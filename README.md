@@ -10,4 +10,6 @@ Link to contribution logs spreadsheet: ...
 https://docs.google.com/spreadsheets/d/1bPJZ4czoDnM9CElqZxPKfBOVB_q9818b03TA0S81pgU/edit?usp=sharing
 ## Design Rationale
 
+Link to group google drive: https://drive.google.com/drive/folders/0AE_9hawjQfXaUk9PVA
+
 _Please write your design rationale below (along with UML diagram pictures)..._
