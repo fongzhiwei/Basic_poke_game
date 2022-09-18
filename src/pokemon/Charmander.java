@@ -33,7 +33,7 @@ public class Charmander extends Pokemon { // changed extends Actor --> extends P
      * Constructor.
      */
     public Charmander() {
-        super("Charmander", 'c', 100, Element.FIRE, 20, 90);
+        super("Charmander", 'c', 100, Element.FIRE);
         // HINT: add more relevant behaviours here
         this.addCapability(Element.FIRE);
         this.behaviours.put(10, new WanderBehaviour());
@@ -58,15 +58,15 @@ public class Charmander extends Pokemon { // changed extends Actor --> extends P
      *
      * @see Actor#playTurn(ActionList, Action, GameMap, Display)
      */
-    @Override
-    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        for (Behaviour behaviour : behaviours.values()) {
-            Action action = behaviour.getAction(this, map);
-            if (action != null)
-                return action;
-        }
-        return new DoNothingAction();
-    }
+//    @Override
+//    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+//        for (Behaviour behaviour : behaviours.values()) {
+//            Action action = behaviour.getAction(this, map);
+//            if (action != null)
+//                return action;
+//        }
+//        return new DoNothingAction();
+//    }
 
     /**
      * @param isEquipping FIXME: develop a logic to toggle weapon (put a selected weapon to the inventory - used!);
