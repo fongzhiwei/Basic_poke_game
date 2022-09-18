@@ -1,4 +1,4 @@
-package game;
+package pokemon;
 
 
 import edu.monash.fit2099.engine.actions.Action;
@@ -7,6 +7,8 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.AttackAction;
+import game.Element;
 import game.behaviours.Behaviour;
 import game.behaviours.WanderBehaviour;
 
@@ -37,7 +39,7 @@ public class Charmander extends Actor {
      * @param otherActor the Actor that might perform an action.
      * @param direction  String representing the direction of the other Actor
      * @param map        current GameMap
-     * @return list of actions
+     * @return list of game.actions
      */
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
