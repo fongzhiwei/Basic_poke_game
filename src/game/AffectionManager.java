@@ -102,8 +102,8 @@ public class AffectionManager {
      * @return custom message to be printed by Display instance later.
      */
     public String increaseAffection(Pokemon actor, int point) {  // changed Actor actor --> Pokemon actor
-        if(findPokemon(actor) != null) {
-            if(getAffectionPoint(actor) + point >= 100) {
+        if (findPokemon(actor) != null) {
+            if (getAffectionPoint(actor) + point >= 100) {
                 actor.setAffectionPoints(100);
             }
             else {
@@ -112,9 +112,9 @@ public class AffectionManager {
             this.affectionPoints.replace(actor, getAffectionPoint(actor) + point);
             updateAffectionLevel(actor);
 
-            return String.format("%s increased affection to %d", pokemon.getName(), getAffectionPoint(actor));
+            return String.format("%s increased affection to %d", actor, getAffectionPoint(actor));
         }
-        return String.format("%s does not exist in the collection", pokemon.getName());
+        return String.format("%s does not exist in the collection", actor);
     }
 
     /**
@@ -130,26 +130,36 @@ public class AffectionManager {
             this.affectionPoints.replace(actor, getAffectionPoint(actor) - point);
             updateAffectionLevel(actor);
 
-            return String.format("%s decreased affection to %d", pokemon.getName(), getAffectionPoint(actor));
+            return String.format("%s decreased affection to %d", actor, getAffectionPoint(actor));
         }
-        return String.format("%s does not exist in the collection", pokemon.getName());
+        return String.format("%s does not exist in the collection", actor);
     }
 
     public void updateAffectionLevel(Pokemon pokemon) {
-        if(pokemon.getAffectionPoints() < AffectionLevel.NEUTRAL) {
-            pokemon.setAffectionLevel(AffectionLevel.DISLIKE);
+        if (pokemon.getAffectionPoints() < AffectionLevel.NEUTRAL.getPoints()) {
+            if (pokemon.getAffectionLevel() != AffectionLevel.DISLIKE) {
+                pokemon.setAffectionLevel(AffectionLevel.DISLIKE);
+            }
         }
-        else if(pokemon.getAffectionPoints() <= AffectionLevel.LIKE) {
-            pokemon.setAffectionLevel(AffectionLevel.NEUTRAL);
+        else if (pokemon.getAffectionPoints() <= AffectionLevel.LIKE.getPoints()) {
+            if (pokemon.getAffectionLevel() != AffectionLevel.NEUTRAL) {
+                pokemon.setAffectionLevel(AffectionLevel.NEUTRAL);
+            }
         }
-        else if(pokemon.getAffectionPoints() <= AffectionLevel.FOLLOW) {
-            pokemon.setAffectionLevel(AffectionLevel.LIKE);
+        else if (pokemon.getAffectionPoints() <= AffectionLevel.FOLLOW.getPoints()) {
+            if (pokemon.getAffectionLevel() != AffectionLevel.LIKE) {
+                pokemon.setAffectionLevel(AffectionLevel.LIKE);
+            }
         }
-        else if(pokemon.getAffectionPoints() <= AffectionLevel.MAX) {
-            pokemon.setAffectionLevel(AffectionLevel.FOLLOW);
+        else if (pokemon.getAffectionPoints() <= AffectionLevel.MAX.getPoints()) {
+            if (pokemon.getAffectionLevel() != AffectionLevel.FOLLOW) {
+                pokemon.setAffectionLevel(AffectionLevel.FOLLOW);
+            }
         }
-        else if(pokemon.getAffectionPoints() == AffectionLevel.MAX) {
-            pokemon.setAffectionLevel(AffectionLevel.MAX);
+        else if (pokemon.getAffectionPoints() == AffectionLevel.MAX.getPoints()) {
+            if (pokemon.getAffectionLevel() != AffectionLevel.MAX) {
+                pokemon.setAffectionLevel(AffectionLevel.MAX);
+            }
         }
     }
 
