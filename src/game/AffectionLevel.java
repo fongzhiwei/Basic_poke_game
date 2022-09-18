@@ -1,4 +1,4 @@
-package pokemon;
+package game;
 
 public enum AffectionLevel {
     DISLIKE(-50),
