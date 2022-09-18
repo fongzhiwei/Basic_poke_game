@@ -13,6 +13,10 @@ public enum AffectionLevel {
         this.affectionPoints = points;
     }
 
+    public int getPoints() {
+        return this.affectionPoints;
+    }
+
     public String toString() {
         return String.valueOf(affectionPoints);
     }
