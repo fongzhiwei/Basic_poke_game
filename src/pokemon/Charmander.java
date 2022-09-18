@@ -14,6 +14,10 @@ import game.behaviours.WanderBehaviour;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 /**
  * Created by:
@@ -21,15 +25,15 @@ import java.util.Map;
  * @author Riordan D. Alfredo
  * Modified by:
  */
-public class Charmander extends Actor {
-    //FIXME: Change it to a sorted map (is it TreeMap? HashMap? LinkedHashMap?)
-    private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
+public class Charmander extends Pokemon { // changed extends Actor --> extends Pokemon
+    //FIXME: Change it to a sorted map (is it TreeMap? HashMap? LinkedHashMap?) // DONE
+    //private final SortedMap<Integer, Behaviour> behaviours = new TreeMap<>(); // priority, behaviour
 
     /**
      * Constructor.
      */
     public Charmander() {
-        super("Charmander", 'c', 100);
+        super("Charmander", 'c', 100, Element.FIRE, 20, 90);
         // HINT: add more relevant behaviours here
         this.addCapability(Element.FIRE);
         this.behaviours.put(10, new WanderBehaviour());
