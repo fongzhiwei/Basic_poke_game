@@ -60,6 +60,13 @@ public abstract class Pokemon extends Actor{
         this.weapon = newWeapon;
     }
 
+    public boolean isCatchable(Pokemon pokemon) {
+        if (pokemon.toString().equals("Charmander")) {
+            return false;
+        }
+        return pokemon.getAffectionLevel() != AffectionLevel.DISLIKE && pokemon.getAffectionLevel() != AffectionLevel.NEUTRAL;
+    }
+
     /**
      * Select and return an action to perform on the current turn.
      *
