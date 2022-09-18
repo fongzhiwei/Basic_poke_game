@@ -1,7 +1,7 @@
 package game;
 
 import edu.monash.fit2099.engine.actors.Actor;
-import pokemon.Charmander;
+import pokemon.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +23,7 @@ public class AffectionManager {
     /**
      * HINT: is it just for a Charmander?
      */
-    private final Map<Charmander, Integer> affectionPoints;
+    private final Map<Pokemon, Integer> affectionPoints; // changed Charmander, Integer --> Pokemon, Integer
 
     /**
      * We assume there's only one trainer in this manager.
@@ -64,7 +64,8 @@ public class AffectionManager {
      *
      * @param pokemon
      */
-    public void registerPokemon(Charmander pokemon) {
+    public void registerPokemon(Pokemon pokemon) { // changed Charmander pokemon --> Pokemon pokemon
+        this.affectionPoints.put(pokemon, pokemon.getAffectionPoints());
     }
 
     /**
@@ -73,7 +74,7 @@ public class AffectionManager {
      * @param pokemon Pokemon instance
      * @return integer of affection point.
      */
-    public int getAffectionPoint(Charmander pokemon) {
+    public int getAffectionPoint(Pokemon pokemon) { // changed Charmander pokemon --> Pokemon pokemon
         return affectionPoints.get(pokemon);
     }
 
@@ -83,8 +84,8 @@ public class AffectionManager {
      * @param actor general actor instance
      * @return the Pokemon instance.
      */
-    private Charmander findPokemon(Actor actor) {
-        for (Charmander pokemon : affectionPoints.keySet()) {
+    private Pokemon findPokemon(Actor actor) { // changed Charmander findPokemon() --> Pokemon findPokemon()
+        for (Pokemon pokemon : affectionPoints.keySet()) { // changed for(Charmander pokemon:) --> for(Pokemon pokemon:)
             if (pokemon.equals(actor)) {
                 return pokemon;
             }
@@ -100,8 +101,20 @@ public class AffectionManager {
      * @param point positive affection modifier
      * @return custom message to be printed by Display instance later.
      */
-    public String increaseAffection(Actor actor, int point) {
-        return "";
+    public String increaseAffection(Pokemon actor, int point) {  // changed Actor actor --> Pokemon actor
+        if(findPokemon(actor) != null) {
+            if(getAffectionPoint(actor) + point >= 100) {
+                actor.setAffectionPoints(100);
+            }
+            else {
+                actor.setAffectionPoints(getAffectionPoint(actor) + point);
+            }
+            this.affectionPoints.replace(actor, getAffectionPoint(actor) + point);
+            updateAffectionLevel(actor);
+
+            return String.format("%s increased affection to %d", pokemon.getName(), getAffectionPoint(actor));
+        }
+        return String.format("%s does not exist in the collection", pokemon.getName());
     }
 
     /**
@@ -111,8 +124,33 @@ public class AffectionManager {
      * @param point positive affection modifier (to be subtracted later)
      * @return custom message to be printed by Display instance later.
      */
-    public String decreaseAffection(Actor actor, int point) {
-        return "";
+    public String decreaseAffection(Pokemon actor, int point) { // changed Actor actor --> Pokemon actor
+        if(findPokemon(actor) != null) {
+            actor.setAffectionPoints(getAffectionPoint(actor) - point);
+            this.affectionPoints.replace(actor, getAffectionPoint(actor) - point);
+            updateAffectionLevel(actor);
+
+            return String.format("%s decreased affection to %d", pokemon.getName(), getAffectionPoint(actor));
+        }
+        return String.format("%s does not exist in the collection", pokemon.getName());
+    }
+
+    public void updateAffectionLevel(Pokemon pokemon) {
+        if(pokemon.getAffectionPoints() < AffectionLevel.NEUTRAL) {
+            pokemon.setAffectionLevel(AffectionLevel.DISLIKE);
+        }
+        else if(pokemon.getAffectionPoints() <= AffectionLevel.LIKE) {
+            pokemon.setAffectionLevel(AffectionLevel.NEUTRAL);
+        }
+        else if(pokemon.getAffectionPoints() <= AffectionLevel.FOLLOW) {
+            pokemon.setAffectionLevel(AffectionLevel.LIKE);
+        }
+        else if(pokemon.getAffectionPoints() <= AffectionLevel.MAX) {
+            pokemon.setAffectionLevel(AffectionLevel.FOLLOW);
+        }
+        else if(pokemon.getAffectionPoints() == AffectionLevel.MAX) {
+            pokemon.setAffectionLevel(AffectionLevel.MAX);
+        }
     }
 
 }
