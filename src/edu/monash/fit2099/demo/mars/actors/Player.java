@@ -28,7 +28,7 @@ public class Player extends Actor {
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
 		// Check if it has previous action or not. If so, execute that last action.
-		// Useful when you want to implement chain-actions like sleeping implementation.
+		// Useful when you want to implement chain-game.actions like sleeping implementation.
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
 

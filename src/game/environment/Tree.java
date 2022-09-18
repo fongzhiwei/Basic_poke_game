@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.*;
 import game.time.TimePerception;
 import game.time.TimePerceptionManager;
+import pokemon.Bulbasaur;
 
 import java.util.List;
 

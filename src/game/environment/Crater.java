@@ -2,7 +2,7 @@ package game.environment;
 
 import edu.monash.fit2099.engine.positions.Location;
 import game.*;
-import game.environment.SpawningGround;
+import pokemon.Charmander;
 
 public class Crater extends SpawningGround {
     //chance of spawning a Charmander
@@ -23,7 +23,7 @@ public class Crater extends SpawningGround {
     @Override
     public void tick(Location location) {
         //chance of spawning a Charmander is 10%
-        //no limitation of element ground surrounding to create Bulbasaur
+        //no limitation of element ground surrounding to create Charmander
         super.tick(location, new Charmander(), Element.FIRE, 10, 0);
     }
 
