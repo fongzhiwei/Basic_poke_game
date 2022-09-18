@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.AffectionLevel;
 import game.AttackAction;
 import game.Element;
@@ -18,21 +19,21 @@ import java.util.TreeMap;
 
 public abstract class Pokemon extends Actor{
     final Element pokemonType;
-    final int intrinsicDamage, intrinsicChanceToHit, specialDamage, specialChanceToHit;
+    final int intrinsicDamage, intrinsicChanceToHit;
     SortedMap<Integer, Behaviour> behaviours;
     private int affectionPoints;
     private AffectionLevel affectionLevel;
+    private WeaponItem weapon;
 
-    public Pokemon(String name, char displayChar, int hitPoints, Element type, int specialDamage, int specialChanceToHit) {
+    public Pokemon(String name, char displayChar, int hitPoints, Element type) {
         super(name, displayChar, hitPoints);
         this.pokemonType = type;
         this.intrinsicDamage = 10;
         this.intrinsicChanceToHit = 50;
-        this.specialDamage = specialDamage;
-        this.specialChanceToHit = specialChanceToHit;
         this.behaviours = new TreeMap<>();
         setAffectionPoints(0);
         setAffectionLevel(AffectionLevel.NEUTRAL);
+        setWeapon(null);
     }
 
     public int getAffectionPoints() {
@@ -43,12 +44,20 @@ public abstract class Pokemon extends Actor{
         return this.affectionLevel;
     }
 
+    public WeaponItem getWeapon() {
+        return this.weapon;
+    }
+
     public void setAffectionPoints(int newAffectionPoints) {
         this.affectionPoints = newAffectionPoints;
     }
 
     public void setAffectionLevel(AffectionLevel newAffectionLevel) {
         this.affectionLevel = newAffectionLevel;
+    }
+
+    public void setWeapon(WeaponItem newWeapon) {
+        this.weapon = newWeapon;
     }
 
     /**
@@ -61,7 +70,17 @@ public abstract class Pokemon extends Actor{
      * @return the Action to be performed
      */
     // from Actor class??
-    public abstract Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display);
+//    public abstract Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display);
+
+    @Override
+    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        for (Behaviour behaviour : behaviours.values()) {
+            Action action = behaviour.getAction(this, map);
+            if (action != null)
+                return action;
+        }
+        return new DoNothingAction();
+    }
 
     /**
      * @param otherActor the Actor that might perform an action.
