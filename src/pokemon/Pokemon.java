@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.AffectionLevel;
 import game.AttackAction;
@@ -23,7 +24,6 @@ public abstract class Pokemon extends Actor{
     SortedMap<Integer, Behaviour> behaviours;
     private int affectionPoints;
     private AffectionLevel affectionLevel;
-    private WeaponItem weapon;
 
     public Pokemon(String name, char displayChar, int hitPoints, Element type) {
         super(name, displayChar, hitPoints);
@@ -33,7 +33,6 @@ public abstract class Pokemon extends Actor{
         this.behaviours = new TreeMap<>();
         setAffectionPoints(0);
         setAffectionLevel(AffectionLevel.NEUTRAL);
-        setWeapon(null);
     }
 
     public int getAffectionPoints() {
@@ -44,8 +43,8 @@ public abstract class Pokemon extends Actor{
         return this.affectionLevel;
     }
 
-    public WeaponItem getWeapon() {
-        return this.weapon;
+    public IntrinsicWeapon getIntrinsicWeapon() {
+        return new IntrinsicWeapon(10, "tackle");
     }
 
     public void setAffectionPoints(int newAffectionPoints) {
@@ -56,14 +55,7 @@ public abstract class Pokemon extends Actor{
         this.affectionLevel = newAffectionLevel;
     }
 
-    public void setWeapon(WeaponItem newWeapon) {
-        this.weapon = newWeapon;
-    }
-
     public boolean isCatchable(Pokemon pokemon) {
-        if (pokemon.toString().equals("Charmander")) {
-            return false;
-        }
         return pokemon.getAffectionLevel() != AffectionLevel.DISLIKE && pokemon.getAffectionLevel() != AffectionLevel.NEUTRAL;
     }
 
