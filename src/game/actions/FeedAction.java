@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.Weapon;
+import game.AffectionLevel;
 import game.AffectionManager;
 import game.items.Pokefruit;
 import pokemon.Pokemon;
@@ -22,6 +23,11 @@ public class FeedAction extends Action {
     public String execute(Actor actor, GameMap map) {
         if (!this.target.isConscious()) {
             return this.target + "is unconscious.";
+        }
+        // if affection points <= -50, relationship cannot be fixed
+        // --> cannot feed?? can feed but no increase in affection points??
+        else if (this.target.getAffectionLevel() == AffectionLevel.DISLIKE) {
+            return this.target + "dislikes you.";
         }
         else if (actor.getInventory().size() == 0) {
             return actor + "'s inventory is empty";
