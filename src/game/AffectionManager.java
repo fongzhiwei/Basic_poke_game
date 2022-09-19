@@ -136,28 +136,35 @@ public class AffectionManager {
     }
 
     public void updateAffectionLevel(Pokemon pokemon) {
+        AffectionLevel currentAffectionLevel = pokemon.getAffectionLevel();
+
         if (pokemon.getAffectionPoints() < AffectionLevel.NEUTRAL.getPoints()) {
-            if (pokemon.getAffectionLevel() != AffectionLevel.DISLIKE) {
+            if (!pokemon.hasCapability(AffectionLevel.DISLIKE)) {
+                pokemon.removeCapability(currentAffectionLevel);
                 pokemon.setAffectionLevel(AffectionLevel.DISLIKE);
             }
         }
         else if (pokemon.getAffectionPoints() <= AffectionLevel.LIKE.getPoints()) {
-            if (pokemon.getAffectionLevel() != AffectionLevel.NEUTRAL) {
+            if (!pokemon.hasCapability(AffectionLevel.NEUTRAL)) {
+                pokemon.removeCapability(currentAffectionLevel);
                 pokemon.setAffectionLevel(AffectionLevel.NEUTRAL);
             }
         }
         else if (pokemon.getAffectionPoints() <= AffectionLevel.FOLLOW.getPoints()) {
-            if (pokemon.getAffectionLevel() != AffectionLevel.LIKE) {
+            if (!pokemon.hasCapability(AffectionLevel.LIKE)) {
+                pokemon.removeCapability(currentAffectionLevel);
                 pokemon.setAffectionLevel(AffectionLevel.LIKE);
             }
         }
         else if (pokemon.getAffectionPoints() <= AffectionLevel.MAX.getPoints()) {
-            if (pokemon.getAffectionLevel() != AffectionLevel.FOLLOW) {
+            if (!pokemon.hasCapability(AffectionLevel.FOLLOW)) {
+                pokemon.removeCapability(currentAffectionLevel);
                 pokemon.setAffectionLevel(AffectionLevel.FOLLOW);
             }
         }
         else if (pokemon.getAffectionPoints() == AffectionLevel.MAX.getPoints()) {
-            if (pokemon.getAffectionLevel() != AffectionLevel.MAX) {
+            if (!pokemon.hasCapability(AffectionLevel.MAX)) {
+                pokemon.removeCapability(currentAffectionLevel);
                 pokemon.setAffectionLevel(AffectionLevel.MAX);
             }
         }
