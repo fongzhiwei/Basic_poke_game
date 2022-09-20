@@ -103,6 +103,8 @@ public class AffectionManager {
      */
     public String increaseAffection(Pokemon actor, int point) {  // changed Actor actor --> Pokemon actor
         if (findPokemon(actor) != null) {
+            int oldAP = getAffectionPoint(actor);
+
             if (getAffectionPoint(actor) + point >= 100) {
                 actor.setAffectionPoints(100);
             }
@@ -112,7 +114,7 @@ public class AffectionManager {
             this.affectionPoints.replace(actor, getAffectionPoint(actor) + point);
             updateAffectionLevel(actor);
 
-            return String.format("%s increased affection to %d", actor, getAffectionPoint(actor));
+            return String.format("%s(%d AP)", actor, oldAP);
         }
         return String.format("%s does not exist in the collection", actor);
     }
@@ -130,7 +132,7 @@ public class AffectionManager {
             this.affectionPoints.replace(actor, getAffectionPoint(actor) - point);
             updateAffectionLevel(actor);
 
-            return String.format("%s decreased affection to %d", actor, getAffectionPoint(actor));
+            return String.format("%s dislikes it! -10 affection points", actor);
         }
         return String.format("%s does not exist in the collection", actor);
     }
