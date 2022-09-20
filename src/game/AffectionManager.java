@@ -132,7 +132,7 @@ public class AffectionManager {
             this.affectionPoints.replace(actor, getAffectionPoint(actor) - point);
             updateAffectionLevel(actor);
 
-            return String.format("%s dislikes it! -10 affection points", actor);
+            return "-10 affection points";
         }
         return String.format("%s does not exist in the collection", actor);
     }
