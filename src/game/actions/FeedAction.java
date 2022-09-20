@@ -54,7 +54,7 @@ public class FeedAction extends Action {
                         return String.format("%s gives a %s Pokefruit to ", actor, pokefruitType) + AffectionManager.getInstance().increaseAffection(this.target, 20);
                     }
                     else {
-                        return AffectionManager.getInstance().decreaseAffection(this.target, 10);
+                        return String.format("%s dislikes it! ", actor) + AffectionManager.getInstance().decreaseAffection(this.target, 10);
                     }
                 }
                 index += 1;
