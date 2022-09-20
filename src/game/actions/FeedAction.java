@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.AffectionLevel;
 import game.AffectionManager;
+import game.Element;
 import game.items.Pokefruit;
 import pokemon.Pokemon;
 
@@ -38,10 +39,19 @@ public class FeedAction extends Action {
             while (index < actor.getInventory().size()) {
                 if (actor.getInventory().get(index) instanceof Pokefruit) {
                     Item pokefruit = actor.getInventory().get(index);
+                    Element pokefruitType = null;
+
+                    for (Enum<?> elem: pokefruit.capabilitiesList()) {
+                        if (elem instanceof Element) {
+                            pokefruitType = (Element) elem;
+                            break;
+                        }
+                    }
+
                     actor.removeItemFromInventory(pokefruit);
 
                     if ((pokefruit.hasCapability((Enum<?>) this.target.capabilitiesList()))) { // not sure
-                        return AffectionManager.getInstance().increaseAffection(this.target, 20);
+                        return String.format("%s gives a %s Pokefruit to ", actor, pokefruitType) + AffectionManager.getInstance().increaseAffection(this.target, 20);
                     }
                     else {
                         return AffectionManager.getInstance().decreaseAffection(this.target, 10);
