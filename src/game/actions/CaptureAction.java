@@ -21,9 +21,10 @@ public class CaptureAction extends Action {
         if (!this.target.isConscious()) {
             return String.format("%s is unconscious.", this.target);
         }
-        else if (this.target.isCaptured()) { // captured game.pokemon will show on map?? summoned pokemon needs to be recaptured??
-            return String.format("%s is already captured.", this.target);
-        }
+        // captured game.pokemon will show on map?? summoned pokemon needs to be recaptured??
+//        else if (this.target.isCaptured()) {
+//            return String.format("%s is already captured.", this.target);
+//        }
         else if (!this.target.isCatchable()) {
             return String.format("%s cannot be captured. $s", this.target, AffectionManager.getInstance().decreaseAffection(this.target, 10));
         }
