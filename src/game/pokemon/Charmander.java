@@ -1,23 +1,15 @@
-package pokemon;
+package game.pokemon;
 
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.AttackAction;
 import game.Element;
-import game.behaviours.Behaviour;
 import game.behaviours.WanderBehaviour;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Iterator;
-import java.util.Set;
-import java.util.SortedMap;
-import java.util.TreeMap;
 
 /**
  * Created by:
@@ -35,8 +27,16 @@ public class Charmander extends Pokemon { // changed extends Actor --> extends P
     public Charmander() {
         super("Charmander", 'c', 100, Element.FIRE);
         // HINT: add more relevant behaviours here
-        this.addCapability(Element.FIRE);
-        this.behaviours.put(10, new WanderBehaviour());
+//        this.addCapability(Element.FIRE);
+        getBehaviours().put(10, new WanderBehaviour());
+    }
+
+    public IntrinsicWeapon getIntrinsicWeapon() {
+        return new IntrinsicWeapon(10, "scratch");
+    }
+
+    public boolean isCatchable() {
+        return false;
     }
 
     /**
@@ -72,6 +72,17 @@ public class Charmander extends Pokemon { // changed extends Actor --> extends P
      * @param isEquipping FIXME: develop a logic to toggle weapon (put a selected weapon to the inventory - used!);
      */
     public void toggleWeapon(boolean isEquipping) {
+        if (isEquipping) {
+            int index = 0;
+
+            while (index < getInventory().size()) {
+                if (getWeapon() == getInventory().get(index)) {
+                    getInventory().set(index, )
+
+                }
+                index += 1;
+            }
+        }
     }
 
 }

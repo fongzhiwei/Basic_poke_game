@@ -1,4 +1,4 @@
-package weapons;
+package game.weapons;
 
 public enum SpecialAttack {
     EMBER("sparks"),
