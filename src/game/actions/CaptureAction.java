@@ -6,8 +6,7 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.AffectionManager;
 import game.items.Pokeball;
-import game.items.Pokefruit;
-import pokemon.Pokemon;
+import game.pokemon.Pokemon;
 
 public class CaptureAction extends Action {
     protected Pokemon target;
@@ -20,31 +19,22 @@ public class CaptureAction extends Action {
 
     public String execute(Actor actor, GameMap map) {
         if (!this.target.isConscious()) {
-            return this.target + " is unconscious.";
+            return String.format("%s is unconscious.", this.target);
         }
-        else if (this.target.isCaptured()) { // captured pokemon will show on map??
-            return this.target + " is already captured.";
+        else if (this.target.isCaptured()) { // captured game.pokemon will show on map?? summoned pokemon needs to be recaptured??
+            return String.format("%s is already captured.", this.target);
         }
         else if (!this.target.isCatchable()) {
-            return this.target + " cannot be captured." + AffectionManager.getInstance().decreaseAffection(this.target, 10);
+            return String.format("%s cannot be captured. $s", this.target, AffectionManager.getInstance().decreaseAffection(this.target, 10));
         }
-        else if (actor.getInventory().size() == 0) {
-            return actor + "'s inventory is empty";
-        }
+//        else if (actor.getInventory().size() == 0) {
+//            return actor + "'s inventory is empty";
+//        }
         else {
-            int index = 0;
-
-            while (index < actor.getInventory().size()) {
-                if (actor.getInventory().get(index) instanceof Pokeball) {
-                    Item pokeball = actor.getInventory().get(index);
-                    actor.removeItemFromInventory(pokeball);
-
-                    //////////////////////////////////////////////////////
-                }
-                index += 1;
+            Pokeball pokeball = new Pokeball(this.target);
+            actor.addItemToInventory(pokeball);
+            return String.format("%s captured %s", actor, this.target);
             }
-            return actor + " does not have pokeball";
-        }
     }
 
     @Override
