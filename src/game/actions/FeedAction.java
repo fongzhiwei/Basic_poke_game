@@ -12,11 +12,11 @@ import game.pokemon.Pokemon;
 
 public class FeedAction extends Action {
     protected Pokemon target;
-    protected String direction;
+//    protected String direction;
 
     public FeedAction(Pokemon target, String direction) {
         this.target = target;
-        this.direction = direction;
+//        this.direction = direction;
     }
 
     public String execute(Actor actor, GameMap map) {
