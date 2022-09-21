@@ -1,7 +1,7 @@
 package game;
 
 import edu.monash.fit2099.engine.actors.Actor;
-import pokemon.*;
+import game.pokemon.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -64,28 +64,28 @@ public class AffectionManager {
      *
      * @param pokemon
      */
-    public void registerPokemon(Pokemon pokemon) { // changed Charmander pokemon --> Pokemon pokemon
+    public void registerPokemon(Pokemon pokemon) { // changed Charmander game.pokemon --> Pokemon game.pokemon
         this.affectionPoints.put(pokemon, pokemon.getAffectionPoints());
     }
 
     /**
-     * Get the affection point by using the pokemon instance as the key.
+     * Get the affection point by using the game.pokemon instance as the key.
      *
      * @param pokemon Pokemon instance
      * @return integer of affection point.
      */
-    public int getAffectionPoint(Pokemon pokemon) { // changed Charmander pokemon --> Pokemon pokemon
+    public int getAffectionPoint(Pokemon pokemon) { // changed Charmander game.pokemon --> Pokemon game.pokemon
         return affectionPoints.get(pokemon);
     }
 
     /**
-     * Useful method to search a pokemon by using Actor instance.
+     * Useful method to search a game.pokemon by using Actor instance.
      *
      * @param actor general actor instance
      * @return the Pokemon instance.
      */
     private Pokemon findPokemon(Actor actor) { // changed Charmander findPokemon() --> Pokemon findPokemon()
-        for (Pokemon pokemon : affectionPoints.keySet()) { // changed for(Charmander pokemon:) --> for(Pokemon pokemon:)
+        for (Pokemon pokemon : affectionPoints.keySet()) { // changed for(Charmander game.pokemon:) --> for(Pokemon game.pokemon:)
             if (pokemon.equals(actor)) {
                 return pokemon;
             }
