@@ -1,16 +1,14 @@
 package game.actions;
 
 import edu.monash.fit2099.engine.actions.Action;
-import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.weapons.Weapon;
 import game.AffectionLevel;
 import game.AffectionManager;
 import game.Element;
 import game.items.Pokefruit;
-import pokemon.Pokemon;
+import game.pokemon.Pokemon;
 
 public class FeedAction extends Action {
     protected Pokemon target;
@@ -51,10 +49,10 @@ public class FeedAction extends Action {
                     actor.removeItemFromInventory(pokefruit);
 
                     if ((pokefruit.hasCapability((Enum<?>) this.target.capabilitiesList()))) { // not sure
-                        return String.format("%s gives a %s Pokefruit to ", actor, pokefruitType) + AffectionManager.getInstance().increaseAffection(this.target, 20);
+                        return String.format("%s gives a %s Pokefruit to $s", actor, pokefruitType, AffectionManager.getInstance().increaseAffection(this.target, 20));
                     }
                     else {
-                        return String.format("%s dislikes it! ", actor) + AffectionManager.getInstance().decreaseAffection(this.target, 10);
+                        return String.format("%s dislikes it! %s", actor, AffectionManager.getInstance().decreaseAffection(this.target, 10));
                     }
                 }
                 index += 1;
