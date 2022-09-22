@@ -1,14 +1,18 @@
 package game.items;
 
 import edu.monash.fit2099.engine.items.Item;
-import pokemon.Pokemon;
+import game.pokemon.Pokemon;
 
 public class Pokeball extends Item {
 
     private Pokemon pokemon;
 
-    public Pokeball(Pokemon pokemon){
-        super("Pokeball with "+ pokemon.toString(),'0',true);
+    public Pokeball(Pokemon pokemon) {
+        super("Pokeball with " + pokemon.toString(), '0', true);
         this.pokemon = pokemon;
+    }
+
+    public Pokemon getPokemon() {
+        return this.pokemon;
     }
 }
