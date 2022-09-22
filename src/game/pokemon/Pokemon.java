@@ -10,54 +10,50 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.AffectionLevel;
 import game.Element;
+import game.Status;
+import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
+import game.behaviours.FollowBehaviour;
+import game.behaviours.WanderBehaviour;
 
 import java.util.SortedMap;
 import java.util.TreeMap;
 
 public abstract class Pokemon extends Actor{
-//    private final Element pokemonType;
     private int affectionPoints;
-    private boolean isCaptured, isCatchable;
-    private SortedMap<Integer, Behaviour> behaviours;
+    private final SortedMap<Integer, Behaviour> behaviours;
 
-    public Pokemon(String name, char displayChar, int hitPoints, Element type) {
+    public Pokemon(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
-        this.addCapability(type);
-        setBehaviours();
-        setAffectionPoints(0);
+        this.behaviours = new TreeMap<>();
+        this.getBehaviours().put(2, new AttackBehaviour());
+        this.getBehaviours().put(3, new WanderBehaviour());
+//        this.addCapability(type);
         this.addCapability(AffectionLevel.NEUTRAL);
-        setIsCaptured(false);
-        setIsCatchable(false);
+        this.setAffectionPoints(0);
+        this.setStatus();
     }
 
     public SortedMap<Integer, Behaviour> getBehaviours() {
         return this.behaviours;
     }
 
-    public int getAffectionPoints() {
-        return this.affectionPoints;
-    }
-
     public AffectionLevel getAffectionLevel() {
-        int index = 0;
-        AffectionLevel result = null;
-
-        while (index < this.capabilitiesList().size()) {
-            if (this.capabilitiesList().get(index) instanceof AffectionLevel) {
-                result = (AffectionLevel) this.capabilitiesList().get(index);
-            }
-            index += 1;
-        }
-        return result;
+        return this.findCapabilitiesByType(AffectionLevel.class).get(0);
+//        int index = 0;
+//        AffectionLevel result = null;
+//
+//        while (index < this.capabilitiesList().size()) {
+//            if (this.capabilitiesList().get(index) instanceof AffectionLevel) {
+//                result = (AffectionLevel) this.capabilitiesList().get(index);
+//            }
+//            index += 1;
+//        }
+//        return result;
     }
 
-    public IntrinsicWeapon getIntrinsicWeapon() {
+    protected IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(10, "tackle");
-    }
-
-    public void setBehaviours() {
-        this.behaviours = new TreeMap<>();
     }
 
     public void setAffectionPoints(int newAffectionPoints) {
@@ -65,27 +61,27 @@ public abstract class Pokemon extends Actor{
     }
 
     public void setAffectionLevel(AffectionLevel newAffectionLevel) {
+        if (this.findCapabilitiesByType(AffectionLevel.class).size() > 0) {
+            for(Enum<?> elem: this.findCapabilitiesByType(AffectionLevel.class)) {
+                this.removeCapability(this.findCapabilitiesByType(AffectionLevel.class).get(0));
+            }
+        }
         this.addCapability(newAffectionLevel);
     }
 
-    public void setIsCaptured(boolean newIsCaptured) {
-        this.isCaptured = newIsCaptured;
-    }
-
-    public void setIsCatchable(boolean newIsCatchable) {
-        this.isCatchable = newIsCatchable;
-    }
-
-    public boolean isCatchable() {
-        if (isCaptured()) {
-            setIsCatchable(false);
-            return false;
+    public void setStatus() {
+        if (this.findCapabilitiesByType(Status.class).size() > 0) {
+            for(Enum<?> elem: this.findCapabilitiesByType(Status.class)) {
+                this.removeCapability(this.findCapabilitiesByType(Status.class).get(0));
+            }
         }
-        return getAffectionLevel() != AffectionLevel.DISLIKE && getAffectionLevel() != AffectionLevel.NEUTRAL;
-    }
 
-    public boolean isCaptured() {
-        return this.isCaptured;
+        if (this.getAffectionLevel() == AffectionLevel.DISLIKE || this.getAffectionLevel() == AffectionLevel.NEUTRAL) {
+            this.addCapability(Status.HOSTILE);
+        }
+        else {
+            this.addCapability(Status.CATCHABLE);
+        }
     }
 
     /**
@@ -97,9 +93,6 @@ public abstract class Pokemon extends Actor{
      * @param display    the I/O object to which messages may be written
      * @return the Action to be performed
      */
-    // from Actor class??
-//    public abstract Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display);
-
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         for (Behaviour behaviour : behaviours.values()) {
@@ -116,12 +109,7 @@ public abstract class Pokemon extends Actor{
      * @param map        current GameMap
      * @return list of game.actions
      */
-    @Override // from Charmander class
+    @Override
     public abstract ActionList allowableActions(Actor otherActor, String direction, GameMap map);
-
-
-
-
-
 
 }
