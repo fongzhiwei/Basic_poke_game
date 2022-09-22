@@ -20,11 +20,7 @@ public class Puddle extends Ground  implements TimePerception {
     public Puddle() {
         super('~');
         this.addCapability(Element.WATER);
-    }
-
-    @Override
-    public void tick(Location location) {
-        TimePerceptionManager.getInstance().run();
+        this.registerInstance();
     }
 
     public void createPuddle(){
@@ -37,26 +33,37 @@ public class Puddle extends Ground  implements TimePerception {
     }
 
     @Override
-    public void dayEffect() {
-        //Puddle has 10% chance of being destroyed
-        boolean chance = Utils.chance(10);
+    public void tick(Location location) {
+        super.tick(location);
+        this.location = location;
+    }
 
-        if (chance && !location.containsAnActor()){
-            location.setGround(new Dirt());
+    @Override
+    public void dayEffect() {
+        if (location != null) {
+            //Puddle has 10% chance of being destroyed
+            boolean chance = Utils.chance(10);
+
+            if (chance && !location.containsAnActor()) {
+                TimePerceptionManager.getInstance().cleanUp(this);
+                location.setGround(new Dirt());
+            }
         }
     }
 
     @Override
     public void nightEffect() {
-        //expand puddle
-        List<Exit> exits = location.getExits();
-        for (Exit exit : exits) {
-            location = exit.getDestination();
+        if (location != null) {
+            //expand puddle
+            List<Exit> exits = location.getExits();
+            for (Exit exit : exits) {
+                location = exit.getDestination();
 
-            Ground ground = exit.getDestination().getGround();
-            boolean checkExpand = ground instanceof Floor || ground instanceof Wall || ground.hasCapability(Element.GRASS);
-            if (!checkExpand) {
-                createPuddle();
+                Ground ground = exit.getDestination().getGround();
+                boolean checkExpand = ground instanceof Floor || ground instanceof Wall || ground.hasCapability(Element.GRASS) || ground instanceof Puddle;
+                if (!checkExpand) {
+                    createPuddle();
+                }
             }
         }
     }

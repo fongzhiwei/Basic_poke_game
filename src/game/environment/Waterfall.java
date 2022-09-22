@@ -27,7 +27,7 @@ public class Waterfall extends SpawningGround {
     }
 
     @Override
-    public void tick(Location location, Pokemon pokemon, Element element, int chanceSpawn, int minGround) {
+    public void tick(Location location) {
         //chance of spawning a Squirtle is 15%
         //at least 2 WATER element ground surrounding to create Squirtle
         super.tick(location, new Squirtle(), Element.WATER, 15, 2);

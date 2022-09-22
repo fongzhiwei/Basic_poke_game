@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
+import game.environment.*;
 
 /**
  * The main class to start the game.
@@ -17,28 +18,26 @@ import edu.monash.fit2099.engine.positions.World;
  * Modified by:
  */
 public class Application {
-
     public static void main(String[] args) {
 
         World world = new World(new Display());
 
         FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(),
-                new Floor(), new Tree(),
-                new Lava(), new Puddle());
+                new Floor(), new Tree(), new Lava(), new Puddle(), new Crater(), new Hay(), new Waterfall());
 
         List<String> map = Arrays.asList(
                 ".............................................^^^^^^^^^^^^^^",
-                "............+..................................+...^^^^^^^^",
-                ".....................................................^^^^^^",
-                "........................................................^^^",
-                "..........................#######........................^^",
+                "...........,+..................................+...^^^^^^^^",
+                "...................O.................................^^^^^^",
+                ".............~..........................................^^^",
+                "............WWW...........#######........................^^",
                 "..........................#_____#............+............^",
                 ".....................+....#_____#..........................",
                 "...+.......~..............###_###..........................",
                 "...~~~~~~~~................................................",
                 "....~~~~~..................................................",
                 "~~~~~~~....................................................",
-                "~~~~~~..+.............................+....................",
+                "~~W~~~..+.............................+....................",
                 "~~~~~~~~~..................................................");
         GameMap gameMap = new GameMap(groundFactory, map);
         world.addGameMap(gameMap);

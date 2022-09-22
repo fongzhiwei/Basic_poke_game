@@ -1,6 +1,7 @@
 package game.time;
 
 
+import game.environment.Lava;
 import game.environment.Puddle;
 
 import java.util.ArrayList;
@@ -63,13 +64,18 @@ public class TimePerceptionManager{
     public void run() {
         turn += 1;
         int last_digit = turn % 10;
+        List<TimePerception> originalList = new ArrayList<>();
+        originalList.addAll(timePerceptionList);
+
         if (last_digit >= 5){
-            for (TimePerception timePerception : timePerceptionList) {
+            System.out.println("Night now");
+            for (TimePerception timePerception : originalList) {
                 timePerception.nightEffect();
             }
         }
         else{
-            for (TimePerception timePerception : timePerceptionList) {
+            System.out.println("Day now");
+            for (TimePerception timePerception : originalList) {
                 timePerception.dayEffect();
             }
         }
