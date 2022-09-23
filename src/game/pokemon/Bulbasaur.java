@@ -7,8 +7,6 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.AttackAction;
 import game.Element;
-import game.behaviours.WanderBehaviour;
-import game.weapons.SpecialAttack;
 import game.weapons.SpecialWeapon;
 
 

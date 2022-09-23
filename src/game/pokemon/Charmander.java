@@ -1,19 +1,13 @@
 package game.pokemon;
 
 
-import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.AttackAction;
 import game.Element;
-import game.behaviours.AttackBehaviour;
-import game.behaviours.FollowBehaviour;
-import game.behaviours.WanderBehaviour;
-import game.weapons.SpecialAttack;
 import game.weapons.SpecialWeapon;
 
 /**
