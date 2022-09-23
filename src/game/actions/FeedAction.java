@@ -4,10 +4,7 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.AffectionLevel;
-import game.AffectionManager;
-import game.Element;
-import game.ElementsHelper;
+import game.*;
 import game.items.Pokefruit;
 import game.pokemon.Pokemon;
 
@@ -35,7 +32,7 @@ public class FeedAction extends Action {
             int index = 0;
 
             while (index < actor.getInventory().size()) {
-                if (actor.getInventory().get(index) instanceof Pokefruit) {
+                if (actor.getInventory().get(index).hasCapability(Status.FOOD)) {
                     Item pokefruit = actor.getInventory().get(index);
                     Element pokefruitType;
                     String str;
