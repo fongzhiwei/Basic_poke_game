@@ -15,10 +15,9 @@ public class Bulbasaur extends Pokemon {
      * Constructor.
      */
     public Bulbasaur() {
-        super("Bulbasaur", 'b', 100, Element.GRASS);
+        super("Bulbasaur", 'b', 100);
         // HINT: add more relevant behaviours here
-//        this.addCapability(Element.GRASS);
-        getBehaviours().put(10, new WanderBehaviour());
+        this.addCapability(Element.GRASS);
     }
 
     /**

@@ -9,6 +9,8 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.AttackAction;
 import game.Element;
+import game.behaviours.AttackBehaviour;
+import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
 
 /**
@@ -17,26 +19,19 @@ import game.behaviours.WanderBehaviour;
  * @author Riordan D. Alfredo
  * Modified by:
  */
-public class Charmander extends Pokemon { // changed extends Actor --> extends Pokemon
-    //FIXME: Change it to a sorted map (is it TreeMap? HashMap? LinkedHashMap?) // DONE
-    //private final SortedMap<Integer, Behaviour> behaviours = new TreeMap<>(); // priority, behaviour
-
+public class Charmander extends Pokemon {
     /**
      * Constructor.
      */
     public Charmander() {
-        super("Charmander", 'c', 100, Element.FIRE);
+        super("Charmander", 'c', 100);
         // HINT: add more relevant behaviours here
-//        this.addCapability(Element.FIRE);
-        getBehaviours().put(10, new WanderBehaviour());
+        this.addCapability(Element.FIRE);
     }
 
-    public IntrinsicWeapon getIntrinsicWeapon() {
+    @Override
+    protected IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(10, "scratch");
-    }
-
-    public boolean isCatchable() {
-        return false;
     }
 
     /**
@@ -54,35 +49,8 @@ public class Charmander extends Pokemon { // changed extends Actor --> extends P
     }
 
     /**
-     * By using behaviour loops, it will decide what will be the next action automatically.
-     *
-     * @see Actor#playTurn(ActionList, Action, GameMap, Display)
-     */
-//    @Override
-//    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-//        for (Behaviour behaviour : behaviours.values()) {
-//            Action action = behaviour.getAction(this, map);
-//            if (action != null)
-//                return action;
-//        }
-//        return new DoNothingAction();
-//    }
-
-    /**
      * @param isEquipping FIXME: develop a logic to toggle weapon (put a selected weapon to the inventory - used!);
      */
     public void toggleWeapon(boolean isEquipping) {
-        if (isEquipping) {
-            int index = 0;
-
-            while (index < getInventory().size()) {
-                if (getWeapon() == getInventory().get(index)) {
-                    getInventory().set(index, )
-
-                }
-                index += 1;
-            }
-        }
     }
-
 }

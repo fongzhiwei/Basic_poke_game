@@ -15,10 +15,9 @@ public class Squirtle extends Pokemon {
      * Constructor.
      */
     public Squirtle() {
-        super("Squirtle", 's', 100, Element.WATER);
+        super("Squirtle", 's', 100);
         // HINT: add more relevant behaviours here
-//        this.addCapability(Element.FIRE);
-        getBehaviours().put(10, new WanderBehaviour());
+        this.addCapability(Element.WATER);
     }
 
     /**
