@@ -1,11 +1,10 @@
 package game;
 
-
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.behaviours.Behaviour;
 import game.behaviours.WanderBehaviour;
@@ -14,21 +13,15 @@ import game.time.TimePerception;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by:
- *
- * @author Riordan D. Alfredo
- * Modified by:
- */
-public class Charmander extends Pokemon implements TimePerception {
+public class Bulbasaur extends Pokemon implements TimePerception {
     //FIXME: Change it to a sorted map (is it TreeMap? HashMap? LinkedHashMap?)
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
 
     /**
      * Constructor.
      */
-    public Charmander() {
-        super("Charmander", 'c', 100);
+    public Bulbasaur() {
+        super("Bulbasaur", 'b', 100);
         // HINT: add more relevant behaviours here
         this.addCapability(Element.FIRE);
         this.behaviours.put(10, new WanderBehaviour());
@@ -45,7 +38,7 @@ public class Charmander extends Pokemon implements TimePerception {
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
         actions.add(new AttackAction(this, direction));
-        //FIXME: allow other actor to attack this Charmander (incl. Player). Please check requirement! :)
+        //FIXME: allow other actor to attack this Bulbasaur (incl. Player). Please check requirement! :)
         return actions;
     }
 
@@ -72,13 +65,14 @@ public class Charmander extends Pokemon implements TimePerception {
 
     @Override
     public void dayEffect() {
-        // Charmander will be healed by 10 points
-        super.heal(10);
+        // Bulbasaur will be hurt by 5 points
+        super.hurt(5);
     }
 
     @Override
     public void nightEffect() {
-        // Charmander will be hurt by 10 points
-        super.hurt(10);
+        // Bulbasaur will be healed by 5 points
+        super.heal(5);
     }
+
 }
