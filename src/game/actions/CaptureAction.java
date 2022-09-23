@@ -2,9 +2,11 @@ package game.actions;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.actors.ActorLocationsIterator;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.AffectionManager;
+import game.Status;
 import game.items.Pokeball;
 import game.pokemon.Pokemon;
 
@@ -21,26 +23,20 @@ public class CaptureAction extends Action {
         if (!this.target.isConscious()) {
             return String.format("%s is unconscious.", this.target);
         }
-        // captured game.pokemon will show on map?? summoned pokemon needs to be recaptured??
-//        else if (this.target.isCaptured()) {
-//            return String.format("%s is already captured.", this.target);
-//        }
-        else if (!this.target.isCatchable()) {
-            return String.format("%s cannot be captured. $s", this.target, AffectionManager.getInstance().decreaseAffection(this.target, 10));
+        else if (!this.target.hasCapability(Status.CATCHABLE)) {
+            return String.format("%s cannot be captured. %s", this.target, AffectionManager.getInstance().decreaseAffection(this.target, 10));
         }
-//        else if (actor.getInventory().size() == 0) {
-//            return actor + "'s inventory is empty";
-//        }
         else {
             Pokeball pokeball = new Pokeball(this.target);
             actor.addItemToInventory(pokeball);
+            map.removeActor(this.target); // remove target from gameMap?
             return String.format("%s captured %s", actor, this.target);
-            }
+        }
     }
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " captures " + target + " at " + direction;
+        return String.format("%s captures %s at %s.", actor, this.target, this.direction);
     }
 
 }
