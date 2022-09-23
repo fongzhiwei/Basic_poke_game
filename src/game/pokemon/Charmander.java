@@ -1,17 +1,14 @@
-package game;
+package game.pokemon;
 
 
-import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.actions.DoNothingAction;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.behaviours.Behaviour;
-import game.behaviours.WanderBehaviour;
-
-import java.util.HashMap;
-import java.util.Map;
+import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.AttackAction;
+import game.Element;
+import game.weapons.SpecialWeapon;
 
 /**
  * Created by:
@@ -19,10 +16,7 @@ import java.util.Map;
  * @author Riordan D. Alfredo
  * Modified by:
  */
-public class Charmander extends Actor {
-    //FIXME: Change it to a sorted map (is it TreeMap? HashMap? LinkedHashMap?)
-    private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
-
+public class Charmander extends Pokemon {
     /**
      * Constructor.
      */
@@ -30,14 +24,18 @@ public class Charmander extends Actor {
         super("Charmander", 'c', 100);
         // HINT: add more relevant behaviours here
         this.addCapability(Element.FIRE);
-        this.behaviours.put(10, new WanderBehaviour());
+    }
+
+    @Override
+    protected IntrinsicWeapon getIntrinsicWeapon() {
+        return new IntrinsicWeapon(10, "scratch");
     }
 
     /**
      * @param otherActor the Actor that might perform an action.
      * @param direction  String representing the direction of the other Actor
      * @param map        current GameMap
-     * @return list of actions
+     * @return list of game.actions
      */
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
@@ -48,24 +46,19 @@ public class Charmander extends Actor {
     }
 
     /**
-     * By using behaviour loops, it will decide what will be the next action automatically.
-     *
-     * @see Actor#playTurn(ActionList, Action, GameMap, Display)
-     */
-    @Override
-    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        for (Behaviour behaviour : behaviours.values()) {
-            Action action = behaviour.getAction(this, map);
-            if (action != null)
-                return action;
-        }
-        return new DoNothingAction();
-    }
-
-    /**
      * @param isEquipping FIXME: develop a logic to toggle weapon (put a selected weapon to the inventory - used!);
      */
     public void toggleWeapon(boolean isEquipping) {
+        if (this.pokemonLocation.getGround().hasCapability(Element.FIRE)) {
+            if (!isEquipping) {
+                SpecialWeapon ember = new SpecialWeapon("Ember", 'E', 20, "sparks", 90, Element.FIRE);
+                this.addItemToInventory(ember);
+            }
+        }
+        else {
+            if (isEquipping) {
+                this.removeItemFromInventory((Item) this.getWeapon());
+            }
+        }
     }
-
 }

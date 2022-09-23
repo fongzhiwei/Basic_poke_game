@@ -60,7 +60,7 @@ public class World {
 	 * Run the game.
 	 *
 	 * On each iteration the gameloop does the following: - displays the player's
-	 * map - processes the actions of every Actor in the game, regardless of map
+	 * map - processes the game.actions of every Actor in the game, regardless of map
 	 *
 	 * We could either only process the actors on the current map, which would make
 	 * time stop on the other maps, or we could process all the actors. We chose to
@@ -72,7 +72,7 @@ public class World {
 		if (player == null)
 			throw new IllegalStateException();
 
-		// initialize the last action map to nothing actions;
+		// initialize the last action map to nothing game.actions;
 		for (Actor actor : actorLocations) {
 			lastActionMap.put(actor, new DoNothingAction());
 		}
@@ -103,9 +103,9 @@ public class World {
 	 * The Actions an Actor can take include:
 	 * <ul>
 	 * <li>those conferred by items it is carrying</li>
-	 * <li>movement actions for the current location and terrain</li>
-	 * <li>actions that can be done to Actors in adjacent squares</li>
-	 * <li>actions that can be done using items in the current location</li>
+	 * <li>movement game.actions for the current location and terrain</li>
+	 * <li>game.actions that can be done to Actors in adjacent squares</li>
+	 * <li>game.actions that can be done using items in the current location</li>
 	 * <li>skipping a turn</li>
 	 * </ul>
 	 *

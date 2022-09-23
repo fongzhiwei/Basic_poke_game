@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class ActionList implements Iterable<Action> {
 	/**
-	 * List of actions
+	 * List of game.actions
 	 */
 	private ArrayList<Action> actions = new ArrayList<Action>();
 
@@ -71,7 +71,7 @@ public class ActionList implements Iterable<Action> {
 	 * Returns an Iterator for the underlying collection.
 	 * 
 	 * Implementing this method means that Actions implements the Iterable interface, which allows
-	 * you to use it in a foreach, e.g. <code>for (Action a: actions) {
+	 * you to use it in a foreach, e.g. <code>for (Action a: game.actions) {
 	 *    ...
 	 *    </code>
 	 * 

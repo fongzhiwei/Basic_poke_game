@@ -13,7 +13,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 public interface Behaviour {
 	
 	/**
-	 * A factory for creating actions. Chaining these together can result in an actor performing more complex tasks.
+	 * A factory for creating game.actions. Chaining these together can result in an actor performing more complex tasks.
 	 *
 	 * A Behaviour represents a kind of objective that an Actor can have.  For example
 	 * it might want to seek out a particular kind of object, or follow another Actor, 

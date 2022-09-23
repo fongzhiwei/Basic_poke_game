@@ -1,6 +1,6 @@
 # FIT2099 Assignment (Semester 2 - 2022) - Pokemon!
 
-## XX_LabYYTeamZZ
+## MA_Lab1Team4
 Team members:
 * Fong Zhiwei
 * Soh Meng Jienq
