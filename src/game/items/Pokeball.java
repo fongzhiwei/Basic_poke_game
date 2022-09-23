@@ -11,4 +11,12 @@ public class Pokeball extends Item {
         super("Pokeball with "+ pokemon.toString(),'0',true);
         this.pokemon = pokemon;
     }
-}
+
+    public Pokemon getPokemon(){
+        return pokemon;
+    }}
+
+//    public void addSummonAction(){
+//        this.addAction(SummonAction());
+//    }
+//}
