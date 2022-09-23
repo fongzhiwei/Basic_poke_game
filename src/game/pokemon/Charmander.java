@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.AttackAction;
@@ -12,6 +13,8 @@ import game.Element;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
+import game.weapons.SpecialAttack;
+import game.weapons.SpecialWeapon;
 
 /**
  * Created by:
@@ -52,5 +55,16 @@ public class Charmander extends Pokemon {
      * @param isEquipping FIXME: develop a logic to toggle weapon (put a selected weapon to the inventory - used!);
      */
     public void toggleWeapon(boolean isEquipping) {
+        if (this.pokemonLocation.getGround().hasCapability(Element.FIRE)) {
+            if (!isEquipping) {
+                SpecialWeapon ember = new SpecialWeapon("Ember", 'E', 20, "sparks", 90, Element.FIRE);
+                this.addItemToInventory(ember);
+            }
+        }
+        else {
+            if (isEquipping) {
+                this.removeItemFromInventory((Item) this.getWeapon());
+            }
+        }
     }
 }
