@@ -30,7 +30,7 @@ public abstract class Pokemon extends Actor{
         this.getBehaviours().put(3, new WanderBehaviour());
 //        this.addCapability(type);
         this.addCapability(AffectionLevel.NEUTRAL);
-        this.setAffectionPoints(0);
+//        this.setAffectionPoints(0);
         this.setStatus();
     }
 
@@ -62,18 +62,14 @@ public abstract class Pokemon extends Actor{
 
     public void setAffectionLevel(AffectionLevel newAffectionLevel) {
         if (this.findCapabilitiesByType(AffectionLevel.class).size() > 0) {
-            for(Enum<?> elem: this.findCapabilitiesByType(AffectionLevel.class)) {
-                this.removeCapability(this.findCapabilitiesByType(AffectionLevel.class).get(0));
-            }
+            this.findCapabilitiesByType(AffectionLevel.class).clear();
         }
         this.addCapability(newAffectionLevel);
     }
 
     public void setStatus() {
         if (this.findCapabilitiesByType(Status.class).size() > 0) {
-            for(Enum<?> elem: this.findCapabilitiesByType(Status.class)) {
-                this.removeCapability(this.findCapabilitiesByType(Status.class).get(0));
-            }
+            this.findCapabilitiesByType(AffectionLevel.class).clear();
         }
 
         if (this.getAffectionLevel() == AffectionLevel.DISLIKE || this.getAffectionLevel() == AffectionLevel.NEUTRAL || this instanceof Charmander) {
