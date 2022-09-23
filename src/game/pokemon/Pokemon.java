@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.AffectionLevel;
 import game.AffectionManager;
@@ -22,6 +23,7 @@ import java.util.TreeMap;
 
 public abstract class Pokemon extends Actor{
     private final SortedMap<Integer, Behaviour> behaviours;
+    protected Location pokemonLocation;
 
     public Pokemon(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
@@ -72,6 +74,7 @@ public abstract class Pokemon extends Actor{
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        this.pokemonLocation = map.locationOf(this);
         for (Behaviour behaviour : behaviours.values()) {
             Action action = behaviour.getAction(this, map);
             if (action != null)
