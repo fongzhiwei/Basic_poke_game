@@ -21,7 +21,6 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 public abstract class Pokemon extends Actor{
-//    private int affectionPoints;
     private final SortedMap<Integer, Behaviour> behaviours;
 
     public Pokemon(String name, char displayChar, int hitPoints) {
@@ -29,9 +28,7 @@ public abstract class Pokemon extends Actor{
         this.behaviours = new TreeMap<>();
         this.getBehaviours().put(2, new AttackBehaviour());
         this.getBehaviours().put(3, new WanderBehaviour());
-//        this.addCapability(type);
         this.addCapability(AffectionLevel.NEUTRAL);
-//        this.setAffectionPoints(0);
         this.setStatus();
         AffectionManager.getInstance().registerPokemon(this);
     }
@@ -40,27 +37,9 @@ public abstract class Pokemon extends Actor{
         return this.behaviours;
     }
 
-//    public AffectionLevel getAffectionLevel() {
-//        return this.findCapabilitiesByType(AffectionLevel.class).get(0);
-//        int index = 0;
-//        AffectionLevel result = null;
-//
-//        while (index < this.capabilitiesList().size()) {
-//            if (this.capabilitiesList().get(index) instanceof AffectionLevel) {
-//                result = (AffectionLevel) this.capabilitiesList().get(index);
-//            }
-//            index += 1;
-//        }
-//        return result;
-//    }
-
     protected IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(10, "tackle");
     }
-
-//    public void setAffectionPoints(int newAffectionPoints) {
-//        this.affectionPoints = newAffectionPoints;
-//    }
 
     public void setAffectionLevel(AffectionLevel newAffectionLevel) {
         if (this.findCapabilitiesByType(AffectionLevel.class).size() > 0) {
@@ -109,5 +88,10 @@ public abstract class Pokemon extends Actor{
      */
     @Override
     public abstract ActionList allowableActions(Actor otherActor, String direction, GameMap map);
+
+    /**
+     * @param isEquipping FIXME: develop a logic to toggle weapon (put a selected weapon to the inventory - used!);
+     */
+    public abstract void toggleWeapon(boolean isEquipping);
 
 }
