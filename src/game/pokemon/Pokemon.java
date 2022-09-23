@@ -40,8 +40,8 @@ public abstract class Pokemon extends Actor{
         return this.behaviours;
     }
 
-    public AffectionLevel getAffectionLevel() {
-        return this.findCapabilitiesByType(AffectionLevel.class).get(0);
+//    public AffectionLevel getAffectionLevel() {
+//        return this.findCapabilitiesByType(AffectionLevel.class).get(0);
 //        int index = 0;
 //        AffectionLevel result = null;
 //
@@ -52,7 +52,7 @@ public abstract class Pokemon extends Actor{
 //            index += 1;
 //        }
 //        return result;
-    }
+//    }
 
     protected IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(10, "tackle");
@@ -71,10 +71,10 @@ public abstract class Pokemon extends Actor{
 
     public void setStatus() {
         if (this.findCapabilitiesByType(Status.class).size() > 0) {
-            this.findCapabilitiesByType(AffectionLevel.class).clear();
+            this.findCapabilitiesByType(Status.class).clear();
         }
 
-        if (this.getAffectionLevel() == AffectionLevel.DISLIKE || this.getAffectionLevel() == AffectionLevel.NEUTRAL || this instanceof Charmander) {
+        if (this.hasCapability(AffectionLevel.DISLIKE) || this.hasCapability(AffectionLevel.NEUTRAL) || this instanceof Charmander) {
             this.addCapability(Status.HOSTILE);
         }
         else {
