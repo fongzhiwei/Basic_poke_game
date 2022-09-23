@@ -9,18 +9,7 @@ import game.time.TimePerception;
 import java.util.List;
 
 public class Tree extends SpawningGround  implements TimePerception {
-    //chance of spawning a Bulbasaur
-    final private int chanceSpawn = 20;
-
-    //chance of drop a pokefruit
-    final private int chancePokefruit = 20;
-
-    //minimum GRASS element ground to spawn Bulbasaur
-    final private int minGround = 1;
-
     private Location location;
-
-    private int turn;
 
     /**
      * Constructor.

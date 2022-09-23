@@ -18,7 +18,6 @@ import java.util.List;
  */
 public class Lava extends Ground implements TimePerception {
     private Location location;
-    private int turn;
 
     /**
      * Constructor.

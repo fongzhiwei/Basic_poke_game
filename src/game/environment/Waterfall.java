@@ -1,22 +1,10 @@
 package game.environment;
 
-import edu.monash.fit2099.engine.positions.Exit;
+
 import edu.monash.fit2099.engine.positions.Location;
 import game.*;
-import game.environment.SpawningGround;
-
-import java.util.List;
 
 public class Waterfall extends SpawningGround {
-    //chance of spawning a Squirtle
-    final private int chanceSpawn = 15;
-
-    //chance of drop a pokefruit
-    final private int chancePokefruit = 15;
-
-    //minimum WATER element ground to spawn Squirtle
-    final private int minGround = 2;
-
     /**
      * Constructor.
      *
