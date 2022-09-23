@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.AffectionLevel;
+import game.AffectionManager;
 import game.Element;
 import game.Status;
 import game.behaviours.AttackBehaviour;
@@ -20,7 +21,7 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 public abstract class Pokemon extends Actor{
-    private int affectionPoints;
+//    private int affectionPoints;
     private final SortedMap<Integer, Behaviour> behaviours;
 
     public Pokemon(String name, char displayChar, int hitPoints) {
@@ -32,6 +33,7 @@ public abstract class Pokemon extends Actor{
         this.addCapability(AffectionLevel.NEUTRAL);
 //        this.setAffectionPoints(0);
         this.setStatus();
+        AffectionManager.getInstance().registerPokemon(this);
     }
 
     public SortedMap<Integer, Behaviour> getBehaviours() {
@@ -56,9 +58,9 @@ public abstract class Pokemon extends Actor{
         return new IntrinsicWeapon(10, "tackle");
     }
 
-    public void setAffectionPoints(int newAffectionPoints) {
-        this.affectionPoints = newAffectionPoints;
-    }
+//    public void setAffectionPoints(int newAffectionPoints) {
+//        this.affectionPoints = newAffectionPoints;
+//    }
 
     public void setAffectionLevel(AffectionLevel newAffectionLevel) {
         if (this.findCapabilitiesByType(AffectionLevel.class).size() > 0) {
