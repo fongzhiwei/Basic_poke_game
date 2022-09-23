@@ -7,29 +7,29 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.AffectionLevel;
 import game.AffectionManager;
 import game.Element;
+import game.ElementsHelper;
 import game.items.Pokefruit;
 import game.pokemon.Pokemon;
 
 public class FeedAction extends Action {
     protected Pokemon target;
-//    protected String direction;
+    protected String direction;
 
     public FeedAction(Pokemon target, String direction) {
         this.target = target;
-//        this.direction = direction;
+        this.direction = direction;
     }
 
-    public String execute(Actor actor, GameMap map) {
+    public String execute(Actor actor, GameMap map) { // Do checking here or main file???
         if (!this.target.isConscious()) {
-            return this.target + "is unconscious.";
-        }
-        // if affection points <= -50, relationship cannot be fixed
-        // --> cannot feed?? can feed but no increase in affection points??
-        else if (this.target.getAffectionLevel() == AffectionLevel.DISLIKE) {
-            return this.target + "dislikes you.";
+            return String.format("%s is unconscious.", this.target);
         }
         else if (actor.getInventory().size() == 0) {
-            return actor + "'s inventory is empty";
+            return String.format("%s's inventory is empty.", actor);
+        }
+        // if affection points <= -50, relationship cannot be fixed
+        else if (this.target.hasCapability(AffectionLevel.DISLIKE)) {
+            return String.format("%s dislikes you.", this.target);
         }
         else {
             int index = 0;
@@ -37,33 +37,28 @@ public class FeedAction extends Action {
             while (index < actor.getInventory().size()) {
                 if (actor.getInventory().get(index) instanceof Pokefruit) {
                     Item pokefruit = actor.getInventory().get(index);
-                    Element pokefruitType = null;
+                    Element pokefruitType;
+                    String str;
 
-                    for (Enum<?> elem: pokefruit.capabilitiesList()) {
-                        if (elem instanceof Element) {
-                            pokefruitType = (Element) elem;
-                            break;
-                        }
-                    }
-
-                    actor.removeItemFromInventory(pokefruit);
-
-                    if ((pokefruit.hasCapability((Enum<?>) this.target.capabilitiesList()))) { // not sure
-                        return String.format("%s gives a %s Pokefruit to $s", actor, pokefruitType, AffectionManager.getInstance().increaseAffection(this.target, 20));
+                    if (ElementsHelper.hasAnySimilarElements(pokefruit, actor.findCapabilitiesByType(Element.class))) {
+                        pokefruitType = pokefruit.findCapabilitiesByType(Element.class).get(0);
+                        str = String.format("%s gives a %s Pokefruit to %s.", actor, pokefruitType, AffectionManager.getInstance().increaseAffection(this.target, 20));
                     }
                     else {
-                        return String.format("%s dislikes it! %s", actor, AffectionManager.getInstance().decreaseAffection(this.target, 10));
+                        str = String.format("%s dislikes it! %s.", actor, AffectionManager.getInstance().decreaseAffection(this.target, 10));
                     }
+                    actor.removeItemFromInventory(pokefruit);
+                    return str;
                 }
                 index += 1;
             }
-            return actor + " does not have pokefruit";
+            return String.format("%s does not have Pokefruit inside inventory.", actor);
         }
     }
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " feeds " + target;
+        return String.format("%s feeds $s.", target);
     }
 
 }
