@@ -11,10 +11,6 @@ public class Bubble extends WeaponItem{
         this.addCapability(Element.WATER);
     }
 
-    public Element getWeaponType() {
-        return Element.WATER;
-    }
-
     public String toString() {
         return "Bubble";
     }

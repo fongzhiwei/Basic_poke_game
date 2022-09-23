@@ -11,10 +11,6 @@ public class VineWhip extends WeaponItem{
         this.addCapability(Element.GRASS);
     }
 
-    public Element getWeaponType() {
-        return Element.GRASS;
-    }
-
     public String toString() {
         return "Vine Whip";
     }
