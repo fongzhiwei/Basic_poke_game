@@ -26,6 +26,7 @@ public class Lava extends Ground implements TimePerception {
     public Lava() {
         super('^');
         this.addCapability(Element.FIRE);
+        this.addCapability(MoreCapabilityType.EXPANDFIRE);
         this.registerInstance();
     }
 
@@ -53,7 +54,7 @@ public class Lava extends Ground implements TimePerception {
                 groundLocation = exit.getDestination();
 
                 Ground ground = exit.getDestination().getGround();
-                boolean checkExpand = ground instanceof Floor || ground instanceof Wall || ground.hasCapability(Element.GRASS) || ground instanceof Lava;
+                boolean checkExpand = ground.hasCapability(MoreCapabilityType.SOLID) || ground.hasCapability(Element.GRASS) || ground.hasCapability(MoreCapabilityType.EXPANDFIRE);
                 if (!checkExpand) {
                     createLava();
                 }

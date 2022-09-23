@@ -85,7 +85,7 @@ public class Tree extends SpawningGround  implements TimePerception {
                 location = exit.getDestination();
 
                 Ground ground = exit.getDestination().getGround();
-                boolean checkExpand = ground instanceof Floor || ground instanceof Wall || ground.hasCapability(Element.GRASS) || ground instanceof Tree;
+                boolean checkExpand = ground.hasCapability(MoreCapabilityType.SOLID) || ground.hasCapability(Element.GRASS);
                 if (!checkExpand) {
                     createTreeOrHay();
                 }
