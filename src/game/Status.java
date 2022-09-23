@@ -7,5 +7,7 @@ package game;
 public enum Status {
     IMMUNE, // an enum to identify that an object is immune to any attack.
     HOSTILE, // use this status to be considered hostile towards enemy (e.g., to be attacked by enemy)
-    CATCHABLE
+    CATCHABLE,
+    CURRENCY,
+    FOOD
 }
