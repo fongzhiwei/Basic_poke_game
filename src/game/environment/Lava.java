@@ -17,7 +17,7 @@ import java.util.List;
  *
  */
 public class Lava extends Ground implements TimePerception {
-    private Location groundLocation;
+    private Location location;
     private int turn;
 
     /**
@@ -26,7 +26,6 @@ public class Lava extends Ground implements TimePerception {
     public Lava() {
         super('^');
         this.addCapability(Element.FIRE);
-        this.addCapability(MoreCapabilityType.EXPANDFIRE);
         this.registerInstance();
     }
 
@@ -34,27 +33,27 @@ public class Lava extends Ground implements TimePerception {
         //Lava ground has 10% chance to expand
         boolean chance = Utils.chance(10);
 
-        if (chance && !groundLocation.containsAnActor()) {
-            groundLocation.setGround(new Lava());
+        if (chance && !location.containsAnActor()) {
+            location.setGround(new Lava());
         }
     }
 
     @Override
     public void tick(Location location) {
         super.tick(location);
-        this.groundLocation = location;
+        this.location = location;
     }
 
     @Override
     public void dayEffect() {
-        if (groundLocation!=null) {
+        if (location !=null) {
             //expand lava
-            List<Exit> exits = groundLocation.getExits();
+            List<Exit> exits = location.getExits();
             for (Exit exit : exits) {
-                groundLocation = exit.getDestination();
+                location = exit.getDestination();
 
                 Ground ground = exit.getDestination().getGround();
-                boolean checkExpand = ground.hasCapability(MoreCapabilityType.SOLID) || ground.hasCapability(Element.GRASS) || ground.hasCapability(MoreCapabilityType.EXPANDFIRE);
+                boolean checkExpand = ground.hasCapability(CapabilityOfExpand.NOTEXPANDABLE) || ground.hasCapability(Element.FIRE);
                 if (!checkExpand) {
                     createLava();
                 }
@@ -64,13 +63,13 @@ public class Lava extends Ground implements TimePerception {
 
     @Override
     public void nightEffect() {
-        if (groundLocation != null) {
+        if (location != null) {
             //Lava ground has 10% chance of being destroyed
             boolean chance = Utils.chance(10);
 
-            if (chance && !groundLocation.containsAnActor()) {
+            if (chance && !location.containsAnActor()) {
                 TimePerceptionManager.getInstance().cleanUp(this);
-                groundLocation.setGround(new Dirt());
+                location.setGround(new Dirt());
             }
         }
     }

@@ -7,7 +7,7 @@ public class Wall extends Ground {
 
 	public Wall() {
 		super('#');
-		this.addCapability(MoreCapabilityType.SOLID);
+		this.addCapability(CapabilityOfExpand.NOTEXPANDABLE);
 	}
 	
 	@Override

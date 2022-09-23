@@ -5,7 +5,6 @@ import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.*;
 import game.time.TimePerception;
-import game.time.TimePerceptionManager;
 
 import java.util.List;
 
@@ -85,7 +84,7 @@ public class Tree extends SpawningGround  implements TimePerception {
                 location = exit.getDestination();
 
                 Ground ground = exit.getDestination().getGround();
-                boolean checkExpand = ground.hasCapability(MoreCapabilityType.SOLID) || ground.hasCapability(Element.GRASS);
+                boolean checkExpand = ground.hasCapability(CapabilityOfExpand.NOTEXPANDABLE) || ground.hasCapability(Element.GRASS);
                 if (!checkExpand) {
                     createTreeOrHay();
                 }

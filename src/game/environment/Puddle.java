@@ -20,7 +20,6 @@ public class Puddle extends Ground  implements TimePerception {
     public Puddle() {
         super('~');
         this.addCapability(Element.WATER);
-        this.addCapability(MoreCapabilityType.EXPANDWATER);
         this.registerInstance();
     }
 
@@ -61,7 +60,7 @@ public class Puddle extends Ground  implements TimePerception {
                 location = exit.getDestination();
 
                 Ground ground = exit.getDestination().getGround();
-                boolean checkExpand = ground.hasCapability(MoreCapabilityType.SOLID) || ground.hasCapability(Element.GRASS) || ground.hasCapability(MoreCapabilityType.EXPANDWATER);
+                boolean checkExpand = ground.hasCapability(CapabilityOfExpand.NOTEXPANDABLE) || ground.hasCapability(Element.WATER);
                 if (!checkExpand) {
                     createPuddle();
                 }
