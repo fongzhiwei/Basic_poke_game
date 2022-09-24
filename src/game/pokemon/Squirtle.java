@@ -4,10 +4,15 @@ package game.pokemon;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import game.AttackAction;
 import game.Element;
 import game.weapons.SpecialWeapon;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Squirtle extends Pokemon {
@@ -36,7 +41,20 @@ public class Squirtle extends Pokemon {
 
     @Override
     public void toggleWeapon(boolean isEquipping) {
-        if (this.pokemonLocation.getGround().hasCapability(Element.WATER)) {
+        List<Exit> exits = this.pokemonLocation.getExits();
+
+        for(Exit elem: exits) {
+            if (!elem.getDestination().containsAnActor()) {
+                exits.remove(elem);
+            }
+            else {
+                if (!elem.getDestination().getActor().hasCapability(Element.FIRE)) {
+                    exits.remove(elem);
+                }
+            }
+        }
+
+        if (this.pokemonLocation.getGround().hasCapability(Element.WATER) || exits.size() > 0) {
             if (!isEquipping) {
                 SpecialWeapon bubble = new SpecialWeapon("Bubble", 'B', 25, "burbles", 80, Element.WATER);
                 this.addItemToInventory(bubble);
