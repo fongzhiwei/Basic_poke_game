@@ -27,6 +27,7 @@ public class CaptureAction extends Action {
             return String.format("%s cannot be captured. %s", this.target, AffectionManager.getInstance().decreaseAffection(this.target, 10));
         }
         else {
+            this.target.removeCapability(Status.CATCHABLE);
             Pokeball pokeball = new Pokeball(this.target);
             actor.addItemToInventory(pokeball);
             map.removeActor(this.target); // remove target from gameMap?
