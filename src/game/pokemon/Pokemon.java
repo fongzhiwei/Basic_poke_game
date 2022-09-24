@@ -117,9 +117,8 @@ public abstract class Pokemon extends Actor{
                 }
 
                 if (otherActor.hasCapability(Character.PLAYER)) {
-                    if (this.hasCapability(Status.CATCHABLE)) {
-                        actions.add(new CaptureAction(this, direction));
-                    }
+                    actions.add(new CaptureAction(this, direction));
+
                     for (Item elem: otherActor.getInventory()) {
                         if (elem.hasCapability(Status.FRUIT) && !this.hasCapability(AffectionLevel.DISLIKE)) {
                             actions.add(new FeedAction(this, direction));
