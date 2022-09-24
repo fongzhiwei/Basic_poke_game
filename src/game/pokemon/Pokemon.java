@@ -9,14 +9,12 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.AffectionLevel;
-import game.AffectionManager;
-import game.Element;
-import game.Status;
+import game.*;
+import game.Character;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
-import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
+import game.weapons.SpecialWeapon;
 
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -31,6 +29,7 @@ public abstract class Pokemon extends Actor{
         this.getBehaviours().put(2, new AttackBehaviour());
         this.getBehaviours().put(3, new WanderBehaviour());
         this.addCapability(AffectionLevel.NEUTRAL);
+        this.addCapability(Character.NPC);
         this.setStatus();
         AffectionManager.getInstance().registerPokemon(this);
     }
@@ -77,8 +76,9 @@ public abstract class Pokemon extends Actor{
         this.pokemonLocation = map.locationOf(this);
         for (Behaviour behaviour : behaviours.values()) {
             Action action = behaviour.getAction(this, map);
-            if (action != null)
+            if (action != null) {
                 return action;
+            }
         }
         return new DoNothingAction();
     }
