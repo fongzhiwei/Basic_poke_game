@@ -60,7 +60,7 @@ public abstract class Pokemon extends Actor{
             this.findCapabilitiesByType(Status.class).clear();
         }
 
-        if (this.hasCapability(AffectionLevel.DISLIKE) || this.hasCapability(AffectionLevel.NEUTRAL) || this instanceof Charmander) {
+        if (this.hasCapability(AffectionLevel.DISLIKE) || this.hasCapability(AffectionLevel.NEUTRAL)) {
             this.addCapability(Status.HOSTILE);
         }
         else {
