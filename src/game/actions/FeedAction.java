@@ -32,7 +32,7 @@ public class FeedAction extends Action {
             int index = 0;
 
             while (index < actor.getInventory().size()) {
-                if (actor.getInventory().get(index).hasCapability(Status.FOOD)) {
+                if (actor.getInventory().get(index).hasCapability(Status.FRUIT)) {
                     Item pokefruit = actor.getInventory().get(index);
                     Element pokefruitType;
                     String str;
