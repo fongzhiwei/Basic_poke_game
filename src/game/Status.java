@@ -10,5 +10,6 @@ public enum Status {
     CATCHABLE,
     CURRENCY,
     FRUIT,
-    BALL
+    BALL,
+    WEAPON
 }
