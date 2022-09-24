@@ -6,16 +6,22 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
+import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.*;
 import game.Character;
+import game.actions.CaptureAction;
+import game.actions.FeedAction;
+import game.actions.SummonAction;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
 import game.behaviours.WanderBehaviour;
 import game.weapons.SpecialWeapon;
 
+import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -90,7 +96,43 @@ public abstract class Pokemon extends Actor{
      * @return list of game.actions
      */
     @Override
-    public abstract ActionList allowableActions(Actor otherActor, String direction, GameMap map);
+    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+        ActionList actions = new ActionList();
+//        actions.add(new AttackAction(this, direction));
+        //FIXME: allow other actor to attack this Squirtle (incl. Player). Please check requirement! :)
+        if (otherActor.isConscious() && this.isConscious()) {
+            List<Exit> exits = map.locationOf(otherActor).getExits();
+            boolean isActorReachable = false;
+            int i = 0;
+
+            while (!isActorReachable && i < exits.size()) {
+                if (exits.get(i).getDestination().getActor().equals(this)) {
+                    isActorReachable = true;
+                }
+                i++;
+            }
+
+            if (isActorReachable) {
+                actions.add(new AttackAction(this, direction));
+
+                if (otherActor.hasCapability(Character.PLAYER)) {
+                    if (this.hasCapability(Status.CATCHABLE)) {
+                        actions.add(new CaptureAction(this, direction));
+                    }
+                    for (Item elem: otherActor.getInventory()) {
+                        if (elem.hasCapability(Status.FRUIT) && !this.hasCapability(AffectionLevel.DISLIKE)) {
+                            actions.add(new FeedAction(this, direction));
+                        }
+
+                        if (elem.hasCapability(Status.BALL)) {
+                            actions.add(new SummonAction(this, direction));
+                        }
+                    }
+                }
+            }
+        }
+        return actions;
+    }
 
     /**
      * @param isEquipping FIXME: develop a logic to toggle weapon (put a selected weapon to the inventory - used!);
