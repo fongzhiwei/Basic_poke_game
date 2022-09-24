@@ -18,10 +18,7 @@ public class CaptureAction extends Action {
     }
 
     public String execute(Actor actor, GameMap map) {
-        if (!this.target.isConscious()) {
-            return String.format("%s is unconscious.", this.target);
-        }
-        else if (!this.target.hasCapability(Status.CATCHABLE)) {
+        if (!this.target.hasCapability(Status.CATCHABLE)) {
             return String.format("%s cannot be captured. %s", this.target, AffectionManager.getInstance().decreaseAffection(this.target, 10));
         }
         else {
