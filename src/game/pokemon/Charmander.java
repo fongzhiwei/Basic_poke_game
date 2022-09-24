@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.AttackAction;
 import game.Element;
+import game.Status;
 import game.weapons.SpecialWeapon;
 
 /**
@@ -27,6 +28,15 @@ public class Charmander extends Pokemon {
     }
 
     @Override
+    public void setStatus() {
+        if (this.findCapabilitiesByType(Status.class).size() > 0) {
+            this.findCapabilitiesByType(Status.class).clear();
+        }
+
+        this.addCapability(Status.HOSTILE);
+    }
+
+    @Override
     protected IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(10, "scratch");
     }
@@ -39,10 +49,7 @@ public class Charmander extends Pokemon {
      */
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
-        ActionList actions = new ActionList();
-        actions.add(new AttackAction(this, direction));
-        //FIXME: allow other actor to attack this Charmander (incl. Player). Please check requirement! :)
-        return actions;
+        return super.allowableActions(otherActor, direction, map).remove();
     }
 
     /**
