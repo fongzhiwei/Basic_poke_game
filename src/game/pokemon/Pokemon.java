@@ -113,7 +113,9 @@ public abstract class Pokemon extends Actor{
             }
 
             if (isActorReachable) {
-                actions.add(new AttackAction(this, direction));
+                if (ElementsHelper.hasAnySimilarElements(this, otherActor.findCapabilitiesByType(Element.class))) {
+                    actions.add(new AttackAction(this, direction));
+                }
 
                 if (otherActor.hasCapability(Character.PLAYER)) {
                     if (this.hasCapability(Status.CATCHABLE)) {
