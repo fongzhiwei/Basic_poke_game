@@ -1,20 +1,11 @@
 package game.pokemon;
 
 
-import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Exit;
-import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.Location;
-import game.*;
-import game.Character;
-import game.actions.CaptureAction;
-import game.actions.FeedAction;
-import game.actions.SummonAction;
+import game.Element;
 import game.weapons.SpecialWeapon;
 
-import java.util.ArrayList;
 import java.util.List;
 
 

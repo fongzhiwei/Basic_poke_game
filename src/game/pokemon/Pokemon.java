@@ -19,7 +19,6 @@ import game.actions.SummonAction;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
 import game.behaviours.WanderBehaviour;
-import game.weapons.SpecialWeapon;
 
 import java.util.List;
 import java.util.SortedMap;
