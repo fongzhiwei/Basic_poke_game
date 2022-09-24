@@ -20,20 +20,6 @@ public class Bulbasaur extends Pokemon {
         this.addCapability(Element.GRASS);
     }
 
-    /**
-     * @param otherActor the Actor that might perform an action.
-     * @param direction  String representing the direction of the other Actor
-     * @param map        current GameMap
-     * @return list of game.actions
-     */
-    @Override
-    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
-        ActionList actions = new ActionList();
-        actions.add(new AttackAction(this, direction));
-        //FIXME: allow other actor to attack this Bulbasaur (incl. Player). Please check requirement! :)
-        return actions;
-    }
-
     @Override
     public void toggleWeapon(boolean isEquipping) {
         if (this.pokemonLocation.getGround().hasCapability(Element.GRASS)) {

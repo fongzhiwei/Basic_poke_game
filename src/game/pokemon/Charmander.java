@@ -42,17 +42,6 @@ public class Charmander extends Pokemon {
     }
 
     /**
-     * @param otherActor the Actor that might perform an action.
-     * @param direction  String representing the direction of the other Actor
-     * @param map        current GameMap
-     * @return list of game.actions
-     */
-    @Override
-    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
-        return super.allowableActions(otherActor, direction, map).remove();
-    }
-
-    /**
      * @param isEquipping FIXME: develop a logic to toggle weapon (put a selected weapon to the inventory - used!);
      */
     public void toggleWeapon(boolean isEquipping) {
