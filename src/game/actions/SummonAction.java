@@ -53,7 +53,7 @@ public class SummonAction extends Action {
                             int randomPosIndex = Utils.nextNum(0, validPosIndex.size());
                             map.addActor(capturedPokemon, exits.get(randomPosIndex).getDestination());
                             actor.removeItemFromInventory(pokeball);
-                            return String.format("%s summoned a %s.", actor, this.target);
+                            return String.format("I choose you... %s.", this.target);
                         }
                     }
                 }
