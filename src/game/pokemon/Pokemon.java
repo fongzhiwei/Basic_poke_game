@@ -81,7 +81,15 @@ public abstract class Pokemon extends Actor{
         this.pokemonLocation = map.locationOf(this);
         for (Behaviour behaviour : behaviours.values()) {
             Action action = behaviour.getAction(this, map);
+            boolean isEquipping = false;
+            int index = 0;
+            while (index < this.getInventory().size()) {
+                if (this.getInventory().get(index).hasCapability(Status.WEAPON)) {
+                    isEquipping = true;
+                }
+            }
             if (action != null) {
+                this.toggleWeapon(isEquipping);
                 return action;
             }
         }
