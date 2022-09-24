@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.AffectionManager;
 import game.Element;
+import game.Status;
 import game.Utils;
 import game.items.Pokeball;
 import game.items.Pokefruit;
@@ -52,6 +53,7 @@ public class SummonAction extends Action {
                         if (validPosIndex.size() > 0) {
                             int randomPosIndex = Utils.nextNum(0, validPosIndex.size());
                             map.addActor(capturedPokemon, exits.get(randomPosIndex).getDestination());
+                            capturedPokemon.addCapability(Status.CATCHABLE);
                             actor.removeItemFromInventory(pokeball);
                             return String.format("I choose you... %s.", this.target);
                         }
