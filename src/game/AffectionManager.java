@@ -1,7 +1,7 @@
 package game;
 
 import edu.monash.fit2099.engine.actors.Actor;
-import game.pokemon.*;
+import game.pokemon.Pokemon;
 
 import java.util.HashMap;
 import java.util.Map;
