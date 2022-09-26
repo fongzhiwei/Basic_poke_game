@@ -51,6 +51,12 @@ public class SummonAction extends Action {
         this.pokeball = pokeball;
     }
 
+    /**
+     * Execute summon action for player to release a pokemon next to him/her on the map
+     * @param actor the actor to release the pokemon (player)
+     * @param map the game map
+     * @return a string display after action is completed
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
         Element pokefruitType;
@@ -87,6 +93,11 @@ public class SummonAction extends Action {
         return String.format("%s has not captured any %s.", actor, this.target);
     }
 
+    /**
+     * Method to return appropriate menu description for the action
+     * @param actor the actor who performed the action
+     * @return a string for menu description
+     */
     @Override
     public String menuDescription(Actor actor) {
         return String.format("%s summons %s." , actor, this.target);
