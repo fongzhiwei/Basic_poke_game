@@ -105,7 +105,7 @@ public abstract class Item implements Printable, Capable {
 	/**
 	 * Getter.
 	 * 
-	 * Returns an unmodifiable copy of the actions list so that calling methods won't
+	 * Returns an unmodifiable copy of the game.actions list so that calling methods won't
 	 * be able to change what this Item can do without the Item checking.
 	 * @return an unmodifiable list of Actions
 	 */
@@ -115,7 +115,7 @@ public abstract class Item implements Printable, Capable {
 
 	/**
 	 * Allow subclasses to add an action.
-	 * @param action a new action to be added to the actions list.
+	 * @param action a new action to be added to the game.actions list.
 	 */
 	protected final void addAction(Action action){
 		if(action == null){
@@ -126,7 +126,7 @@ public abstract class Item implements Printable, Capable {
 
 	/**
 	 * Allow subclasses to remove an action.
-	 * @param action a new action to be removed from the actions list.
+	 * @param action a new action to be removed from the game.actions list.
 	 */
 	protected final void removeAction(Action action){
 		if(action == null){
@@ -136,7 +136,7 @@ public abstract class Item implements Printable, Capable {
 	}
 
 	/**
-	 * Clear all actions from this item.
+	 * Clear all game.actions from this item.
 	 */
 	protected final void clearActions(){
 		this.allowableActions = new ActionList();

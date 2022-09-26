@@ -1,4 +1,4 @@
-package game;
+package game.environment;
 
 import edu.monash.fit2099.engine.positions.Ground;
 
@@ -13,5 +13,7 @@ import edu.monash.fit2099.engine.positions.Ground;
 public class Floor extends Ground {
 	public Floor() {
 		super('_');
+		this.addCapability(CapabilityOfExpand.NOTEXPANDABLE);
 	}
+
 }

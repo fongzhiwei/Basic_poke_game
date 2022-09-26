@@ -6,7 +6,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 /**
  * An Action that doesn't do anything.  
  * 
- * Use this to implement waiting or similar actions in game clients.
+ * Use this to implement waiting or similar game.actions in game clients.
  */
 public class DoNothingAction extends Action {
 

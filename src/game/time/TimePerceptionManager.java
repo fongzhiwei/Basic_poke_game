@@ -1,5 +1,9 @@
 package game.time;
 
+
+import game.environment.Lava;
+import game.environment.Puddle;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +17,7 @@ import java.util.List;
  * Modified by:
  *
  */
-public class TimePerceptionManager {
+public class TimePerceptionManager{
     /**
      * A list of polymorph instances (any classes that implements TimePerception,
      * such as, a Charmander implements TimePerception, it will be stored in here)
@@ -37,7 +41,10 @@ public class TimePerceptionManager {
      * FIXME: create a singleton instance.
      */
     public static TimePerceptionManager getInstance() {
-        return null;
+        if (instance == null){
+            instance = new TimePerceptionManager();
+        }
+        return instance;
     }
 
     /**
@@ -55,6 +62,23 @@ public class TimePerceptionManager {
      * FIXME: write a relevant logic (i.e., increment turns choose day or night) and call this method once at every turn.
      */
     public void run() {
+        turn += 1;
+        int last_digit = turn % 10;
+        List<TimePerception> originalList = new ArrayList<>();
+        originalList.addAll(timePerceptionList);
+
+        if (last_digit >= 5){
+            System.out.println("Night now");
+            for (TimePerception timePerception : originalList) {
+                timePerception.nightEffect();
+            }
+        }
+        else{
+            System.out.println("Day now");
+            for (TimePerception timePerception : originalList) {
+                timePerception.dayEffect();
+            }
+        }
     }
 
 
@@ -64,8 +88,8 @@ public class TimePerceptionManager {
      * @param objInstance any instance that implements TimePerception
      */
     public void append(TimePerception objInstance) {
+        timePerceptionList.add(objInstance);
     }
-
 
     /**
      * Remove a TimePerception instance from the list
@@ -75,5 +99,7 @@ public class TimePerceptionManager {
      * @param objInstance object instance
      */
     public void cleanUp(TimePerception objInstance) {
+        timePerceptionList.remove(objInstance);
     }
+
 }

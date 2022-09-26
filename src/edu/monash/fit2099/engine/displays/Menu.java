@@ -29,7 +29,7 @@ public class Menu {
 		for (char i = 'a'; i <= 'z'; i++)
 			freeChars.add(i);
 
-		// Show with the actions with hotkeys first;
+		// Show with the game.actions with hotkeys first;
 		for (Action action : actions.sorted(new SortHotkeysFirst())) {
 			String hotKey = action.hotkey();
 			char c;

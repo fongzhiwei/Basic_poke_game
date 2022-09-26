@@ -2,8 +2,12 @@ package game.behaviours;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.*;
+import game.pokemon.Charmander;
+
+import java.util.List;
 
 /**
  * Created by:
@@ -18,10 +22,20 @@ public class AttackBehaviour implements Behaviour {
      */
     @Override
     public Action getAction(Actor actor, GameMap map) {
-        Actor fakeOtherActor = new Charmander();
         // FIXME: fakeOtherActor is a completely new instance that doesn't exist anywhere in the map! Check the requirement.
-        if(ElementsHelper.hasAnySimilarElements(actor, fakeOtherActor.findCapabilitiesByType(Element.class))){
-            return new AttackAction(fakeOtherActor, "here"); // behaviour will stop here.
+        if (actor.isConscious()) {
+            List<Exit> exits = map.locationOf(actor).getExits();
+            Actor otherActor;
+
+            for(Exit elem: exits) {
+                if (elem.getDestination().containsAnActor()) {
+                    otherActor = elem.getDestination().getActor();
+
+                    if (ElementsHelper.hasAnySimilarElements(actor, otherActor.findCapabilitiesByType(Element.class))) {
+                        return new AttackAction(otherActor, "here"); // behaviour will stop here.
+                    }
+                }
+            }
         }
         return null; // go to next behaviour
     }
