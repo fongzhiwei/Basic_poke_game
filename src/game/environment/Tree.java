@@ -59,27 +59,6 @@ public class Tree extends SpawningGround  implements TimePerception {
     }
 
     /**
-     * This method will create the surrounding location to either tree or hay.
-     */
-    public void createTreeOrHay(){
-        //Trees has 10% chance to expand
-        boolean chance = Utils.chance(10);
-
-        //Convert its surrounding to either all Trees or all Hays randomly
-        //50% of chance to all Trees, 50% of chance to all Hays
-        boolean chanceRandom = Utils.chance(50);
-
-        if (chance && !location.containsAnActor()) {
-            if (chanceRandom) {
-                location.setGround(new Tree());
-            }
-            else{
-                location.setGround(new Hay());
-            }
-        }
-    }
-
-    /**
      * This method will drop candy when the time period is day.
      */
     @Override
@@ -100,17 +79,27 @@ public class Tree extends SpawningGround  implements TimePerception {
     @Override
     public void nightEffect() {
         if (location!=null) {
-            List<Exit> exits = location.getExits();
-            for (Exit exit : exits) {
-                location = exit.getDestination();
+            //Trees has 10% chance to expand
+            boolean chance = Utils.chance(10);
 
-                Ground ground = exit.getDestination().getGround();
-                boolean checkExpand = ground.hasCapability(CapabilityOfExpand.NOTEXPANDABLE) || ground.hasCapability(Element.GRASS);
-                if (!checkExpand) {
-                    createTreeOrHay();
+            //Convert its surrounding to either all Trees or all Hays randomly
+            //50% of chance to all Trees, 50% of chance to all Hays
+            boolean chanceRandom = Utils.chance(50);
+
+            if (chance && !location.containsAnActor()) {
+                List<Exit> exits = location.getExits();
+                for (Exit exit : exits) {
+                    location = exit.getDestination();
+
+                    Ground ground = exit.getDestination().getGround();
+                    boolean checkExpand = ground.hasCapability(CapabilityOfExpand.NOTEXPANDABLE) || ground.hasCapability(Element.GRASS);
+                    if (!checkExpand && chanceRandom) {
+                        location.setGround(new Tree());
+                    } else {
+                        location.setGround(new Hay());
+                    }
                 }
             }
         }
-
     }
 }
