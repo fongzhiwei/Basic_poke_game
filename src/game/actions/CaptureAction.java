@@ -8,15 +8,38 @@ import game.Status;
 import game.items.Pokeball;
 import game.pokemon.Pokemon;
 
+/**
+ * An Action to capture a Pokemon.
+ * Created by:
+ * @author Leong Xin Yun
+ *
+ * Modified by:
+ *
+ */
 public class CaptureAction extends Action {
+    /**
+     * The Pokemon that is to be captured
+     */
     protected Pokemon target;
+
+    /**
+     * The direction of incoming capture action.
+     */
     protected String direction;
 
+    /**
+     * Constructor.
+     *
+     * @param target the Pokemon to capture
+     * @param direction the direction of the incoming capture action
+     *
+     */
     public CaptureAction(Pokemon target, String direction) {
         this.target = target;
         this.direction = direction;
     }
 
+    @Override
     public String execute(Actor actor, GameMap map) {
         if (!this.target.hasCapability(Status.CATCHABLE)) {
             return String.format("%s cannot be captured. %s", this.target, AffectionManager.getInstance().decreaseAffection(this.target, 10));
