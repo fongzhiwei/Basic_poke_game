@@ -35,7 +35,7 @@ public abstract class Pokemon extends Actor{
         this.getBehaviours().put(3, new WanderBehaviour());
         this.addCapability(AffectionLevel.NEUTRAL);
         this.addCapability(Character.NPC);
-        this.setStatus(0);
+        this.setStatus();
         AffectionManager.getInstance().registerPokemon(this);
     }
 
@@ -52,52 +52,20 @@ public abstract class Pokemon extends Actor{
             this.findCapabilitiesByType(AffectionLevel.class).clear();
         }
         this.addCapability(newAffectionLevel);
-//        this.setStatus();
     }
 
-    public void setStatus(int affectionPoints) {
+    public void setStatus() {
         if (this.findCapabilitiesByType(Status.class).size() > 0) {
-            for (Status status : this.findCapabilitiesByType(Status.class)) {
-                this.removeCapability(status);
-            }
+            this.findCapabilitiesByType(Status.class).clear();
         }
 
-//        if (affectionPoints <= AffectionLevel.DISLIKE.getPoints()) {
-//            this.addCapability(AffectionLevel.DISLIKE);
-//        } else if (affectionPoints <= AffectionLevel.NEUTRAL.getPoints()) {
-//            this.addCapability(AffectionLevel.NEUTRAL);
-//        } else if (affectionPoints <= AffectionLevel.LIKE.getPoints()) {
-//            this.addCapability(AffectionLevel.LIKE);
-//        } else if (affectionPoints <= AffectionLevel.FOLLOW.getPoints()) {
-//            this.addCapability(AffectionLevel.FOLLOW);
-//        } else {
-//            this.addCapability(AffectionLevel.MAX);
-//        }
-
-        if (this.hasCapability(AffectionLevel.DISLIKE)) {
+        if (this.hasCapability(AffectionLevel.DISLIKE) || this.hasCapability(AffectionLevel.NEUTRAL)) {
             this.addCapability(Status.HOSTILE);
         }
-        else if (this.hasCapability(AffectionLevel.NEUTRAL)) {
-            this.addCapability(Status.HOSTILE);
-        }
-        else if (this.hasCapability(AffectionLevel.LIKE)) {
-            this.addCapability(Status.CATCHABLE);
-        }
-        else if (this.hasCapability(AffectionLevel.FOLLOW)) {
-            this.addCapability(Status.CATCHABLE);
-        }
-        else if (this.hasCapability(AffectionLevel.MAX)) {
+        else {
             this.addCapability(Status.CATCHABLE);
         }
     }
-
-//        if (this.hasCapability(AffectionLevel.DISLIKE) || this.hasCapability(AffectionLevel.NEUTRAL)) {
-//            this.addCapability(Status.HOSTILE);
-//        }
-//        else {
-//            this.addCapability(Status.CATCHABLE);
-//        }
-//    }
 
     /**
      * Select and return an action to perform on the current turn.
@@ -140,28 +108,28 @@ public abstract class Pokemon extends Actor{
 //        actions.add(new AttackAction(this, direction));
         //FIXME: allow other actor to attack this Squirtle (incl. Player). Please check requirement! :)
         if (otherActor.isConscious() && this.isConscious()) {
-            List<Exit> exits = map.locationOf(this).getExits();
+            List<Exit> exits = map.locationOf(otherActor).getExits();
             boolean isActorReachable = false;
             int i = 0;
 
             while (!isActorReachable && i < exits.size()) {
-                if (exits.get(i).getDestination().getActor() != null && exits.get(i).getDestination().getActor().equals(otherActor)) {
+                if (exits.get(i).getDestination().getActor() != null && exits.get(i).getDestination().getActor().equals(this)) {
                     isActorReachable = true;
                 }
                 i++;
             }
 
             if (isActorReachable) {
-                if (!ElementsHelper.hasAnySimilarElements(this, otherActor.findCapabilitiesByType(Element.class))) {
+                if (ElementsHelper.hasAnySimilarElements(this, otherActor.findCapabilitiesByType(Element.class))) {
                     actions.add(new AttackAction(this, direction));
                 }
 
                 if (otherActor.hasCapability(Character.PLAYER)) {
                     actions.add(new CaptureAction(this, direction));
 
-                    for (Item elem : otherActor.getInventory()) {
+                    for (Item elem: otherActor.getInventory()) {
                         if (elem.hasCapability(Status.FRUIT) && !this.hasCapability(AffectionLevel.DISLIKE)) {
-                            actions.add(new FeedAction(this, direction, elem));
+                            actions.add(new FeedAction(this, direction));
                         }
 
                         if (elem.hasCapability(Status.BALL)) {
