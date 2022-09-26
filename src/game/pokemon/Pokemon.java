@@ -18,6 +18,7 @@ import game.actions.FeedAction;
 import game.actions.SummonAction;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
+import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
 
 import java.util.List;
@@ -35,7 +36,7 @@ public abstract class Pokemon extends Actor{
         this.getBehaviours().put(3, new WanderBehaviour());
         this.addCapability(AffectionLevel.NEUTRAL);
         this.addCapability(Character.NPC);
-        this.setStatus();
+        this.setStatus(0);
         AffectionManager.getInstance().registerPokemon(this);
     }
 
@@ -54,17 +55,21 @@ public abstract class Pokemon extends Actor{
         this.addCapability(newAffectionLevel);
     }
 
-    public void setStatus() {
+    public void setStatus(int affectionPoints) {
         if (this.findCapabilitiesByType(Status.class).size() > 0) {
-            this.findCapabilitiesByType(Status.class).clear();
+            for (Status status : this.findCapabilitiesByType(Status.class)) {
+                this.removeCapability(status);
+            }
         }
 
-        if (this.hasCapability(AffectionLevel.DISLIKE) || this.hasCapability(AffectionLevel.NEUTRAL)) {
+        if (affectionPoints<50) {
             this.addCapability(Status.HOSTILE);
         }
-        else {
+
+        else if (affectionPoints>=0) {
             this.addCapability(Status.CATCHABLE);
         }
+
     }
 
     /**
@@ -105,7 +110,7 @@ public abstract class Pokemon extends Actor{
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
-//        actions.add(new AttackAction(this, direction));
+        actions.add(new AttackAction(this, direction));
         //FIXME: allow other actor to attack this Squirtle (incl. Player). Please check requirement! :)
         if (otherActor.isConscious() && this.isConscious()) {
             List<Exit> exits = map.locationOf(otherActor).getExits();
@@ -125,16 +130,15 @@ public abstract class Pokemon extends Actor{
                 }
 
                 if (otherActor.hasCapability(Character.PLAYER)) {
-                    actions.add(new CaptureAction(this, direction));
+                    if (!this.hasCapability(Status.NOT_CATCHABLE)){
+                        actions.add(new CaptureAction(this, direction));
+                    }
 
                     for (Item elem: otherActor.getInventory()) {
                         if (elem.hasCapability(Status.FRUIT) && !this.hasCapability(AffectionLevel.DISLIKE)) {
                             actions.add(new FeedAction(this, direction, elem));
                         }
 
-                        if (elem.hasCapability(Status.BALL)) {
-                            actions.add(new SummonAction(this, direction, elem));
-                        }
                     }
                 }
             }

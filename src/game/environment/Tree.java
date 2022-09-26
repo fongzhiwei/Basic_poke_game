@@ -43,7 +43,7 @@ public class Tree extends SpawningGround  implements TimePerception {
     public void tick(Location location) {
         //chance of spawning a Bulbasaur is 15%
         //at least 1 GRASS element ground surrounding to create Bulbasaur
-        super.tick(location, new Bulbasaur(), Element.GRASS, 15, 1);
+        super.tick(location, new Bulbasaur(), Element.GRASS, -1, 1);
         super.tick(location);
         this.location = location;
         createFruit(location);

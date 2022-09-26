@@ -27,7 +27,7 @@ public class TradeGrassPokefruitAction extends Action {
      */
     public TradeGrassPokefruitAction(Actor target){
         this.target = target;
-        this.merchandise = new Pokefruit(Element.FIRE);
+        this.merchandise = new Pokefruit(Element.GRASS);
     }
 
     /**
@@ -55,6 +55,6 @@ public class TradeGrassPokefruitAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return target + " trades Grass Pokefruit for 1 Candy with Nurse Joy" ;
+        return target + " trades Grass Pokefruit with 1 Candy with Nurse Joy" ;
     }
 }

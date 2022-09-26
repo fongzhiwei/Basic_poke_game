@@ -1,7 +1,9 @@
 package game;
 
 import edu.monash.fit2099.engine.actors.Actor;
-import game.pokemon.Pokemon;
+import game.behaviours.Behaviour;
+import game.behaviours.FollowBehaviour;
+import game.pokemon.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -112,8 +114,12 @@ public class AffectionManager {
                 this.affectionPoints.replace(actor, oldAP + point);
             }
             this.updateAffectionLevel(actor);
-            actor.setStatus();
+            actor.setStatus(getAffectionPoint(actor));
 
+            if (getAffectionPoint(actor)>= 75){
+                actor.getBehaviours().put(1,new FollowBehaviour(trainer));
+                System.out.println("Follow behaviour added");
+            }
             return String.format("%s(%d AP)", actor, oldAP);
         }
         return String.format("%s does not exist in the collection", actor);
@@ -132,8 +138,11 @@ public class AffectionManager {
 
             this.affectionPoints.replace(actor, oldAP - point);
             this.updateAffectionLevel(actor);
-            actor.setStatus();
+            actor.setStatus(getAffectionPoint(actor));
 
+            if (getAffectionPoint(actor)< 75){
+                actor.getBehaviours().remove(1);
+            }
             return "-10 affection points";
         }
         return String.format("%s does not exist in the collection", actor);

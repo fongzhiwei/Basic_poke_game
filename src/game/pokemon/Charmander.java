@@ -26,12 +26,13 @@ public class Charmander extends Pokemon implements TimePerception{
         super("Charmander", 'c', 100);
         // HINT: add more relevant behaviours here
         this.addCapability(Element.FIRE);
+        this.addCapability(Status.NOT_CATCHABLE);
         this.registerInstance();
     }
 
 
     @Override
-    public void setStatus() {
+    public void setStatus(int affectionPoints) {
         if (this.findCapabilitiesByType(Status.class).size() > 0) {
             this.findCapabilitiesByType(Status.class).clear();
         }

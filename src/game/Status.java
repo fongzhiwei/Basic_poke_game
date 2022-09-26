@@ -7,11 +7,12 @@ package game;
  * @author Riordan D. Alfredo
  */
 public enum Status {
-    IMMUNE,     // an enum to identify that an object is immune to any attack.
-    HOSTILE,    // use this status to be considered hostile towards enemy (e.g., to be attacked by enemy)
-    CATCHABLE,  // for released pokemons and pokemons with affection points of 50 and more
-    CURRENCY,   // for candy
-    FRUIT,      // for all pokefruit item
-    BALL,       // for all pokeball item
-    WEAPON      // for all weapon item
+    IMMUNE, // an enum to identify that an object is immune to any attack.
+    HOSTILE, // use this status to be considered hostile towards enemy (e.g., to be attacked by enemy)
+    NOT_CATCHABLE,
+    CATCHABLE,
+    CURRENCY,
+    FRUIT,
+    BALL,
+    WEAPON
 }

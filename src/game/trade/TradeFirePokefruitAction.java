@@ -55,6 +55,6 @@ public class TradeFirePokefruitAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return target + " trades Fire Pokefruit for 1 Candy with Nurse Joy" ;
+        return target + " trades Fire Pokefruit with 1 Candy with Nurse Joy" ;
     }
 }
