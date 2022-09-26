@@ -1,7 +1,9 @@
 package game.items;
 
+import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.items.Item;
 import game.Status;
+import game.actions.SummonAction;
 import game.pokemon.Pokemon;
 
 /**
@@ -27,6 +29,7 @@ public class Pokeball extends Item {
         super("Pokeball with "+ pokemon.toString(),'0',true);
         this.pokemon = pokemon;
         this.addCapability(Status.BALL);
+        this.addAction(new SummonAction(pokemon));
     }
 
     /**
@@ -35,5 +38,11 @@ public class Pokeball extends Item {
      */
     public Pokemon getPokemon(){
         return pokemon;
-    }}
+    }
+
+}
+
+
+
+
 

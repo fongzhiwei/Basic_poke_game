@@ -5,7 +5,8 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.*;
+import game.Status;
+import game.Utils;
 import game.items.Pokeball;
 import game.pokemon.Pokemon;
 
@@ -27,28 +28,16 @@ public class SummonAction extends Action {
      */
     protected Pokemon target;
 
-    /**
-     * The direction of incoming summon (release) action.
-     */
-    protected String direction;
-
-    /**
-     * The pokeball item holding the pokemon to be released
-     */
-    protected Item pokeball;
 
     /**
      * Constructor.
      *
      * @param target the Pokemon to summon (release)
-     * @param direction the direction of the incoming summon (release) action
-     * @param pokeball the pokeball item retaining the pokemon
      *
      */
-    public SummonAction(Pokemon target, String direction, Item pokeball) {
+    public SummonAction(Pokemon target) {
         this.target = target;
-        this.direction = direction;
-        this.pokeball = pokeball;
+
     }
 
     /**
@@ -59,26 +48,23 @@ public class SummonAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        if (this.pokeball.getPokemon().toString().equals(this.target.toString())) {
-            // retrieve pokemon next to actor
-            Pokemon capturedPokemon = this.pokeball.getPokemon();
-            List<Exit> exits = map.locationOf(actor).getExits();
-            ArrayList<Integer> validPosIndex = new ArrayList<>();
 
-            for (int i = 0; i < exits.size(); i++) {
-                if (exits.get(i).getDestination().getGround().canActorEnter(capturedPokemon)) {
-                    validPosIndex.add(i);
-                }
-            }
+        Pokemon capturedPokemon = target;
+        List<Exit> exits = map.locationOf(actor).getExits();
+        ArrayList<Integer> validPosIndex = new ArrayList<>();
 
-            if (validPosIndex.size() > 0) {
-                int randomPosIndex = Utils.nextNum(0, validPosIndex.size());
-                map.addActor(capturedPokemon, exits.get(randomPosIndex).getDestination());
-                capturedPokemon.addCapability(Status.CATCHABLE);
-                actor.removeItemFromInventory(pokeball);
-                return String.format("I choose you... %s.", this.target);
+        for (int i = 0; i < exits.size(); i++) {
+            if (exits.get(i).getDestination().getGround().canActorEnter(capturedPokemon)) {
+                validPosIndex.add(i);
             }
         }
+        if (validPosIndex.size() > 0) {
+            int randomPosIndex = Utils.nextNum(0, validPosIndex.size());
+            map.addActor(capturedPokemon, exits.get(randomPosIndex).getDestination());
+//            actor.removeItemFromInventory(pokeball);
+            return String.format("I choose you... %s.", this.target);
+            }
+
         return String.format("%s has not captured any %s.", actor, this.target);
     }
 

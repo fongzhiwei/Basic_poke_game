@@ -18,6 +18,7 @@ import game.actions.FeedAction;
 import game.actions.SummonAction;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
+import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
 
 import java.util.List;
@@ -60,23 +61,15 @@ public abstract class Pokemon extends Actor{
                 this.removeCapability(status);
             }
         }
-        System.out.println(findCapabilitiesByType(AffectionLevel.class));
-        if (this.hasCapability(AffectionLevel.DISLIKE)) {
+
+        if (affectionPoints<50) {
             this.addCapability(Status.HOSTILE);
         }
-        else if (this.hasCapability(AffectionLevel.NEUTRAL)) {
-            this.addCapability(Status.HOSTILE);
-        }
-        else if (this.hasCapability(AffectionLevel.LIKE)) {
+
+        else if (affectionPoints>=0) {
             this.addCapability(Status.CATCHABLE);
         }
-        else if (this.hasCapability(AffectionLevel.FOLLOW)) {
-            this.addCapability(Status.CATCHABLE);
-        }
-        else if (this.hasCapability(AffectionLevel.MAX)) {
-            this.addCapability(Status.CATCHABLE);
-        }
-        System.out.println(findCapabilitiesByType(Status.class));
+
     }
 
     /**
@@ -137,16 +130,15 @@ public abstract class Pokemon extends Actor{
                 }
 
                 if (otherActor.hasCapability(Character.PLAYER)) {
-                    actions.add(new CaptureAction(this, direction));
+                    if (!this.hasCapability(Status.NOT_CATCHABLE)){
+                        actions.add(new CaptureAction(this, direction));
+                    }
 
                     for (Item elem: otherActor.getInventory()) {
                         if (elem.hasCapability(Status.FRUIT) && !this.hasCapability(AffectionLevel.DISLIKE)) {
                             actions.add(new FeedAction(this, direction, elem));
                         }
 
-                        if (elem.hasCapability(Status.BALL)) {
-                            actions.add(new SummonAction(this, direction, elem));
-                        }
                     }
                 }
             }

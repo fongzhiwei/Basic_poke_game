@@ -62,7 +62,7 @@ public class FeedAction extends Action {
             return String.format("%s gives a %s Pokefruit to %s.", actor, pokefruitType, AffectionManager.getInstance().increaseAffection(this.target, 20));
         } else {
             actor.removeItemFromInventory(pokefruit);
-            return String.format("%s dislikes it! %s.", actor, AffectionManager.getInstance().decreaseAffection(this.target, 10));
+            return String.format("%s dislikes it! %s.", target, AffectionManager.getInstance().decreaseAffection(this.target, 10));
         }
     }
 
@@ -73,7 +73,7 @@ public class FeedAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return String.format("%s feeds %s to %s.",actor,pokefruit, target);
+        return String.format("%s feeds %s to %s.(%s AP)",actor,pokefruit, target, AffectionManager.getInstance().getAffectionPoint(target));
     }
 
 }

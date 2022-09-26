@@ -54,6 +54,7 @@ public class CaptureAction extends Action {
             this.target.removeCapability(Status.CATCHABLE);
             Pokeball pokeball = new Pokeball(this.target);
             actor.addItemToInventory(pokeball);
+            System.out.println(actor.getInventory());
             map.removeActor(this.target); // remove target from gameMap?
             return String.format("%s captured %s", actor, this.target);
         }
