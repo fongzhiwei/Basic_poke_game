@@ -132,13 +132,18 @@ public class AffectionManager {
 
             this.affectionPoints.replace(actor, oldAP - point);
             this.updateAffectionLevel(actor);
-            actor.setStatus(getAffectionPoint(actor));
+//            actor.setStatus(getAffectionPoint(actor));
 
             return "-10 affection points";
         }
         return String.format("%s does not exist in the collection", actor);
     }
 
+    /**
+     * Update the affection level of the pokemon with it's respective affection points
+     *
+     * @param pokemon Actor instance, but we expect a Pokemon here.
+     */
     public void updateAffectionLevel(Pokemon pokemon) {
         if (getAffectionPoint(pokemon) < AffectionLevel.NEUTRAL.getPoints() && !pokemon.hasCapability(AffectionLevel.DISLIKE)) {
             pokemon.setAffectionLevel(AffectionLevel.DISLIKE);
