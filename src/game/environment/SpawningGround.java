@@ -18,7 +18,6 @@ import java.util.List;
 
 public abstract class SpawningGround extends Ground{
 
-    List<Pokemon> poke_list = new ArrayList<>();
     /**
      * Constructor.
      * @param displayChar the symbol that will show in game map
@@ -46,7 +45,7 @@ public abstract class SpawningGround extends Ground{
         }
 
         if (chance && !location.containsAnActor() && numOfGround>=minGround){
-//            location.addActor(pokemon);
+            location.addActor(pokemon);
         }
     }
 
