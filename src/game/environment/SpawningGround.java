@@ -6,8 +6,6 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.*;
 import game.items.Pokefruit;
 import game.pokemon.Pokemon;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
