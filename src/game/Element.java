@@ -8,10 +8,13 @@ package game;
  */
 
 public enum Element {
-    WATER("Water"),
-    FIRE("Fire"),
-    GRASS("Grass");
+    WATER("Water"),     // water element
+    FIRE("Fire"),       // fire element
+    GRASS("Grass");     // grass element
 
+    /**
+     * The label text for element type
+     */
     private final String label;
 
     Element(String label){

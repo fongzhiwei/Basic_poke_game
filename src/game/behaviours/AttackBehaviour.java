@@ -13,7 +13,7 @@ import java.util.List;
  * Created by:
  * @author Riordan D. Alfredo
  * Modified by:
- *
+ * @author Leong Xin Yun
  */
 public class AttackBehaviour implements Behaviour {
 

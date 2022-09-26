@@ -13,9 +13,10 @@ import java.util.ArrayList;
 
 /**
  * Created by:
- *
  * @author Riordan D. Alfredo
+ *
  * Modified by:
+ * @author Leong Xin Yun <xleo0002@student.monash.edu>
  */
 public class Charmander extends Pokemon implements TimePerception{
     /**
@@ -27,6 +28,7 @@ public class Charmander extends Pokemon implements TimePerception{
         this.addCapability(Element.FIRE);
         this.registerInstance();
     }
+
 
     @Override
     public void setStatus() {

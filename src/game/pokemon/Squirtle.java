@@ -9,7 +9,13 @@ import game.weapons.SpecialWeapon;
 
 import java.util.List;
 
-
+/**
+ * Created by:
+ * @author Leong Xin Yun <xleo0002@student.monash.edu>
+ *
+ * Modified by:
+ *
+ */
 public class Squirtle extends Pokemon implements TimePerception {
     /**
      * Constructor.
@@ -21,6 +27,10 @@ public class Squirtle extends Pokemon implements TimePerception {
         this.registerInstance();
     }
 
+    /**
+     * Switch the pokemon's weapon in the game
+     * @param isEquipping boolean value representing if the pokemon is equipping any weapon at the moment
+     */
     @Override
     public void toggleWeapon(boolean isEquipping) {
         List<Exit> exits = this.pokemonLocation.getExits();

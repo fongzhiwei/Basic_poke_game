@@ -1,6 +1,10 @@
 package game;
 
+/**
+ * An enumeration that store the character types.
+ */
+
 public enum Character {
-    NPC,
-    PLAYER
+    NPC,        // Non-player character (pokemons, nurse joy)
+    PLAYER      // Player character
 }

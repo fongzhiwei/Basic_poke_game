@@ -11,7 +11,7 @@ import game.pokemon.Pokemon;
 /**
  * An Action to capture a Pokemon.
  * Created by:
- * @author Leong Xin Yun
+ * @author Leong Xin Yun <xleo0002@student.monash.edu>
  *
  * Modified by:
  *

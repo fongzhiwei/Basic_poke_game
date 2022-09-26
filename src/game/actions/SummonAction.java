@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * An Action to feed a Pokemon.
  * Created by:
- * @author Leong Xin Yun
+ * @author Leong Xin Yun <xleo0002@student.monash.edu>
  *
  * Modified by:
  *
@@ -59,17 +59,6 @@ public class SummonAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        Element pokefruitType;
-
-        if (ElementsHelper.hasAnySimilarElements(this.target, this.pokefruit.findCapabilitiesByType(Element.class))) {
-            pokefruitType = this.pokefruit.findCapabilitiesByType(Element.class).get(0);
-            actor.removeItemFromInventory(this.pokefruit);
-            return String.format("%s gives a %s Pokefruit to %s.", actor, pokefruitType, AffectionManager.getInstance().increaseAffection(this.target, 20));
-        } else {
-            actor.removeItemFromInventory(pokefruit);
-            return String.format("%s dislikes it! %s.", actor, AffectionManager.getInstance().decreaseAffection(this.target, 10));
-        }
-
         if (this.pokeball.getPokemon().toString().equals(this.target.toString())) {
             // retrieve pokemon next to actor
             Pokemon capturedPokemon = this.pokeball.getPokemon();
