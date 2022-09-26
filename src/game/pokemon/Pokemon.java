@@ -6,18 +6,21 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
+import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.AffectionLevel;
-import game.AffectionManager;
-import game.Element;
-import game.Status;
+import game.*;
+import game.Character;
+import game.actions.CaptureAction;
+import game.actions.FeedAction;
+import game.actions.SummonAction;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
-import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
 
+import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -31,6 +34,7 @@ public abstract class Pokemon extends Actor{
         this.getBehaviours().put(2, new AttackBehaviour());
         this.getBehaviours().put(3, new WanderBehaviour());
         this.addCapability(AffectionLevel.NEUTRAL);
+        this.addCapability(Character.NPC);
         this.setStatus();
         AffectionManager.getInstance().registerPokemon(this);
     }
@@ -55,7 +59,7 @@ public abstract class Pokemon extends Actor{
             this.findCapabilitiesByType(Status.class).clear();
         }
 
-        if (this.hasCapability(AffectionLevel.DISLIKE) || this.hasCapability(AffectionLevel.NEUTRAL) || this instanceof Charmander) {
+        if (this.hasCapability(AffectionLevel.DISLIKE) || this.hasCapability(AffectionLevel.NEUTRAL)) {
             this.addCapability(Status.HOSTILE);
         }
         else {
@@ -77,8 +81,17 @@ public abstract class Pokemon extends Actor{
         this.pokemonLocation = map.locationOf(this);
         for (Behaviour behaviour : behaviours.values()) {
             Action action = behaviour.getAction(this, map);
-            if (action != null)
+            boolean isEquipping = false;
+            int index = 0;
+            while (index < this.getInventory().size()) {
+                if (this.getInventory().get(index).hasCapability(Status.WEAPON)) {
+                    isEquipping = true;
+                }
+            }
+            if (action != null) {
+                this.toggleWeapon(isEquipping);
                 return action;
+            }
         }
         return new DoNothingAction();
     }
@@ -90,7 +103,44 @@ public abstract class Pokemon extends Actor{
      * @return list of game.actions
      */
     @Override
-    public abstract ActionList allowableActions(Actor otherActor, String direction, GameMap map);
+    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+        ActionList actions = new ActionList();
+//        actions.add(new AttackAction(this, direction));
+        //FIXME: allow other actor to attack this Squirtle (incl. Player). Please check requirement! :)
+        if (otherActor.isConscious() && this.isConscious()) {
+            List<Exit> exits = map.locationOf(otherActor).getExits();
+            boolean isActorReachable = false;
+            int i = 0;
+
+            while (!isActorReachable && i < exits.size()) {
+                if (exits.get(i).getDestination().getActor().equals(this)) {
+                    isActorReachable = true;
+                }
+                i++;
+            }
+
+            if (isActorReachable) {
+                if (ElementsHelper.hasAnySimilarElements(this, otherActor.findCapabilitiesByType(Element.class))) {
+                    actions.add(new AttackAction(this, direction));
+                }
+
+                if (otherActor.hasCapability(Character.PLAYER)) {
+                    actions.add(new CaptureAction(this, direction));
+
+                    for (Item elem: otherActor.getInventory()) {
+                        if (elem.hasCapability(Status.FRUIT) && !this.hasCapability(AffectionLevel.DISLIKE)) {
+                            actions.add(new FeedAction(this, direction));
+                        }
+
+                        if (elem.hasCapability(Status.BALL)) {
+                            actions.add(new SummonAction(this, direction));
+                        }
+                    }
+                }
+            }
+        }
+        return actions;
+    }
 
     /**
      * @param isEquipping FIXME: develop a logic to toggle weapon (put a selected weapon to the inventory - used!);

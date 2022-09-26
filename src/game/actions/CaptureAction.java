@@ -2,8 +2,6 @@ package game.actions;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.actors.ActorLocationsIterator;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.AffectionManager;
 import game.Status;
@@ -20,13 +18,11 @@ public class CaptureAction extends Action {
     }
 
     public String execute(Actor actor, GameMap map) {
-        if (!this.target.isConscious()) {
-            return String.format("%s is unconscious.", this.target);
-        }
-        else if (!this.target.hasCapability(Status.CATCHABLE)) {
+        if (!this.target.hasCapability(Status.CATCHABLE)) {
             return String.format("%s cannot be captured. %s", this.target, AffectionManager.getInstance().decreaseAffection(this.target, 10));
         }
         else {
+            this.target.removeCapability(Status.CATCHABLE);
             Pokeball pokeball = new Pokeball(this.target);
             actor.addItemToInventory(pokeball);
             map.removeActor(this.target); // remove target from gameMap?

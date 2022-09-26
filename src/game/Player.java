@@ -29,6 +29,7 @@ public class Player extends Actor {
 	public Player(String name, char displayChar, int hitPoints) {
 		super(name, displayChar, hitPoints);
 		this.addCapability(Status.IMMUNE);
+		this.addCapability(Character.PLAYER);
 		AffectionManager.getInstance().registerTrainer(this);
 	}
 

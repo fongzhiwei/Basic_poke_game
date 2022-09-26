@@ -2,19 +2,13 @@ package game.actions;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.actors.ActorLocationsIterator;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.Location;
-import game.AffectionManager;
-import game.Element;
+import game.Status;
 import game.Utils;
 import game.items.Pokeball;
-import game.items.Pokefruit;
 import game.pokemon.Pokemon;
 
-import java.lang.annotation.ElementType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,39 +22,35 @@ public class SummonAction extends Action {
     }
 
     public String execute(Actor actor, GameMap map) {
-        if (actor.getInventory().size() == 0) {
-            return String.format("%s's inventory is empty", actor);
-        }
-        else {
-            int index = 0;
+        int index = 0;
 
-            while (index < actor.getInventory().size()) {
-                if (actor.getInventory().get(index) instanceof Pokeball) {
-                    Pokeball pokeball = (Pokeball) actor.getInventory().get(index);
-                    Pokemon capturedPokemon = pokeball.getPokemon();
+        while (index < actor.getInventory().size()) {
+            if (actor.getInventory().get(index).hasCapability(Status.BALL)) {
+                Pokeball pokeball = (Pokeball) actor.getInventory().get(index);
+                Pokemon capturedPokemon = pokeball.getPokemon();
 
-                    if (capturedPokemon.toString().equals(this.target.toString())) {
-                        // retrieve pokemon next to actor
-                        List<Exit> exits = map.locationOf(actor).getExits();
-                        ArrayList<Integer> validPosIndex = new ArrayList<>();
-                        for (int i = 0; i < exits.size(); i++) {
-                            if (exits.get(i).getDestination().getGround().canActorEnter(capturedPokemon)) {
-                                validPosIndex.add(i);
-                            }
-                        }
-
-                        if (validPosIndex.size() > 0) {
-                            int randomPosIndex = Utils.nextNum(0, validPosIndex.size());
-                            map.addActor(capturedPokemon, exits.get(randomPosIndex).getDestination());
-                            actor.removeItemFromInventory(pokeball);
-                            return String.format("%s summoned a %s.", actor, this.target);
+                if (capturedPokemon.toString().equals(this.target.toString())) {
+                    // retrieve pokemon next to actor
+                    List<Exit> exits = map.locationOf(actor).getExits();
+                    ArrayList<Integer> validPosIndex = new ArrayList<>();
+                    for (int i = 0; i < exits.size(); i++) {
+                        if (exits.get(i).getDestination().getGround().canActorEnter(capturedPokemon)) {
+                            validPosIndex.add(i);
                         }
                     }
+
+                    if (validPosIndex.size() > 0) {
+                        int randomPosIndex = Utils.nextNum(0, validPosIndex.size());
+                        map.addActor(capturedPokemon, exits.get(randomPosIndex).getDestination());
+                        capturedPokemon.addCapability(Status.CATCHABLE);
+                        actor.removeItemFromInventory(pokeball);
+                        return String.format("I choose you... %s.", this.target);
+                    }
                 }
-                index += 1;
             }
-            return String.format("%s has not captured any %s.", actor, this.target);
+            index += 1;
         }
+        return String.format("%s has not captured any %s.", actor, this.target);
     }
 
     public String menuDescription(Actor actor) {
