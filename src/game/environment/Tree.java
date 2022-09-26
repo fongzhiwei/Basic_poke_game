@@ -5,24 +5,11 @@ import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.*;
 import game.time.TimePerception;
-import game.time.TimePerceptionManager;
-import pokemon.Bulbasaur;
 
 import java.util.List;
 
 public class Tree extends SpawningGround  implements TimePerception {
-    //chance of spawning a Bulbasaur
-    final private int chanceSpawn = 20;
-
-    //chance of drop a pokefruit
-    final private int chancePokefruit = 20;
-
-    //minimum GRASS element ground to spawn Bulbasaur
-    final private int minGround = 1;
-
     private Location location;
-
-    private int turn;
 
     /**
      * Constructor.
@@ -31,6 +18,7 @@ public class Tree extends SpawningGround  implements TimePerception {
     public Tree() {
         super('+');
         this.addCapability(Element.GRASS);
+        this.registerInstance();
     }
 
     @Override
@@ -38,7 +26,8 @@ public class Tree extends SpawningGround  implements TimePerception {
         //chance of spawning a Bulbasaur is 15%
         //at least 1 GRASS element ground surrounding to create Bulbasaur
         super.tick(location, new Bulbasaur(), Element.GRASS, 15, 1);
-        TimePerceptionManager.getInstance().run();
+        super.tick(location);
+        this.location = location;
     }
 
     public void createFruit(Location location) {
@@ -66,24 +55,28 @@ public class Tree extends SpawningGround  implements TimePerception {
 
     @Override
     public void dayEffect() {
-        //Trees have 5% of chance of dropping a Candy
-        boolean chance = Utils.chance(5);
+        if (location!=null) {
+            //Trees have 5% of chance of dropping a Candy
+            boolean chance = Utils.chance(5);
 
-        if(chance && !location.containsAnActor()){
-            location.addItem(new Candy());
+            if(chance && !location.containsAnActor()) {
+                location.addItem(new Candy());
+            }
         }
     }
 
     @Override
     public void nightEffect() {
-        List<Exit> exits = location.getExits();
-        for (Exit exit : exits) {
-            location = exit.getDestination();
+        if (location!=null) {
+            List<Exit> exits = location.getExits();
+            for (Exit exit : exits) {
+                location = exit.getDestination();
 
-            Ground ground = exit.getDestination().getGround();
-            boolean checkExpand = ground instanceof Floor || ground instanceof Wall || ground.hasCapability(Element.GRASS);
-            if (!checkExpand) {
-                createTreeOrHay();
+                Ground ground = exit.getDestination().getGround();
+                boolean checkExpand = ground.hasCapability(CapabilityOfExpand.NOTEXPANDABLE) || ground.hasCapability(Element.GRASS);
+                if (!checkExpand) {
+                    createTreeOrHay();
+                }
             }
         }
 

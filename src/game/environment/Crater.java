@@ -2,14 +2,8 @@ package game.environment;
 
 import edu.monash.fit2099.engine.positions.Location;
 import game.*;
-import pokemon.Charmander;
 
 public class Crater extends SpawningGround {
-    //chance of spawning a Charmander
-    final private int chanceSpawn = 10;
-
-    //chance of drop a pokefruit
-    final private int chancePokefruit = 25;
 
     /**
      * Constructor.

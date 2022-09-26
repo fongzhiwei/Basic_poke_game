@@ -10,6 +10,6 @@ public class Utils {
 
     public static boolean chance(int percentage){
         int num = nextNum(0, 100);
-        return num >= percentage;
+        return num <= percentage;
     }
 }
