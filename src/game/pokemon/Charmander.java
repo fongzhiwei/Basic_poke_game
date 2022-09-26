@@ -13,9 +13,10 @@ import java.util.ArrayList;
 
 /**
  * Created by:
- *
  * @author Riordan D. Alfredo
+ *
  * Modified by:
+ * @author Leong Xin Yun <xleo0002@student.monash.edu>
  */
 public class Charmander extends Pokemon implements TimePerception{
     /**
@@ -27,6 +28,7 @@ public class Charmander extends Pokemon implements TimePerception{
         this.addCapability(Element.FIRE);
         this.registerInstance();
     }
+
 
     @Override
     public void setStatus(int affectionPoints) {
@@ -59,12 +61,18 @@ public class Charmander extends Pokemon implements TimePerception{
         }
     }
 
+    /**
+     * Charmander will be healed during the period of day
+     */
     @Override
     public void dayEffect() {
         // Charmander will be healed by 10 points
         super.heal(10);
     }
 
+    /**
+     * Charmander will be hurt during the period of night
+     */
     @Override
     public void nightEffect() {
         // Charmander will be hurt by 10 points

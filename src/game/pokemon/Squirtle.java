@@ -10,7 +10,13 @@ import game.weapons.SpecialWeapon;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Created by:
+ * @author Leong Xin Yun <xleo0002@student.monash.edu>
+ *
+ * Modified by:
+ *
+ */
 public class Squirtle extends Pokemon implements TimePerception {
     /**
      * Constructor.
@@ -22,6 +28,10 @@ public class Squirtle extends Pokemon implements TimePerception {
         this.registerInstance();
     }
 
+    /**
+     * Switch the pokemon's weapon in the game
+     * @param isEquipping boolean value representing if the pokemon is equipping any weapon at the moment
+     */
     @Override
     public void toggleWeapon(boolean isEquipping) {
         List<Exit> exits = this.pokemonLocation.getExits();
@@ -45,12 +55,19 @@ public class Squirtle extends Pokemon implements TimePerception {
             }
         }
     }
+
+    /**
+     * Squirtle will be hurt during the period of day
+     */
     @Override
     public void dayEffect() {
         // Squirtle will be hurt by 10 points
         super.hurt(10);
     }
 
+    /**
+     * Squirtle will be healed during the period of night
+     */
     @Override
     public void nightEffect() {
         // Squirtle will be healed by 10 points

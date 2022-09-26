@@ -145,7 +145,7 @@ public abstract class Pokemon extends Actor{
                         }
 
                         if (elem.hasCapability(Status.BALL)) {
-                            actions.add(new SummonAction(this, direction));
+                            actions.add(new SummonAction(this, direction, elem));
                         }
                     }
                 }

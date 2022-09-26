@@ -15,6 +15,7 @@ import edu.monash.fit2099.engine.weapons.Weapon;
  *
  * @author Riordan D. Alfredo
  * Modified by:
+ * @author Leong Xin Yun
  */
 public class AttackAction extends Action {
 
@@ -37,6 +38,7 @@ public class AttackAction extends Action {
      * Constructor.
      *
      * @param target the Actor to attack
+     * @param direction the direction of incoming attack
      */
     public AttackAction(Actor target, String direction) {
         this.target = target;

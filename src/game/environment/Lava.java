@@ -11,16 +11,23 @@ import game.time.TimePerceptionManager;
 import java.util.List;
 
 /**
+ * A class that represents lava.
  * Created by:
  * @author Riordan D. Alfredo
- * Modified by:
+ * Modified by: Soh Meng Jienq
+ * @version 2.0
  *
+ * @see Utils
+ * @see Ground
+ * @see CapabilityOfExpand
+ * @see TimePerception
  */
 public class Lava extends Ground implements TimePerception {
     private Location location;
 
     /**
      * Constructor.
+     * Lava  shows symbol '^' in game map, and it has Fire Element.
      */
     public Lava() {
         super('^');
@@ -28,6 +35,9 @@ public class Lava extends Ground implements TimePerception {
         this.registerInstance();
     }
 
+    /**
+     * This method will expand lava.
+     */
     public void createLava(){
         //Lava ground has 10% chance to expand
         boolean chance = Utils.chance(10);
@@ -37,12 +47,19 @@ public class Lava extends Ground implements TimePerception {
         }
     }
 
+    /**
+     * This method will get the location from the game map
+     * @param location The location of the Ground
+     */
     @Override
     public void tick(Location location) {
         super.tick(location);
         this.location = location;
     }
 
+    /**
+     * This method will expand the lava when the time period is day.
+     */
     @Override
     public void dayEffect() {
         if (location !=null) {
@@ -60,6 +77,9 @@ public class Lava extends Ground implements TimePerception {
         }
     }
 
+    /**
+     * This method will destroy lava to dirt when the time period is night.
+     */
     @Override
     public void nightEffect() {
         if (location != null) {
