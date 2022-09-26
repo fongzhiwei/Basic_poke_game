@@ -27,7 +27,7 @@ public class Tree extends SpawningGround  implements TimePerception {
 
     /**
      * Constructor.
-     * Tree use symbol 'T' and it has grass element.
+     * Tree shows symbol 'T' in game map, and it has grass element.
      */
     public Tree() {
         super('T');

@@ -11,11 +11,13 @@ import edu.monash.fit2099.engine.positions.Ground;
  *
  * @see Puddle
  * @see CapabilityOfExpand
- * @see game.time.TimePerception
- * @see game.Utils
  */
 public class Dirt extends Ground {
 
+    /**
+     * Constructor.
+     * Dirt shows symbol '.' in game map.
+     */
     public Dirt() {
         super('.');
     }

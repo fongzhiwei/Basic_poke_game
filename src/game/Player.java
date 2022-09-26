@@ -14,7 +14,6 @@ import game.time.TimePerceptionManager;
  * Created by:
  * @author Riordan D. Alfredo
  * Modified by:
- *
  */
 public class Player extends Actor {
 

@@ -27,7 +27,7 @@ public class Lava extends Ground implements TimePerception {
 
     /**
      * Constructor.
-     * Lava use symbol '^' and it has Fire Element.
+     * Lava  shows symbol '^' in game map, and it has Fire Element.
      */
     public Lava() {
         super('^');

@@ -2,6 +2,9 @@ package game;
 
 /**
  * An enumeration that store the elements.
+ * @author Riordan D. Alfredo
+ * Modified by: Soh Meng Jienq
+ * @version 2.0
  */
 
 public enum Element {

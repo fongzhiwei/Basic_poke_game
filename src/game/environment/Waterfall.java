@@ -19,13 +19,17 @@ import game.pokemon.Squirtle;
 public class Waterfall extends SpawningGround {
     /**
      * Constructor.
-     *
+     * Waterfall shows symbol 'W' in game map, and it has water element.
      */
     public Waterfall() {
         super('W');
         this.addCapability(Element.WATER);
     }
 
+    /**
+     * This method will let Waterfall spawn Squirtle.
+     * @param location The location of the Ground
+     */
     @Override
     public void tick(Location location) {
         //chance of spawning a Squirtle is 15%
@@ -34,6 +38,10 @@ public class Waterfall extends SpawningGround {
         createFruit(location);
     }
 
+    /**
+     * This method will let Waterfall drop 'Water Pokefruit'
+     * @param location The location of the Ground
+     */
     public void createFruit(Location location) {
         //chance of dropping fruit is 15
         dropFruit(location, Element.WATER, 15);

@@ -13,6 +13,9 @@ import edu.monash.fit2099.engine.positions.Ground;
 
 public class Wall extends Ground {
 
+	/**
+	 *  Wall shows symbol '#' in game map, and it is not expandable.
+	 */
 	public Wall() {
 		super('#');
 		this.addCapability(CapabilityOfExpand.NOTEXPANDABLE);

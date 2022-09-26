@@ -12,6 +12,10 @@ import java.util.List;
  * A class that represents spawning ground which is an interactive ground.
  * @author Soh Meng Jienq <msoh0007@stundet.monash.edu>
  * @version 1.0
+ *
+ * @see Ground
+ * @see Pokemon
+ * @see Pokefruit
  */
 
 public abstract class SpawningGround extends Ground{
