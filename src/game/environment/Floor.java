@@ -16,7 +16,7 @@ import edu.monash.fit2099.engine.positions.Ground;
 public class Floor extends Ground {
 	/**
 	 * Constructor.
-	 * Floor use symbol '_' and it is not expandable.
+	 * Floor  shows symbol '_' in game map, and it is not expandable.
 	 */
 	public Floor() {
 		super('_');

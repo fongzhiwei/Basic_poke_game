@@ -5,13 +5,6 @@ package game.time;
  * @author Riordan D. Alfredo
  * Modified by: Soh Meng Jienq
  * @version 2.0
- *
- * @see game.pokemon.Charmander
- * @see game.pokemon.Squirtle
- * @see game.pokemon.Bulbasaur
- * @see game.environment.Lava
- * @see game.environment.Puddle
- * @see game.environment.Tree
  */
 
 public interface TimePerception {

@@ -16,7 +16,7 @@ public class Hay extends Ground {
 
     /**
      * Constructor.
-     * Hey use symbol ',' and it has Grass Element.
+     * Hey  shows symbol ',' in game map, and it has Grass Element.
      */
     public Hay() {
         super(',');

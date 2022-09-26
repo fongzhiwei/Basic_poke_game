@@ -19,7 +19,7 @@ public class Crater extends SpawningGround {
 
     /**
      * Constructor.
-     * Crater use symbol 'O' and it has Fire Element.
+     * Crater shows symbol 'O' in game map, and it has Fire Element.
      */
     public Crater() {
         super('O');

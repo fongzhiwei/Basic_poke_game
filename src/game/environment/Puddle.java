@@ -26,7 +26,7 @@ public class Puddle extends Ground  implements TimePerception {
 
     /**
      * Constructor.
-     * Puddle use symbol '~' and it has water element.
+     * Puddle  shows symbol '~' in game map, and it has water element.
      */
     public Puddle() {
         super('~');
