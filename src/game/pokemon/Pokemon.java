@@ -113,7 +113,7 @@ public abstract class Pokemon extends Actor{
             int i = 0;
 
             while (!isActorReachable && i < exits.size()) {
-                if (exits.get(i).getDestination().getActor().equals(this)) {
+                if (exits.get(i).getDestination().getActor() != null && exits.get(i).getDestination().getActor().equals(this)) {
                     isActorReachable = true;
                 }
                 i++;
