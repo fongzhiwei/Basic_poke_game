@@ -48,12 +48,19 @@ public class Squirtle extends Pokemon implements TimePerception {
             }
         }
     }
+
+    /**
+     * Squirtle will be hurt during the period of day
+     */
     @Override
     public void dayEffect() {
         // Squirtle will be hurt by 10 points
         super.hurt(10);
     }
 
+    /**
+     * Squirtle will be healed during the period of night
+     */
     @Override
     public void nightEffect() {
         // Squirtle will be healed by 10 points

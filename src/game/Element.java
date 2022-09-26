@@ -1,5 +1,9 @@
 package game;
 
+/**
+ * An enumeration that store the elements.
+ */
+
 public enum Element {
     WATER("Water"),
     FIRE("Fire"),

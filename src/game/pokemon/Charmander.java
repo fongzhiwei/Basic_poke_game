@@ -59,12 +59,18 @@ public class Charmander extends Pokemon implements TimePerception{
         }
     }
 
+    /**
+     * Charmander will be healed during the period of day
+     */
     @Override
     public void dayEffect() {
         // Charmander will be healed by 10 points
         super.heal(10);
     }
 
+    /**
+     * Charmander will be hurt during the period of night
+     */
     @Override
     public void nightEffect() {
         // Charmander will be hurt by 10 points

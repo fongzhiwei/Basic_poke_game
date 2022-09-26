@@ -10,12 +10,23 @@ import game.time.TimePerceptionManager;
 
 import java.util.List;
 
+/**
+ * A class that represents puddle.
+ * @author Soh Meng Jienq <msoh0007@stundet.monash.edu>
+ * @version 1.0
+ *
+ * @see Utils
+ * @see Ground
+ * @see Dirt
+ * @see CapabilityOfExpand
+ * @see TimePerception
+ */
 public class Puddle extends Ground  implements TimePerception {
     private Location location;
 
     /**
      * Constructor.
-     *
+     * Puddle use symbol '~' and it has water element.
      */
     public Puddle() {
         super('~');
@@ -23,6 +34,9 @@ public class Puddle extends Ground  implements TimePerception {
         this.registerInstance();
     }
 
+    /**
+     * This method will expand puddle.
+     */
     public void createPuddle(){
         //Puddle has 10% chance to expand
         boolean chance = Utils.chance(10);
@@ -32,12 +46,19 @@ public class Puddle extends Ground  implements TimePerception {
         }
     }
 
+    /**
+     * This method will get the location from the game map.
+     * @param location The location of the Ground
+     */
     @Override
     public void tick(Location location) {
         super.tick(location);
         this.location = location;
     }
 
+    /**
+     * This method will destroy puddle to dirt when the time period is night.
+     */
     @Override
     public void dayEffect() {
         if (location != null) {
@@ -51,6 +72,9 @@ public class Puddle extends Ground  implements TimePerception {
         }
     }
 
+    /**
+     * This method will expand the puddle when the time period is day.
+     */
     @Override
     public void nightEffect() {
         if (location != null) {

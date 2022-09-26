@@ -33,12 +33,18 @@ public class Bulbasaur extends Pokemon implements TimePerception {
         }
     }
 
+    /**
+     * Bulbasaur will be hurt during the period of day
+     */
     @Override
     public void dayEffect() {
         // Bulbasaur will be hurt by 5 points
         super.hurt(5);
     }
 
+    /**
+     * Bulbasaur will be healed during the period of night
+     */
     @Override
     public void nightEffect() {
         // Bulbasaur will be healed by 5 points
