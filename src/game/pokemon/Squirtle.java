@@ -7,6 +7,7 @@ import game.Element;
 import game.time.TimePerception;
 import game.weapons.SpecialWeapon;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -24,19 +25,15 @@ public class Squirtle extends Pokemon implements TimePerception {
     @Override
     public void toggleWeapon(boolean isEquipping) {
         List<Exit> exits = this.pokemonLocation.getExits();
+        ArrayList<Integer> posIndex = new ArrayList<>();
 
-        for(Exit elem: exits) {
-            if (!elem.getDestination().containsAnActor()) {
-                exits.remove(elem);
-            }
-            else {
-                if (!elem.getDestination().getActor().hasCapability(Element.FIRE)) {
-                    exits.remove(elem);
-                }
+        for(int i = 0; i < exits.size(); i++) {
+            if (exits.get(i).getDestination().containsAnActor() && exits.get(i).getDestination().getActor().hasCapability(Element.FIRE)) {
+                posIndex.add(i);
             }
         }
 
-        if (this.pokemonLocation.getGround().hasCapability(Element.WATER) || exits.size() > 0) {
+        if (this.pokemonLocation.getGround().hasCapability(Element.WATER) || posIndex.size() > 0) {
             if (!isEquipping) {
                 SpecialWeapon bubble = new SpecialWeapon("Bubble", 'B', 25, "burbles", 80, Element.WATER);
                 this.addItemToInventory(bubble);
