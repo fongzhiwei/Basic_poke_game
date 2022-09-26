@@ -19,7 +19,7 @@ public class Waterfall extends SpawningGround {
     public void tick(Location location) {
         //chance of spawning a Squirtle is 15%
         //at least 2 WATER element ground surrounding to create Squirtle
-        super.tick(location, new Squirtle(), Element.WATER, 15, 2);
+        super.tick(location, new Squirtle(), Element.WATER, -1, 2);
     }
 
     public void createFruit(Location location) {

@@ -1,5 +1,6 @@
 package game.environment;
 
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
@@ -15,7 +16,7 @@ public abstract class SpawningGround extends Ground{
         super(displayChar);
     }
 
-    public void tick(Location location, Pokemon pokemon , Element element, int chanceSpawn, int minGround){
+    public void tick(Location location, Actor pokemon , Element element, int chanceSpawn, int minGround){
         boolean chance = Utils.chance(chanceSpawn);
 
         int numOfGround = 0;

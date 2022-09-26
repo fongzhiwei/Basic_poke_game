@@ -14,17 +14,13 @@ public class Pokefruit extends Item implements Tradable {
 
     public Pokefruit(Element element){
         super(element.toString()+ " Pokefruit", 'f',true);
-        setElement(element);
         this.addCapability(Status.FRUIT);
+        this.addCapability(element);
 
     }
 
     public Element getElement() {
         return element;
-    }
-
-    public void setElement(Element element) {
-        this.element = element;
     }
 
     public boolean tradedWith(Actor player){
@@ -33,7 +29,6 @@ public class Pokefruit extends Item implements Tradable {
         int count = 0;
         boolean flag = false;
         ArrayList <Integer> candyIndex = new ArrayList<>();
-
 
         for(Item item : player.getInventory()){
             if (item.hasCapability(Status.CURRENCY)){

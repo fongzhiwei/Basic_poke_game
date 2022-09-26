@@ -3,6 +3,7 @@ package game.pokemon;
 
 import edu.monash.fit2099.engine.items.Item;
 import game.Element;
+import game.Status;
 import game.time.TimePerception;
 import game.weapons.SpecialWeapon;
 

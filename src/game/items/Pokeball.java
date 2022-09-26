@@ -18,7 +18,3 @@ public class Pokeball extends Item {
         return pokemon;
     }}
 
-//    public void addSummonAction(){
-//        this.addAction(SummonAction());
-//    }
-//}

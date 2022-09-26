@@ -33,6 +33,6 @@ public class TradeCharmanderAction extends Action {
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " trades Fire Pokefruit for 1 Candy with Nurse Joy" ;
+        return actor + " trades Charmander with 1 Candy with Nurse Joy" ;
     }
 }
