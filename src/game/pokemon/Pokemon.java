@@ -35,7 +35,7 @@ public abstract class Pokemon extends Actor{
         this.getBehaviours().put(3, new WanderBehaviour());
         this.addCapability(AffectionLevel.NEUTRAL);
         this.addCapability(Character.NPC);
-        this.setStatus();
+        this.setStatus(0);
         AffectionManager.getInstance().registerPokemon(this);
     }
 
@@ -52,20 +52,52 @@ public abstract class Pokemon extends Actor{
             this.findCapabilitiesByType(AffectionLevel.class).clear();
         }
         this.addCapability(newAffectionLevel);
+//        this.setStatus();
     }
 
-    public void setStatus() {
+    public void setStatus(int affectionPoints) {
         if (this.findCapabilitiesByType(Status.class).size() > 0) {
-            this.findCapabilitiesByType(Status.class).clear();
+            for (Status status : this.findCapabilitiesByType(Status.class)) {
+                this.removeCapability(status);
+            }
         }
 
-        if (this.hasCapability(AffectionLevel.DISLIKE) || this.hasCapability(AffectionLevel.NEUTRAL)) {
+//        if (affectionPoints <= AffectionLevel.DISLIKE.getPoints()) {
+//            this.addCapability(AffectionLevel.DISLIKE);
+//        } else if (affectionPoints <= AffectionLevel.NEUTRAL.getPoints()) {
+//            this.addCapability(AffectionLevel.NEUTRAL);
+//        } else if (affectionPoints <= AffectionLevel.LIKE.getPoints()) {
+//            this.addCapability(AffectionLevel.LIKE);
+//        } else if (affectionPoints <= AffectionLevel.FOLLOW.getPoints()) {
+//            this.addCapability(AffectionLevel.FOLLOW);
+//        } else {
+//            this.addCapability(AffectionLevel.MAX);
+//        }
+
+        if (this.hasCapability(AffectionLevel.DISLIKE)) {
             this.addCapability(Status.HOSTILE);
         }
-        else {
+        else if (this.hasCapability(AffectionLevel.NEUTRAL)) {
+            this.addCapability(Status.HOSTILE);
+        }
+        else if (this.hasCapability(AffectionLevel.LIKE)) {
+            this.addCapability(Status.CATCHABLE);
+        }
+        else if (this.hasCapability(AffectionLevel.FOLLOW)) {
+            this.addCapability(Status.CATCHABLE);
+        }
+        else if (this.hasCapability(AffectionLevel.MAX)) {
             this.addCapability(Status.CATCHABLE);
         }
     }
+
+//        if (this.hasCapability(AffectionLevel.DISLIKE) || this.hasCapability(AffectionLevel.NEUTRAL)) {
+//            this.addCapability(Status.HOSTILE);
+//        }
+//        else {
+//            this.addCapability(Status.CATCHABLE);
+//        }
+//    }
 
     /**
      * Select and return an action to perform on the current turn.
@@ -108,32 +140,33 @@ public abstract class Pokemon extends Actor{
 //        actions.add(new AttackAction(this, direction));
         //FIXME: allow other actor to attack this Squirtle (incl. Player). Please check requirement! :)
         if (otherActor.isConscious() && this.isConscious()) {
-//            List<Exit> exits = map.locationOf(this).getExits();
-//            boolean isActorReachable = false;
-//            int i = 0;
+            List<Exit> exits = map.locationOf(this).getExits();
+            boolean isActorReachable = false;
+            int i = 0;
 
-//            while (!isActorReachable && i < exits.size()) {
-//                if (exits.get(i).getDestination().getActor() != null && exits.get(i).getDestination().getActor().equals(otherActor)) {
-//                    isActorReachable = true;
-//                }
-//                i++;
-//            }
-
-//            if (isActorReachable) {
-            if (!ElementsHelper.hasAnySimilarElements(this, otherActor.findCapabilitiesByType(Element.class))) {
-                actions.add(new AttackAction(this, direction));
+            while (!isActorReachable && i < exits.size()) {
+                if (exits.get(i).getDestination().getActor() != null && exits.get(i).getDestination().getActor().equals(otherActor)) {
+                    isActorReachable = true;
+                }
+                i++;
             }
 
-            if (otherActor.hasCapability(Character.PLAYER)) {
-                actions.add(new CaptureAction(this, direction));
+            if (isActorReachable) {
+                if (!ElementsHelper.hasAnySimilarElements(this, otherActor.findCapabilitiesByType(Element.class))) {
+                    actions.add(new AttackAction(this, direction));
+                }
 
-                for (Item elem : otherActor.getInventory()) {
-                    if (elem.hasCapability(Status.FRUIT) && !this.hasCapability(AffectionLevel.DISLIKE)) {
-                        actions.add(new FeedAction(this, direction));
-                    }
+                if (otherActor.hasCapability(Character.PLAYER)) {
+                    actions.add(new CaptureAction(this, direction));
 
-                    if (elem.hasCapability(Status.BALL)) {
-                        actions.add(new SummonAction(this, direction));
+                    for (Item elem : otherActor.getInventory()) {
+                        if (elem.hasCapability(Status.FRUIT) && !this.hasCapability(AffectionLevel.DISLIKE)) {
+                            actions.add(new FeedAction(this, direction, elem));
+                        }
+
+                        if (elem.hasCapability(Status.BALL)) {
+                            actions.add(new SummonAction(this, direction));
+                        }
                     }
                 }
             }

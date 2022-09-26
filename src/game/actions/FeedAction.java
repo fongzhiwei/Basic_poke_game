@@ -10,14 +10,62 @@ import game.pokemon.Pokemon;
 public class FeedAction extends Action {
     protected Pokemon target;
     protected String direction;
+    protected Item pokefruit;
 
-    public FeedAction(Pokemon target, String direction) {
+    public FeedAction(Pokemon target, String direction, Item pokefruit) {
         this.target = target;
         this.direction = direction;
+        this.pokefruit = pokefruit;
     }
 
     public String execute(Actor actor, GameMap map) {
-        int index = 0;
+        Element pokefruitType;
+
+        if (ElementsHelper.hasAnySimilarElements(this.target, this.pokefruit.findCapabilitiesByType(Element.class))) {
+            pokefruitType = this.pokefruit.findCapabilitiesByType(Element.class).get(0);
+            actor.removeItemFromInventory(this.pokefruit);
+            return String.format("%s gives a %s Pokefruit to %s.", actor, pokefruitType, AffectionManager.getInstance().increaseAffection(this.target, 20));
+        } else {
+            actor.removeItemFromInventory(pokefruit);
+            return String.format("%s dislikes it! %s.", actor, AffectionManager.getInstance().decreaseAffection(this.target, 10));
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+        String str = null;
+        for (Item item : actor.getInventory()) {
+            Item pokefruit = item;
+            Element pokefruitType;
+
+            if (item.hasCapability(Status.FRUIT)) {
+                if (ElementsHelper.hasAnySimilarElements(actor, item.findCapabilitiesByType(Element.class))) {
+                    pokefruitType = item.findCapabilitiesByType(Element.class).get(0);
+                    str = String.format("%s gives a %s Pokefruit to %s.", actor, pokefruitType, AffectionManager.getInstance().increaseAffection(this.target, 20));
+                    actor.removeItemFromInventory(item);
+                } else if (item == actor.getInventory().get(-1)) {
+                    str = String.format("%s dislikes it! %s.", actor, AffectionManager.getInstance().decreaseAffection(this.target, 10));
+                    actor.removeItemFromInventory(pokefruit);
+                }
+            }
+
+            if (str != null) {
+                break;
+            }
+        }
+        return str;
+    }
+
+
 
         while (index < actor.getInventory().size()) {
             if (actor.getInventory().get(index).hasCapability(Status.FRUIT)) {
@@ -28,9 +76,11 @@ public class FeedAction extends Action {
                 if (ElementsHelper.hasAnySimilarElements(pokefruit, actor.findCapabilitiesByType(Element.class))) {
                     pokefruitType = pokefruit.findCapabilitiesByType(Element.class).get(0);
                     str = String.format("%s gives a %s Pokefruit to %s.", actor, pokefruitType, AffectionManager.getInstance().increaseAffection(this.target, 20));
+                    actor.removeItemFromInventory(pokefruit);
                 }
                 else {
                     str = String.format("%s dislikes it! %s.", actor, AffectionManager.getInstance().decreaseAffection(this.target, 10));
+                    actor.removeItemFromInventory(pokefruit);
                 }
                 actor.removeItemFromInventory(pokefruit);
                 return str;

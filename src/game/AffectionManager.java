@@ -112,7 +112,7 @@ public class AffectionManager {
                 this.affectionPoints.replace(actor, oldAP + point);
             }
             this.updateAffectionLevel(actor);
-            actor.setStatus();
+            actor.setStatus(getAffectionPoint(actor));
 
             return String.format("%s(%d AP)", actor, oldAP);
         }
@@ -132,7 +132,7 @@ public class AffectionManager {
 
             this.affectionPoints.replace(actor, oldAP - point);
             this.updateAffectionLevel(actor);
-            actor.setStatus();
+            actor.setStatus(getAffectionPoint(actor));
 
             return "-10 affection points";
         }
