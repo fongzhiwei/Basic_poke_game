@@ -4,6 +4,8 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.*;
+import game.items.Candy;
+import game.pokemon.Bulbasaur;
 import game.time.TimePerception;
 
 import java.util.List;

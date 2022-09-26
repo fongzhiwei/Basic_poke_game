@@ -9,7 +9,9 @@ import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.environment.*;
+import game.items.Candy;
 import game.pokemon.Charmander;
+import game.trade.NurseJoy;
 
 /**
  * The main class to start the game.
@@ -47,10 +49,14 @@ public class Application {
         //Add player - Ash
         Player ash = new Player("Ash", '@', 1);
         world.addPlayer(ash, gameMap.at(32, 10));
+        ash.addItemToInventory(new Candy());
 
-        //Add first game.pokemon - Charmander
+        //Add first pokemon - Charmander
         Actor charmander = new Charmander();
         gameMap.at(33, 10).addActor(charmander);
+
+        NurseJoy nurseJoy = new NurseJoy();
+        gameMap.at(31,10).addActor(nurseJoy);
 
         world.run();
 

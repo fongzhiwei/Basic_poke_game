@@ -15,7 +15,7 @@ public class Pokefruit extends Item implements Tradable {
     public Pokefruit(Element element){
         super(element.toString()+ " Pokefruit", 'f',true);
         setElement(element);
-        this.addCapability(Status.FOOD);
+        this.addCapability(Status.FRUIT);
 
     }
 
