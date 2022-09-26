@@ -7,6 +7,8 @@ import game.*;
 import game.items.Candy;
 import game.pokemon.Bulbasaur;
 import game.time.TimePerception;
+import game.time.TimePerceptionManager;
+import game.pokemon.Bulbasaur;
 
 import java.util.List;
 
