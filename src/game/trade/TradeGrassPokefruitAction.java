@@ -14,7 +14,7 @@ public class TradeGrassPokefruitAction extends Action {
 
     public TradeGrassPokefruitAction(Actor target){
         this.target = target;
-        this.merchandise = new Pokefruit(Element.FIRE);
+        this.merchandise = new Pokefruit(Element.GRASS);
     }
 
     @Override
