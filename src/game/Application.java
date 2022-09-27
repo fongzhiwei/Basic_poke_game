@@ -10,15 +10,22 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.environment.*;
 import game.items.Candy;
+import game.items.Pokeball;
+import game.items.Pokefruit;
+import game.pokemon.Bulbasaur;
 import game.pokemon.Charmander;
+import game.pokemon.Pokemon;
 import game.trade.NurseJoy;
 
 /**
  * The main class to start the game.
  * Created by:
- *
  * @author Riordan D. Alfredo
+ *
  * Modified by:
+ * @author Fong Zhiwei
+ * @author Soh Menh Jienq
+ * @author Leong Xin Yun
  */
 public class Application {
 
@@ -31,17 +38,17 @@ public class Application {
 
         List<String> map = Arrays.asList(
                 ".............................................^^^^^^^^^^^^^^",
-                "...........,+..................................+...^^^^^^^^",
+                "...........,T..................................T...^^^^^^^^",
                 "...................O................................#^^^^^^",
                 ".............~..........................................^^^",
                 "............WWW...........#######........................^^",
-                "..........................#_____#............+............^",
-                ".....................+....#_____#..........................",
-                "...+.......~..............###_###..........................",
+                "..........................#_____#............T............^",
+                ".....................T....#_____#..........................",
+                "...T.......~..............###_###..........................",
                 "...~~~~~~~~................................................",
                 "....~~~~~..................................................",
                 "~~~~~~~....................................................",
-                "~~W~~~..+.............................+....................",
+                "~~W~~~..T.............................T....................",
                 "~~~~~~~~~..................................................");
         GameMap gameMap = new GameMap(groundFactory, map);
         world.addGameMap(gameMap);
@@ -49,14 +56,15 @@ public class Application {
         //Add player - Ash
         Player ash = new Player("Ash", '@', 1);
         world.addPlayer(ash, gameMap.at(32, 10));
-        ash.addItemToInventory(new Candy());
+
 
         //Add first pokemon - Charmander
         Actor charmander = new Charmander();
         gameMap.at(33, 10).addActor(charmander);
 
+        //Add NurseJoy into the house in the middle of the map
         NurseJoy nurseJoy = new NurseJoy();
-        gameMap.at(31,10).addActor(nurseJoy);
+        gameMap.at(31,6).addActor(nurseJoy);
 
         world.run();
 

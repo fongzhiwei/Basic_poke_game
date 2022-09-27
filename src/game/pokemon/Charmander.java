@@ -12,10 +12,13 @@ import game.weapons.SpecialWeapon;
 import java.util.ArrayList;
 
 /**
- * Created by:
+ * Class representing the Charmander
  *
+ * Created by:
  * @author Riordan D. Alfredo
+ *
  * Modified by:
+ * @author Leong Xin Yun <xleo0002@student.monash.edu>
  */
 public class Charmander extends Pokemon implements TimePerception{
     /**
@@ -25,11 +28,17 @@ public class Charmander extends Pokemon implements TimePerception{
         super("Charmander", 'c', 100);
         // HINT: add more relevant behaviours here
         this.addCapability(Element.FIRE);
+        this.addCapability(Status.NOT_CATCHABLE);
         this.registerInstance();
     }
 
+    /**
+     * Set the status of a Charmander to Hostile
+     *
+     * @param affectionPoints the Pokemon's affection points towards the player or trainer
+     */
     @Override
-    public void setStatus() {
+    public void setStatus(int affectionPoints) {
         if (this.findCapabilitiesByType(Status.class).size() > 0) {
             this.findCapabilitiesByType(Status.class).clear();
         }
@@ -37,13 +46,20 @@ public class Charmander extends Pokemon implements TimePerception{
         this.addCapability(Status.HOSTILE);
     }
 
+    /**
+     * Creates and returns an intrinsic weapon. By default, the Charmander 'scratch' for 10 damage.
+     *
+     * @return a freshly-instantiated IntrinsicWeapon
+     */
     @Override
     protected IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(10, "scratch");
     }
 
     /**
-     * @param isEquipping FIXME: develop a logic to toggle weapon (put a selected weapon to the inventory - used!);
+     * Switch the pokemon's weapon in the game
+     *
+     * @param isEquipping boolean value representing if the pokemon is equipping any weapon at the moment
      */
     public void toggleWeapon(boolean isEquipping) {
         if (this.pokemonLocation.getGround().hasCapability(Element.FIRE)) {
@@ -59,12 +75,18 @@ public class Charmander extends Pokemon implements TimePerception{
         }
     }
 
+    /**
+     * Charmander will be healed during the period of day
+     */
     @Override
     public void dayEffect() {
         // Charmander will be healed by 10 points
         super.heal(10);
     }
 
+    /**
+     * Charmander will be hurt during the period of night
+     */
     @Override
     public void nightEffect() {
         // Charmander will be hurt by 10 points
@@ -90,7 +112,7 @@ public class Charmander extends Pokemon implements TimePerception{
         if(price <= money) {
             flag = true;
             while (count < price){
-                player.removeItemFromInventory(player.getInventory().get(candyIndex.get(count)));
+                player.removeItemFromInventory(player.getInventory().get(candyIndex.get(count)-count));
                 count += 1;
             }
         }

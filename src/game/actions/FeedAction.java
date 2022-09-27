@@ -5,19 +5,54 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.*;
+import game.items.Pokefruit;
 import game.pokemon.Pokemon;
 
+/**
+ * An Action to feed a Pokemon.
+ * Created by:
+ * @author Leong Xin Yun <xleo0002@student.monash.edu>
+ *
+ * Modified by:
+ *
+ */
 public class FeedAction extends Action {
+    /**
+     * The Pokemon that is to be fed
+     */
     protected Pokemon target;
+
+    /**
+     * The direction of incoming feed action.
+     */
     protected String direction;
+
+    /**
+     * The pokefruit item to be fed by the actor to the pokemon.
+     */
     protected Item pokefruit;
 
+    /**
+     * Constructor.
+     *
+     * @param target the Pokemon to feed
+     * @param direction the direction of the incoming feed action
+     * @param pokefruit the pokefruit item to be fed to the pokemon
+     *
+     */
     public FeedAction(Pokemon target, String direction, Item pokefruit) {
         this.target = target;
         this.direction = direction;
         this.pokefruit = pokefruit;
     }
 
+    /**
+     * Execute feed action for player to feed a pokemon on the map
+     * @param actor the actor to feed the pokemon (player)
+     * @param map the game map
+     * @return a string display after action is completed
+     */
+    @Override
     public String execute(Actor actor, GameMap map) {
         Element pokefruitType;
 
@@ -27,72 +62,18 @@ public class FeedAction extends Action {
             return String.format("%s gives a %s Pokefruit to %s.", actor, pokefruitType, AffectionManager.getInstance().increaseAffection(this.target, 20));
         } else {
             actor.removeItemFromInventory(pokefruit);
-            return String.format("%s dislikes it! %s.", actor, AffectionManager.getInstance().decreaseAffection(this.target, 10));
+            return String.format("%s dislikes it! %s.", this.target, AffectionManager.getInstance().decreaseAffection(this.target, 10));
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-        String str = null;
-        for (Item item : actor.getInventory()) {
-            Item pokefruit = item;
-            Element pokefruitType;
-
-            if (item.hasCapability(Status.FRUIT)) {
-                if (ElementsHelper.hasAnySimilarElements(actor, item.findCapabilitiesByType(Element.class))) {
-                    pokefruitType = item.findCapabilitiesByType(Element.class).get(0);
-                    str = String.format("%s gives a %s Pokefruit to %s.", actor, pokefruitType, AffectionManager.getInstance().increaseAffection(this.target, 20));
-                    actor.removeItemFromInventory(item);
-                } else if (item == actor.getInventory().get(-1)) {
-                    str = String.format("%s dislikes it! %s.", actor, AffectionManager.getInstance().decreaseAffection(this.target, 10));
-                    actor.removeItemFromInventory(pokefruit);
-                }
-            }
-
-            if (str != null) {
-                break;
-            }
-        }
-        return str;
-    }
-
-
-
-        while (index < actor.getInventory().size()) {
-            if (actor.getInventory().get(index).hasCapability(Status.FRUIT)) {
-                Item pokefruit = actor.getInventory().get(index);
-                Element pokefruitType;
-                String str;
-
-                if (ElementsHelper.hasAnySimilarElements(pokefruit, actor.findCapabilitiesByType(Element.class))) {
-                    pokefruitType = pokefruit.findCapabilitiesByType(Element.class).get(0);
-                    str = String.format("%s gives a %s Pokefruit to %s.", actor, pokefruitType, AffectionManager.getInstance().increaseAffection(this.target, 20));
-                    actor.removeItemFromInventory(pokefruit);
-                }
-                else {
-                    str = String.format("%s dislikes it! %s.", actor, AffectionManager.getInstance().decreaseAffection(this.target, 10));
-                    actor.removeItemFromInventory(pokefruit);
-                }
-                actor.removeItemFromInventory(pokefruit);
-                return str;
-            }
-            index += 1;
-        }
-        return String.format("%s does not have Pokefruit inside inventory.", actor);
-    }
-
+    /**
+     * Method to return appropriate menu description for the action
+     * @param actor the actor who performed the action
+     * @return a string for menu description
+     */
     @Override
     public String menuDescription(Actor actor) {
-        return String.format("%s feeds $s.", target);
+        return String.format("%s gives a %s to %s.(%s AP) at %s",actor,pokefruit, target, AffectionManager.getInstance().getAffectionPoint(target), direction);
     }
 
 }
