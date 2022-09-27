@@ -31,7 +31,7 @@ public class TradeCharmanderAction extends Action {
     public TradeCharmanderAction(Actor target){
         this.target = target;
         this.merchandise = new Charmander();
-        AffectionManager.getInstance().increaseAffection(merchandise, 50);
+        AffectionManager.getInstance().increaseAffection(merchandise, AffectionLevel.LIKE.getPoints());
         this.pokeball = new Pokeball(merchandise);
     }
 

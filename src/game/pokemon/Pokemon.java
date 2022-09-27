@@ -99,17 +99,17 @@ public abstract class Pokemon extends Actor{
      * @param affectionPoints the Pokemon's affection points towards the player or trainer
      */
     public void setStatus(int affectionPoints) {
-        if (this.findCapabilitiesByType(Status.class).size() > 0) {
-            for (Status status : this.findCapabilitiesByType(Status.class)) {
-                this.removeCapability(status);
-            }
+
+        if(this.hasCapability(Status.CATCHABLE)){
+            this.removeCapability(Status.CATCHABLE);
+
         }
 
-        if (affectionPoints<50) {
-            this.addCapability(Status.HOSTILE);
+        if (affectionPoints<=-50) {
+            this.addCapability(Status.NOT_CATCHABLE);
+            this.addCapability(AffectionLevel.DISLIKE);
         }
-
-        else if (affectionPoints>=0) {
+        else if (affectionPoints>=50) {
             this.addCapability(Status.CATCHABLE);
         }
 
@@ -135,6 +135,7 @@ public abstract class Pokemon extends Actor{
                 if (this.getInventory().get(index).hasCapability(Status.WEAPON)) {
                     isEquipping = true;
                 }
+                index++;
             }
             if (action != null) {
                 this.toggleWeapon(isEquipping);
@@ -155,7 +156,6 @@ public abstract class Pokemon extends Actor{
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
-        actions.add(new AttackAction(this, direction));
 
         if (otherActor.isConscious() && this.isConscious()) {
             List<Exit> exits = map.locationOf(otherActor).getExits();
@@ -170,7 +170,7 @@ public abstract class Pokemon extends Actor{
             }
 
             if (isActorReachable) {
-                if (ElementsHelper.hasAnySimilarElements(this, otherActor.findCapabilitiesByType(Element.class))) {
+                if (!otherActor.hasCapability(Status.IMMUNE)) {
                     actions.add(new AttackAction(this, direction));
                 }
 

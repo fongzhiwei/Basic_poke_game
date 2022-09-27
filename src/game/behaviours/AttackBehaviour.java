@@ -40,7 +40,7 @@ public class AttackBehaviour implements Behaviour {
                 if (elem.getDestination().containsAnActor()) {
                     otherActor = elem.getDestination().getActor();
 
-                    if (ElementsHelper.hasAnySimilarElements(actor, otherActor.findCapabilitiesByType(Element.class))) {
+                    if (!ElementsHelper.hasAnySimilarElements(actor, otherActor.findCapabilitiesByType(Element.class)) && (!otherActor.hasCapability(Status.IMMUNE))) {
                         return new AttackAction(otherActor, "here"); // behaviour will stop here.
                     }
                 }

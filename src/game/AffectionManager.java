@@ -108,8 +108,8 @@ public class AffectionManager {
         if (findPokemon(actor) != null) {
             int oldAP = getAffectionPoint(actor);
 
-            if (oldAP + point >= 100) {
-                this.affectionPoints.replace(actor, 100);
+            if (oldAP + point >= AffectionLevel.MAX.getPoints()) {
+                this.affectionPoints.replace(actor, AffectionLevel.MAX.getPoints());
             }
             else {
                 this.affectionPoints.replace(actor, oldAP + point);
@@ -117,17 +117,17 @@ public class AffectionManager {
             this.updateAffectionLevel(actor);
             actor.setStatus(getAffectionPoint(actor));
 
-            if (getAffectionPoint(actor)>= 75){
+            if (getAffectionPoint(actor)>= AffectionLevel.FOLLOW.getPoints()){
                 actor.getBehaviours().put(1,new FollowBehaviour(trainer));
-                System.out.println("Follow behaviour added");
             }
-            return String.format("%s(%d AP)", actor, oldAP);
+            return String.format("%s(%d AP)", actor, this.getAffectionPoint(actor));
         }
         return String.format("%s does not exist in the collection", actor);
     }
 
     /**
-     * Decrease the Pokemon's affection points.
+     * Decrease the Pokemon's affection points. Work on both cases when there's a Pokemon,
+     * or when it doesn't exist in the collection.
      *
      * @param actor Actor instance, but we expect a Pokemon here.
      * @param point positive affection modifier (to be subtracted later)
@@ -141,7 +141,7 @@ public class AffectionManager {
             this.updateAffectionLevel(actor);
             actor.setStatus(getAffectionPoint(actor));
 
-            if (getAffectionPoint(actor)< 75){
+            if (oldAP>=AffectionLevel.FOLLOW.getPoints() && getAffectionPoint(actor)< AffectionLevel.FOLLOW.getPoints()){
                 actor.getBehaviours().remove(1);
             }
             return "-10 affection points";

@@ -112,7 +112,7 @@ public class Charmander extends Pokemon implements TimePerception{
         if(price <= money) {
             flag = true;
             while (count < price){
-                player.removeItemFromInventory(player.getInventory().get(candyIndex.get(count)));
+                player.removeItemFromInventory(player.getInventory().get(candyIndex.get(count)-count));
                 count += 1;
             }
         }
