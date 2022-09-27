@@ -84,7 +84,7 @@ public class Puddle extends Ground  implements TimePerception {
                 location = exit.getDestination();
 
                 Ground ground = exit.getDestination().getGround();
-                boolean checkExpand = ground.hasCapability(CapabilityOfExpand.NOTEXPANDABLE) || ground.hasCapability(Element.WATER);
+                boolean checkExpand = ground.hasCapability(CapabilityOfExpand.NOT_EXPANDABLE) || ground.hasCapability(Element.WATER);
                 if (!checkExpand) {
                     createPuddle();
                 }

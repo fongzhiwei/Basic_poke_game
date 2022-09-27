@@ -92,7 +92,7 @@ public class Tree extends SpawningGround  implements TimePerception {
                     location = exit.getDestination();
 
                     Ground ground = exit.getDestination().getGround();
-                    boolean checkExpand = ground.hasCapability(CapabilityOfExpand.NOTEXPANDABLE) || ground.hasCapability(Element.GRASS);
+                    boolean checkExpand = ground.hasCapability(CapabilityOfExpand.NOT_EXPANDABLE) || ground.hasCapability(Element.GRASS);
                     if (!checkExpand && chanceRandom) {
                         location.setGround(new Tree());
                     } else {

@@ -20,7 +20,7 @@ public class Floor extends Ground {
 	 */
 	public Floor() {
 		super('_');
-		this.addCapability(CapabilityOfExpand.NOTEXPANDABLE);
+		this.addCapability(CapabilityOfExpand.NOT_EXPANDABLE);
 	}
 
 }

@@ -24,8 +24,8 @@ public class Utils {
      * @return a random number within the range
      */
     public static int nextNum(int low, int high) {
-        Random r = new Random();
-        return (r.nextInt(high - low) + low);
+        Random randomNum = new Random();
+        return (randomNum.nextInt(high - low) + low);
     }
 
     /**
