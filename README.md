@@ -7,7 +7,7 @@ Team members:
 * Leong Xin Yun
 
 Link to contribution logs spreadsheet: ...
-https://docs.google.com/spreadsheets/d/1bPJZ4czoDnM9CElqZxPKfBOVB_q9818b03TA0S81pgU/edit?usp=sharing
+https://docs.google.com/spreadsheets/d/1oUODKdbO4DoMGkg9CS-neSaxfmVXrx9WSeT96tDRMTg/edit?usp=sharing 
 
 Link to group google drive: https://drive.google.com/drive/folders/0AE_9hawjQfXaUk9PVA
 
