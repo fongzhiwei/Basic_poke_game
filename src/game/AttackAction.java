@@ -11,11 +11,12 @@ import edu.monash.fit2099.engine.weapons.Weapon;
 
 /**
  * An Action to attack another Actor.
- * Created by:
  *
+ * Created by:
  * @author Riordan D. Alfredo
+ *
  * Modified by:
- * @author Leong Xin Yun
+ *
  */
 public class AttackAction extends Action {
 
@@ -45,6 +46,13 @@ public class AttackAction extends Action {
         this.direction = direction;
     }
 
+    /**
+     * Perform the Attack Action.
+     *
+     * @param actor The actor performing the action.
+     * @param map The map the actor is on.
+     * @return a description of what happened that can be displayed to the user.
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
 

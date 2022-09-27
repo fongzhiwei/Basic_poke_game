@@ -12,6 +12,8 @@ import game.weapons.SpecialWeapon;
 import java.util.ArrayList;
 
 /**
+ * Class representing the Charmander
+ *
  * Created by:
  * @author Riordan D. Alfredo
  *
@@ -30,7 +32,11 @@ public class Charmander extends Pokemon implements TimePerception{
         this.registerInstance();
     }
 
-
+    /**
+     * Set the status of a Charmander to Hostile
+     *
+     * @param affectionPoints the Pokemon's affection points towards the player or trainer
+     */
     @Override
     public void setStatus(int affectionPoints) {
         if (this.findCapabilitiesByType(Status.class).size() > 0) {
@@ -40,13 +46,20 @@ public class Charmander extends Pokemon implements TimePerception{
         this.addCapability(Status.HOSTILE);
     }
 
+    /**
+     * Creates and returns an intrinsic weapon. By default, the Charmander 'scratch' for 10 damage.
+     *
+     * @return a freshly-instantiated IntrinsicWeapon
+     */
     @Override
     protected IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(10, "scratch");
     }
 
     /**
-     * @param isEquipping FIXME: develop a logic to toggle weapon (put a selected weapon to the inventory - used!);
+     * Switch the pokemon's weapon in the game
+     *
+     * @param isEquipping boolean value representing if the pokemon is equipping any weapon at the moment
      */
     public void toggleWeapon(boolean isEquipping) {
         if (this.pokemonLocation.getGround().hasCapability(Element.FIRE)) {
@@ -99,7 +112,7 @@ public class Charmander extends Pokemon implements TimePerception{
         if(price <= money) {
             flag = true;
             while (count < price){
-                player.removeItemFromInventory(player.getInventory().get(candyIndex.get(count)));
+                player.removeItemFromInventory(player.getInventory().get(candyIndex.get(count)-count));
                 count += 1;
             }
         }

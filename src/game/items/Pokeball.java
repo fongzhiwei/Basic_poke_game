@@ -21,14 +21,14 @@ public class Pokeball extends Item {
 
     /**
      * Constructor.
-     * Pokebal shows symbol '0' in game map, and it has a status of ball.
+     * Pokeball shows symbol '0' in game map, and it has a status of ball.
      * @param pokemon Pokemon is the actor that is contained inside the pokeball.
      */
     public Pokeball(Pokemon pokemon){
         super("Pokeball with "+ pokemon.toString(),'0',true);
         this.pokemon = pokemon;
         this.addCapability(Status.BALL);
-        this.addAction(new SummonAction(pokemon));
+        this.addAction(new SummonAction(pokemon,this));
     }
 
     /**

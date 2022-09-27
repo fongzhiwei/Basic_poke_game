@@ -3,8 +3,10 @@ package game.actions;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import game.AffectionManager;
 import game.Status;
+import game.items.Candy;
 import game.items.Pokeball;
 import game.pokemon.Pokemon;
 
@@ -26,6 +28,11 @@ public class CaptureAction extends Action {
      * The direction of incoming capture action.
      */
     protected String direction;
+
+    /**
+     * Location of the current pokemon to spawn a candy after successful CaptureAction
+     */
+    protected Location location;
 
     /**
      * Constructor.
@@ -51,11 +58,13 @@ public class CaptureAction extends Action {
             return String.format("%s cannot be captured. %s", this.target, AffectionManager.getInstance().decreaseAffection(this.target, 10));
         }
         else {
-            this.target.removeCapability(Status.CATCHABLE);
             Pokeball pokeball = new Pokeball(this.target);
             actor.addItemToInventory(pokeball);
-            System.out.println(actor.getInventory());
-            map.removeActor(this.target); // remove target from gameMap?
+            location = map.locationOf(this.target);
+            map.removeActor(this.target); // remove target from gameMap
+            location.addItem(new Candy());
+
+
             return String.format("%s captured %s", actor, this.target);
         }
     }

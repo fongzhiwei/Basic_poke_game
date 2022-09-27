@@ -28,6 +28,11 @@ public class SummonAction extends Action {
      */
     protected Pokemon target;
 
+    /**
+     * The Pokeball to be removed after summoning pokemon
+     */
+    protected Pokeball pokeball;
+
 
     /**
      * Constructor.
@@ -35,8 +40,9 @@ public class SummonAction extends Action {
      * @param target the Pokemon to summon (release)
      *
      */
-    public SummonAction(Pokemon target) {
+    public SummonAction(Pokemon target, Pokeball pokeball) {
         this.target = target;
+        this.pokeball = pokeball;
 
     }
 
@@ -61,7 +67,8 @@ public class SummonAction extends Action {
         if (validPosIndex.size() > 0) {
             int randomPosIndex = Utils.nextNum(0, validPosIndex.size());
             map.addActor(capturedPokemon, exits.get(randomPosIndex).getDestination());
-//            actor.removeItemFromInventory(pokeball);
+            actor.removeItemFromInventory(pokeball);
+            System.out.println(actor.getInventory());
             return String.format("I choose you... %s.", this.target);
             }
 
