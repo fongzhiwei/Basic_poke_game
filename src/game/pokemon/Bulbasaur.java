@@ -8,6 +8,8 @@ import game.time.TimePerception;
 import game.weapons.SpecialWeapon;
 
 /**
+ * Class representing the Bulbasaur
+ *
  * Created by:
  * @author Leong Xin Yun <xleo0002@student.monash.edu>
  *
@@ -27,6 +29,7 @@ public class Bulbasaur extends Pokemon implements TimePerception {
 
     /**
      * Switch the pokemon's weapon in the game
+     *
      * @param isEquipping boolean value representing if the pokemon is equipping any weapon at the moment
      */
     @Override

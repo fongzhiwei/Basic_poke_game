@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Class representing the Squirtle
+ *
  * Created by:
  * @author Leong Xin Yun <xleo0002@student.monash.edu>
  *
