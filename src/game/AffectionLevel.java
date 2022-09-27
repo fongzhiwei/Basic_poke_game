@@ -6,8 +6,7 @@ package game;
  * Created by:
  * @author Leong Xin Yun <xleo0002@student.monash.edu>
  *
- * Modified by:
- *
+ * @version 1.0
  */
 public enum AffectionLevel {
     DISLIKE(-50),   // Pokemon dislikes player/trainer, and the relationship cannot be fixed. It can't be captured anymore

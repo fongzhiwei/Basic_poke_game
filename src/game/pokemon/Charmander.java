@@ -31,7 +31,7 @@ public class Charmander extends Pokemon implements TimePerception{
     }
 
     /**
-     * Set the status of a Pokemon
+     * Set the status of a Charmander to Hostile
      *
      * @param affectionPoints the Pokemon's affection points towards the player or trainer
      */
@@ -44,6 +44,11 @@ public class Charmander extends Pokemon implements TimePerception{
         this.addCapability(Status.HOSTILE);
     }
 
+    /**
+     * Creates and returns an intrinsic weapon. By default, the Charmander 'scratch' for 10 damage.
+     *
+     * @return a freshly-instantiated IntrinsicWeapon
+     */
     @Override
     protected IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(10, "scratch");
