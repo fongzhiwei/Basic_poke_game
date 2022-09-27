@@ -15,8 +15,8 @@ import java.util.List;
  *
  * Created by:
  * @author Leong Xin Yun <xleo0002@student.monash.edu>
+ * @version 1.0
  *
- * Modified by:
  *
  */
 public class Squirtle extends Pokemon implements TimePerception {
