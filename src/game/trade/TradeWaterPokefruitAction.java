@@ -16,9 +16,14 @@ import game.items.Pokefruit;
  */
 
 public class TradeWaterPokefruitAction extends Action {
-
+    /**
+     * Trade target (player)
+     */
     protected Actor target;
 
+    /**
+     * Trade object to be added
+     */
     protected Pokefruit merchandise;
 
     /**

@@ -18,10 +18,19 @@ import game.items.Pokeball;
  */
 
 public class TradeCharmanderAction extends Action {
-
+    /**
+     * Trade target (player)
+     */
     protected Actor target;
+
+    /**
+     * Trade target (player)
+     */
     protected Charmander merchandise;
 
+    /**
+     * The pokeball to be removed after a successful summon action
+     */
     protected Pokeball pokeball;
 
     /**
@@ -32,6 +41,7 @@ public class TradeCharmanderAction extends Action {
         this.target = target;
         this.merchandise = new Charmander();
         AffectionManager.getInstance().increaseAffection(merchandise, AffectionLevel.LIKE.getPoints());
+        merchandise.setStatus(AffectionManager.getInstance().getAffectionPoint(merchandise));
         this.pokeball = new Pokeball(merchandise);
     }
 
