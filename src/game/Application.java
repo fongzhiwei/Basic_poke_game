@@ -20,9 +20,12 @@ import game.trade.NurseJoy;
 /**
  * The main class to start the game.
  * Created by:
- *
  * @author Riordan D. Alfredo
+ *
  * Modified by:
+ * @author Fong Zhiwei
+ * @author Soh Menh Jienq
+ * @author Leong Xin Yun
  */
 public class Application {
 
@@ -54,13 +57,12 @@ public class Application {
         Player ash = new Player("Ash", '@', 1);
         world.addPlayer(ash, gameMap.at(32, 10));
 
-        ash.addItemToInventory(new Pokefruit(Element.WATER));
-        ash.addItemToInventory(new Pokeball(new Bulbasaur()));
 
         //Add first pokemon - Charmander
         Actor charmander = new Charmander();
         gameMap.at(33, 10).addActor(charmander);
 
+        //Add NurseJoy into the house in the middle of the map
         NurseJoy nurseJoy = new NurseJoy();
         gameMap.at(31,6).addActor(nurseJoy);
 
