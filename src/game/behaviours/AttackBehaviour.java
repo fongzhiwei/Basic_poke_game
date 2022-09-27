@@ -10,15 +10,24 @@ import game.pokemon.Charmander;
 import java.util.List;
 
 /**
+ * A class that figures out an AttackAction that will attack the target Actor
+ *
  * Created by:
  * @author Riordan D. Alfredo
+ *
  * Modified by:
- * @author Leong Xin Yun
+ * @author Leong Xin Yun <xleo0002@student.monash.edu>
+ *
  */
 public class AttackBehaviour implements Behaviour {
 
     /**
-     *  HINT: develop a logic to check surrounding, check elements, and return an action to attack that opponent.
+     * Returns an AttackAction to attack a target actor, if possible.
+     * If no target is found or no attack action is possible, returns null.
+     *
+     * @param actor the Actor acting
+     * @param map the GameMap containing the Actor
+     * @return an Action that actor can perform, or null if actor can't do this.
      */
     @Override
     public Action getAction(Actor actor, GameMap map) {
