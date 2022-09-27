@@ -147,7 +147,9 @@ public abstract class Pokemon extends Actor{
     }
 
     /**
-     * @param isEquipping FIXME: develop a logic to toggle weapon (put a selected weapon to the inventory - used!);
+     * Switch the pokemon's weapon in the game
+     *
+     * @param isEquipping boolean value representing if the pokemon is equipping any weapon at the moment
      */
     public abstract void toggleWeapon(boolean isEquipping);
 

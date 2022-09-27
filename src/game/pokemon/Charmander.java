@@ -30,7 +30,11 @@ public class Charmander extends Pokemon implements TimePerception{
         this.registerInstance();
     }
 
-
+    /**
+     * Set the status of a Pokemon
+     *
+     * @param affectionPoints the Pokemon's affection points towards the player or trainer
+     */
     @Override
     public void setStatus(int affectionPoints) {
         if (this.findCapabilitiesByType(Status.class).size() > 0) {
@@ -46,7 +50,9 @@ public class Charmander extends Pokemon implements TimePerception{
     }
 
     /**
-     * @param isEquipping FIXME: develop a logic to toggle weapon (put a selected weapon to the inventory - used!);
+     * Switch the pokemon's weapon in the game
+     *
+     * @param isEquipping boolean value representing if the pokemon is equipping any weapon at the moment
      */
     public void toggleWeapon(boolean isEquipping) {
         if (this.pokemonLocation.getGround().hasCapability(Element.FIRE)) {
