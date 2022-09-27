@@ -12,9 +12,11 @@ import java.util.Map;
  * Affection Manager
  * <p>
  * Created by:
- *
  * @author Riordan D. Alfredo
+ *
  * Modified by:
+ * @author Leong Xin Yun <xleo0002@student.monash.edu>
+ *
  */
 public class AffectionManager {
 
@@ -22,14 +24,14 @@ public class AffectionManager {
      * Singleton instance (the one and only for a whole game).
      */
     private static AffectionManager instance;
+
     /**
-     * HINT: is it just for a Charmander?
+     * A collection of pokemons and their affection points
      */
     private final Map<Pokemon, Integer> affectionPoints;
 
     /**
-     * We assume there's only one trainer in this manager.
-     * Think about how will you extend it.
+     * The player/trainer in the game
      */
     private Actor trainer;
 
@@ -64,7 +66,7 @@ public class AffectionManager {
     /**
      * Add Pokemon to the collection. By default, it has 0 affection point. Ideally, you'll register all instantiated Pokemon
      *
-     * @param pokemon
+     * @param pokemon the Pokemon instance
      */
     public void registerPokemon(Pokemon pokemon) {
         this.affectionPoints.put(pokemon, 0);
@@ -96,8 +98,7 @@ public class AffectionManager {
     }
 
     /**
-     * Increase the affection. Work on both cases when there's a Pokemon,
-     * or when it doesn't exist in the collection.
+     * Increase the Pokemon's affection points
      *
      * @param actor Actor instance, but we expect a Pokemon here.
      * @param point positive affection modifier
@@ -126,7 +127,7 @@ public class AffectionManager {
     }
 
     /**
-     * Decrease the affection level of the . Work on both cases when it is
+     * Decrease the Pokemon's affection points.
      *
      * @param actor Actor instance, but we expect a Pokemon here.
      * @param point positive affection modifier (to be subtracted later)
@@ -148,6 +149,11 @@ public class AffectionManager {
         return String.format("%s does not exist in the collection", actor);
     }
 
+    /**
+     * Update the Pokemon's affection level.
+     *
+     * @param pokemon a Pokemon instance
+     */
     public void updateAffectionLevel(Pokemon pokemon) {
         if (getAffectionPoint(pokemon) < AffectionLevel.NEUTRAL.getPoints() && !pokemon.hasCapability(AffectionLevel.DISLIKE)) {
             pokemon.setAffectionLevel(AffectionLevel.DISLIKE);
