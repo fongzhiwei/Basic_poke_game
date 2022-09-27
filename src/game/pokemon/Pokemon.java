@@ -26,6 +26,8 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 /**
+ * An entity representing a Pokemon that is alive.
+ *
  * Created by:
  * @author Leong Xin Yun <xleo0002@student.monash.edu>
  *

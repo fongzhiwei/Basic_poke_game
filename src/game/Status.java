@@ -1,8 +1,9 @@
 package game;
 
 /**
- * Use this enum class to give `buff` or `debuff`.
- * It is also useful to give a `state` to abilities or game.actions that can be attached-detached.
+ * An enumeration to store the status of the actor and item instances.
+ * Collection of status is used to give a `state` to abilities or
+ * game.actions that can be attached-detached.
  *
  * Created by:
  * @author Riordan D. Alfredo

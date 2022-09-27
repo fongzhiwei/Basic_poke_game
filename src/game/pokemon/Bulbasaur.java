@@ -8,6 +8,8 @@ import game.time.TimePerception;
 import game.weapons.SpecialWeapon;
 
 /**
+ * Class representing the Bulbasaur
+ *
  * Created by:
  * @author Leong Xin Yun <xleo0002@student.monash.edu>
  *

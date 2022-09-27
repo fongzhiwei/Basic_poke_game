@@ -11,6 +11,7 @@ import edu.monash.fit2099.engine.weapons.Weapon;
 
 /**
  * An Action to attack another Actor.
+ *
  * Created by:
  * @author Riordan D. Alfredo
  *

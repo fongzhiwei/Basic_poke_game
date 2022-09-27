@@ -12,6 +12,8 @@ import game.weapons.SpecialWeapon;
 import java.util.ArrayList;
 
 /**
+ * Class representing the Charmander
+ *
  * Created by:
  * @author Riordan D. Alfredo
  *

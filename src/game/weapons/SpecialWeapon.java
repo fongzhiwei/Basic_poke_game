@@ -5,6 +5,8 @@ import game.Element;
 import game.Status;
 
 /**
+ * Class representing the pokemon's special weapon
+ *
  * Created by:
  * @author Leong Xin Yun <xleo0002@student.monash.edu>
  *
