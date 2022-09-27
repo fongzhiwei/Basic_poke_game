@@ -12,5 +12,5 @@ package game.environment;
  * @see Wall
  */
 public enum CapabilityOfExpand {
-    NOTEXPANDABLE
+    NOT_EXPANDABLE
 }

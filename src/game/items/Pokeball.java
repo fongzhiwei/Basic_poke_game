@@ -1,6 +1,5 @@
 package game.items;
 
-import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.items.Item;
 import game.Status;
 import game.actions.SummonAction;

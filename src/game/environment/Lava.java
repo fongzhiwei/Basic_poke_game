@@ -69,7 +69,7 @@ public class Lava extends Ground implements TimePerception {
                 location = exit.getDestination();
 
                 Ground ground = exit.getDestination().getGround();
-                boolean checkExpand = ground.hasCapability(CapabilityOfExpand.NOTEXPANDABLE) || ground.hasCapability(Element.FIRE);
+                boolean checkExpand = ground.hasCapability(CapabilityOfExpand.NOT_EXPANDABLE) || ground.hasCapability(Element.FIRE);
                 if (!checkExpand) {
                     createLava();
                 }
