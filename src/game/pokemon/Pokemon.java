@@ -56,17 +56,17 @@ public abstract class Pokemon extends Actor{
     }
 
     public void setStatus(int affectionPoints) {
-        if (this.findCapabilitiesByType(Status.class).size() > 0) {
-            for (Status status : this.findCapabilitiesByType(Status.class)) {
-                this.removeCapability(status);
-            }
+
+        if(this.hasCapability(Status.CATCHABLE)){
+            this.removeCapability(Status.CATCHABLE);
+
         }
 
-        if (affectionPoints<50) {
-            this.addCapability(Status.HOSTILE);
+        if (affectionPoints<=-50) {
+            this.addCapability(Status.NOT_CATCHABLE);
+            this.addCapability(AffectionLevel.DISLIKE);
         }
-
-        else if (affectionPoints>=0) {
+        else if (affectionPoints>=50) {
             this.addCapability(Status.CATCHABLE);
         }
 
@@ -92,6 +92,7 @@ public abstract class Pokemon extends Actor{
                 if (this.getInventory().get(index).hasCapability(Status.WEAPON)) {
                     isEquipping = true;
                 }
+                index++;
             }
             if (action != null) {
                 this.toggleWeapon(isEquipping);
@@ -110,8 +111,7 @@ public abstract class Pokemon extends Actor{
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
-        actions.add(new AttackAction(this, direction));
-        //FIXME: allow other actor to attack this Squirtle (incl. Player). Please check requirement! :)
+
         if (otherActor.isConscious() && this.isConscious()) {
             List<Exit> exits = map.locationOf(otherActor).getExits();
             boolean isActorReachable = false;
@@ -125,7 +125,7 @@ public abstract class Pokemon extends Actor{
             }
 
             if (isActorReachable) {
-                if (ElementsHelper.hasAnySimilarElements(this, otherActor.findCapabilitiesByType(Element.class))) {
+                if (!otherActor.hasCapability(Character.PLAYER)) {
                     actions.add(new AttackAction(this, direction));
                 }
 
@@ -147,7 +147,7 @@ public abstract class Pokemon extends Actor{
     }
 
     /**
-     * @param isEquipping FIXME: develop a logic to toggle weapon (put a selected weapon to the inventory - used!);
+     * @param isEquipping boolean check to see the if the pokemon is current equipping a weapon
      */
     public abstract void toggleWeapon(boolean isEquipping);
 

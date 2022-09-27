@@ -10,6 +10,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.environment.*;
 import game.items.Candy;
+import game.items.Pokeball;
 import game.items.Pokefruit;
 import game.pokemon.Bulbasaur;
 import game.pokemon.Charmander;
@@ -52,18 +53,16 @@ public class Application {
         //Add player - Ash
         Player ash = new Player("Ash", '@', 1);
         world.addPlayer(ash, gameMap.at(32, 10));
-        ash.addItemToInventory(new Candy());
-        ash.addItemToInventory(new Pokefruit(Element.GRASS));
-        ash.addItemToInventory(new Pokefruit(Element.GRASS));
+
+        ash.addItemToInventory(new Pokefruit(Element.WATER));
+        ash.addItemToInventory(new Pokeball(new Bulbasaur()));
 
         //Add first pokemon - Charmander
         Actor charmander = new Charmander();
         gameMap.at(33, 10).addActor(charmander);
-        Pokemon bulbasaur = new Bulbasaur();
-        gameMap.at(32,11).addActor(new Bulbasaur());
 
         NurseJoy nurseJoy = new NurseJoy();
-        gameMap.at(31,10).addActor(nurseJoy);
+        gameMap.at(31,6).addActor(nurseJoy);
 
         world.run();
 
