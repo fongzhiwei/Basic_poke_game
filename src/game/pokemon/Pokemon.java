@@ -132,7 +132,7 @@ public abstract class Pokemon extends Actor{
             }
 
             if (isActorReachable) {
-                if (ElementsHelper.hasAnySimilarElements(this, otherActor.findCapabilitiesByType(Element.class))) {
+                if (!ElementsHelper.hasAnySimilarElements(this, otherActor.findCapabilitiesByType(Element.class))) {
                     actions.add(new AttackAction(this, direction));
                 }
 
@@ -144,9 +144,9 @@ public abstract class Pokemon extends Actor{
                             actions.add(new FeedAction(this, direction, elem));
                         }
 
-                        if (elem.hasCapability(Status.BALL)) {
-                            actions.add(new SummonAction(this, direction));
-                        }
+//                        if (elem.hasCapability(Status.BALL)) {
+//                            actions.add(new SummonAction(this, direction));
+//                        }
                     }
                 }
             }
