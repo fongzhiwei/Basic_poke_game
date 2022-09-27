@@ -62,6 +62,7 @@ public class Application {
         Actor charmander = new Charmander();
         gameMap.at(33, 10).addActor(charmander);
 
+
         //Add NurseJoy into the house in the middle of the map
         NurseJoy nurseJoy = new NurseJoy();
         gameMap.at(31,6).addActor(nurseJoy);
