@@ -1,7 +1,9 @@
 package game.items;
 
 import edu.monash.fit2099.engine.actions.Action;
+import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.Location;
 
 public class Door extends Item {
 
@@ -11,6 +13,10 @@ public class Door extends Item {
 
     public void addMapAction(Action newAction){
         this.addAction(newAction);
+    }
+
+    public void addMapAction(Location moveToLocation, String direction){
+        addMapAction(new MoveActorAction(moveToLocation, direction));
     }
 
 }

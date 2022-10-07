@@ -67,7 +67,8 @@ public class Application {
 
         // Add Door to teleport from game map to new map
         Door gameDoor = new Door("door", '=', false);
-        gameDoor.addMapAction(new MoveActorAction(pokemonCenter.at(9, 5), "to Pokemon Center!"));
+        //gameDoor.addMapAction(new MoveActorAction(pokemonCenter.at(9, 5), "to Pokemon Center!"));
+        gameDoor.addMapAction(pokemonCenter.at(9, 5), "to Pokemon Center!");
         gameMap.at(30, 5).addItem(gameDoor);
 
         //Add player and nurse joy in the middle of new map
@@ -76,7 +77,7 @@ public class Application {
 
         // Add Exit to teleport from new map to game map
         Door newDoor = new Door("door", '=', false);
-        newDoor.addMapAction(new MoveActorAction(gameMap.at(30, 5), "to Game Map!"));
+        newDoor.addMapAction(gameMap.at(30, 5), "to Game Map!");
         pokemonCenter.at(9, 5).addItem(newDoor);
 
         //Add player - Ash
