@@ -3,20 +3,14 @@ package game;
 import java.util.Arrays;
 import java.util.List;
 
-import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.environment.*;
-import game.items.Candy;
 import game.items.Door;
-import game.items.Pokeball;
-import game.items.Pokefruit;
-import game.pokemon.Bulbasaur;
 import game.pokemon.Charmander;
-import game.pokemon.Pokemon;
 import game.trade.NurseJoy;
 
 /**
