@@ -12,10 +12,12 @@ import game.pokemon.Pokemon;
 
 /**
  * An Action to capture a Pokemon.
+ *
  * Created by:
  * @author Leong Xin Yun <xleo0002@student.monash.edu>
+ * @version 1.0
  *
- * Modified by:
+ * @see edu.monash.fit2099.engine.actions.Action
  *
  */
 public class CaptureAction extends Action {

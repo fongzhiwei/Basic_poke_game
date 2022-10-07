@@ -93,6 +93,12 @@ public class Charmander extends Pokemon implements TimePerception{
         super.hurt(10);
     }
 
+    /**
+     * This is a method to trade with player using candy to get Charmander and Pokefruit
+     *
+     * @param player the person that want to trade
+     * @return the result of whether the trade can successfully done (True/False)
+     */
     public boolean tradedWith(Actor player){
         int price = 5;
         int money = 0;

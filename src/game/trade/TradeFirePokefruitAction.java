@@ -16,9 +16,14 @@ import game.items.Pokefruit;
  */
 
 public class TradeFirePokefruitAction extends Action {
-
+    /**
+     * Trade target (player)
+     */
     protected Actor target;
 
+    /**
+     * Trade target (player)
+     */
     protected Pokefruit merchandise;
 
     /**

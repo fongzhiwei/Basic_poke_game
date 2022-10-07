@@ -10,10 +10,12 @@ import game.pokemon.Pokemon;
 
 /**
  * An Action to feed a Pokemon.
+ *
  * Created by:
  * @author Leong Xin Yun <xleo0002@student.monash.edu>
+ * @version 1.0
  *
- * Modified by:
+ * @see edu.monash.fit2099.engine.actions.Action
  *
  */
 public class FeedAction extends Action {
@@ -65,7 +67,7 @@ public class FeedAction extends Action {
             return String.format("%s dislikes it! %s.", this.target, AffectionManager.getInstance().decreaseAffection(this.target, 10));
         }
     }
-
+    
     /**
      * Method to return appropriate menu description for the action
      * @param actor the actor who performed the action
