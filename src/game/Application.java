@@ -56,6 +56,8 @@ public class Application {
         //Add player - Ash
         Player ash = new Player("Ash", '@', 1);
         world.addPlayer(ash, gameMap.at(32, 10));
+        ash.addItemToInventory(new Pokefruit(Element.WATER));
+        ash.addItemToInventory(new Pokefruit(Element.FIRE));
 
 
         //Add first pokemon - Charmander
@@ -67,6 +69,7 @@ public class Application {
         NurseJoy nurseJoy = new NurseJoy();
         gameMap.at(31,6).addActor(nurseJoy);
 
+        System.out.println(ash.getInventory());
         world.run();
 
     }
