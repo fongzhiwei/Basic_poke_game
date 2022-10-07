@@ -53,23 +53,23 @@ public class TimePerceptionManager{
      * By doing this way, it will avoid using `instanceof` all over the place.
      */
     public void run() {
-        turn += 1;
         int last_digit = turn % 10;
         List<TimePerception> originalList = new ArrayList<>();
         originalList.addAll(timePerceptionList);
 
         if (last_digit >= 5){
-            System.out.println("Night now");
+            System.out.println("Night Turn " + (last_digit-4));
             for (TimePerception timePerception : originalList) {
                 timePerception.nightEffect();
             }
         }
         else{
-            System.out.println("Day now");
+            System.out.println("Day Turn " + (last_digit+1));
             for (TimePerception timePerception : originalList) {
                 timePerception.dayEffect();
             }
         }
+        turn += 1;
     }
 
 
