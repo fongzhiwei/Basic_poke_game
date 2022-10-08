@@ -8,6 +8,16 @@ import game.pokemon.Charizard;
 import game.pokemon.Charmeleon;
 import game.pokemon.Pokemon;
 
+/**
+ * An Action to evolve a Pokemon.
+ *
+ * Created by:
+ * @author Leong Xin Yun <xleo0002@student.monash.edu>
+ * @version 1.0
+ *
+ * @see edu.monash.fit2099.engine.actions.Action
+ *
+ */
 public class EvolveAction extends Action {
     /**
      * The Pokemon that is to be evolved
