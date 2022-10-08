@@ -45,7 +45,7 @@ public class Squirtle extends Pokemon implements TimePerception {
             }
         }
 
-        if (this.pokemonLocation.getGround().hasCapability(Element.WATER) || exits.size() > 0) {
+        if (this.pokemonLocation.getGround().hasCapability(Element.WATER) || posIndex.size() > 0) {
             if (!isEquipping) {
                 SpecialWeapon bubble = new SpecialWeapon("Bubble", 'B', 25, "burbles", 80, Element.WATER);
                 this.addItemToInventory(bubble);
