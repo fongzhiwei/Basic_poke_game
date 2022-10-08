@@ -14,12 +14,12 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.*;
 import game.Character;
 import game.actions.CaptureAction;
+import game.actions.EvolveAction;
 import game.actions.FeedAction;
 import game.actions.SummonAction;
-import game.behaviours.AttackBehaviour;
-import game.behaviours.Behaviour;
-import game.behaviours.FollowBehaviour;
-import game.behaviours.WanderBehaviour;
+import game.behaviours.*;
+import game.items.Fire;
+import game.time.TimePerceptionManager;
 
 import java.util.List;
 import java.util.SortedMap;
@@ -46,6 +46,16 @@ public abstract class Pokemon extends Actor{
     protected Location pokemonLocation;
 
     /**
+     * The starting turn number when a Pokemon is spawned
+     */
+    private int birthCount;
+
+    /**
+     * Duration of damage effect on a Pokemon
+     */
+    private int effectTurnCount;
+
+    /**
      * Constructor.
      *
      * @param name          name of the Pokemon
@@ -60,6 +70,7 @@ public abstract class Pokemon extends Actor{
         this.addCapability(AffectionLevel.NEUTRAL);
         this.addCapability(Character.NPC);
         this.setStatus(0);
+        this.birthCount = TimePerceptionManager.getInstance().getTurn();
         AffectionManager.getInstance().registerPokemon(this);
     }
 
@@ -79,6 +90,31 @@ public abstract class Pokemon extends Actor{
      */
     protected IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(10, "tackle");
+    }
+
+    /**
+     * Get the duration for how long the Pokemon's damage effect lasted
+     *
+     * @return a turn count for which the damage effect lasted
+     */
+    public int getEffectTurnCount() {
+        return this.effectTurnCount;
+    }
+
+    /**
+     * Get the starting turn number for when the Pokemon is spawned to the game world
+     *
+     * @return turn number when the Pokemon is spawned
+     */
+    public int getbirthCount() {
+        return this.birthCount;
+    }
+
+    /**
+     * Set the starting time for when the Pokemon's damage effect started
+     */
+    public void setEffectTurnCount(int count) {
+        this.effectTurnCount = count;
     }
 
     /**
@@ -102,7 +138,6 @@ public abstract class Pokemon extends Actor{
 
         if(this.hasCapability(Status.CATCHABLE)){
             this.removeCapability(Status.CATCHABLE);
-
         }
 
         if (affectionPoints<=-50) {
@@ -127,6 +162,15 @@ public abstract class Pokemon extends Actor{
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         this.pokemonLocation = map.locationOf(this);
+
+        if (this.pokemonLocation.getItems().contains(new Fire()) && !this.hasCapability(Element.FIRE)) {
+            this.setEffectTurnCount(this.getEffectTurnCount() + 1);
+
+            if (this.getEffectTurnCount() <= 2) {
+                return new DoNothingAction();
+            }
+        }
+
         for (Behaviour behaviour : behaviours.values()) {
             Action action = behaviour.getAction(this, map);
             boolean isEquipping = false;
@@ -175,15 +219,18 @@ public abstract class Pokemon extends Actor{
                 }
 
                 if (otherActor.hasCapability(Character.PLAYER)) {
-                    if (!this.hasCapability(Status.NOT_CATCHABLE)){
+                    if (this.hasCapability(Status.CATCHABLE)){
                         actions.add(new CaptureAction(this, direction));
+                    }
+
+                    if (this.hasCapability(AffectionLevel.MAX)) {
+                        actions.add(new EvolveAction(this));
                     }
 
                     for (Item elem: otherActor.getInventory()) {
                         if (elem.hasCapability(Status.FRUIT) && !this.hasCapability(AffectionLevel.DISLIKE)) {
                             actions.add(new FeedAction(this, direction, elem));
                         }
-
                     }
                 }
             }
@@ -198,4 +245,8 @@ public abstract class Pokemon extends Actor{
      */
     public abstract void toggleWeapon(boolean isEquipping);
 
+    @Override
+    public String toString() {
+        return String.format("%s(%s/%d)(AP: %d)", super.toString(), super.printHp(), super.getMaxHp(), AffectionManager.getInstance().getAffectionPoint(this));
+    }
 }

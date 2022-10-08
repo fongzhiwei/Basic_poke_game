@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.Status;
 import game.Utils;
+import game.behaviours.FollowBehaviour;
 import game.items.Pokeball;
 import game.pokemon.Pokemon;
 
