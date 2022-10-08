@@ -20,7 +20,7 @@ import game.trade.NurseJoy;
  *
  * Modified by:
  * @author Fong Zhiwei
- * @author Soh Menh Jienq
+ * @author Soh Meng Jienq
  * @author Leong Xin Yun
  */
 public class Application {
