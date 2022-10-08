@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.Element;
 import game.Status;
+import game.behaviours.EvolveBehaviour;
 import game.time.TimePerception;
 import game.weapons.SpecialWeapon;
 
@@ -27,23 +28,10 @@ public class Charmander extends Pokemon implements TimePerception{
     public Charmander() {
         super("Charmander", 'c', 100);
         // HINT: add more relevant behaviours here
+        this.getBehaviours().put(0, new EvolveBehaviour());
         this.addCapability(Element.FIRE);
         this.registerInstance();
     }
-
-//    /**
-//     * Set the status of a Charmander to Hostile
-//     *
-//     * @param affectionPoints the Pokemon's affection points towards the player or trainer
-//     */
-//    @Override
-//    public void setStatus(int affectionPoints) {
-//        if (this.findCapabilitiesByType(Status.class).size() > 0) {
-//            this.findCapabilitiesByType(Status.class).clear();
-//        }
-//
-//        this.addCapability(Status.HOSTILE);
-//    }
 
     /**
      * Creates and returns an intrinsic weapon. By default, the Charmander 'scratch' for 10 damage.
