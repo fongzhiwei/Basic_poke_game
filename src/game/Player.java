@@ -46,6 +46,7 @@ public class Player extends Actor {
 	 */
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+		System.out.println("Inventory" + this.getInventory());
 		// Apply day and night effect
 		TimePerceptionManager.getInstance().run();
 		// Handle multi-turn Actions
