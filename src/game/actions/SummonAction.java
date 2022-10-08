@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.Status;
 import game.Utils;
+import game.behaviours.FollowBehaviour;
 import game.items.Pokeball;
 import game.pokemon.Pokemon;
 
@@ -67,6 +68,7 @@ public class SummonAction extends Action {
         if (validPosIndex.size() > 0) {
             int randomPosIndex = Utils.nextNum(0, validPosIndex.size());
             map.addActor(capturedPokemon, exits.get(randomPosIndex).getDestination());
+            capturedPokemon.getBehaviours().put(1, new FollowBehaviour(actor));
             actor.removeItemFromInventory(pokeball);
             System.out.println(actor.getInventory());
             return String.format("I choose you... %s.", this.target);
