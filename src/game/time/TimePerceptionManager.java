@@ -89,4 +89,12 @@ public class TimePerceptionManager{
         timePerceptionList.remove(objInstance);
     }
 
+    /**
+     * Get current turn number
+     *
+     * @return current turn number
+     */
+    public int getTurn() {
+        return this.turn;
+    }
 }
