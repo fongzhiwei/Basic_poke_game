@@ -7,17 +7,10 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.GroundFactory;
 import edu.monash.fit2099.engine.positions.World;
 import game.environment.*;
-import game.items.Candy;
-import game.items.Pokeball;
-import game.items.Pokefruit;
-import game.pokemon.Bulbasaur;
+import game.items.Door;
 import game.pokemon.Charmander;
-import game.pokemon.Charmeleon;
-import game.pokemon.Pokemon;
-import game.time.TimePerceptionManager;
 import game.trade.NurseJoy;
 
 /**
@@ -27,7 +20,7 @@ import game.trade.NurseJoy;
  *
  * Modified by:
  * @author Fong Zhiwei
- * @author Soh Menh Jienq
+ * @author Soh Meng Jienq
  * @author Leong Xin Yun
  */
 public class Application {
@@ -44,10 +37,10 @@ public class Application {
                 "....,,.....,T....OO............................T...^^^^^^^^",
                 "..,,,,...........OOO................................#^^^^^^",
                 "..,,,,.......~....O.....................................^^^",
-                "...TTTT.....WWW...........#######........................^^",
-                "...TTTT......W............#_____#............T............^",
-                "...TTTT.....WWW......T....#_____#..........................",
-                "...T.......~..............###_###..........................",
+                "...TTTT.....WWW..............###.........................^^",
+                "...TTTT......W...............#.#.............T............^",
+                "...TTTT.....WWW......T.....................................",
+                "...T.......~...............................................",
                 "...~~~~~~~~................................................",
                 "....~~~~~..................................................",
                 "~~~~~~~....................................................",
@@ -56,22 +49,39 @@ public class Application {
         GameMap gameMap = new GameMap(groundFactory, map);
         world.addGameMap(gameMap);
 
+        List<String> newMap = Arrays.asList(
+                "##################",
+                "#________________#",
+                "#______.._.._____#",
+                "#________________#",
+                "#________________#",
+                "########___#######");
+        GameMap pokemonCenter = new GameMap(groundFactory, newMap);
+        world.addGameMap(pokemonCenter);
+
+        // Add Door to teleport from game map to new map
+        Door gameDoor = new Door("door", '=', false);
+        //gameDoor.addMapAction(new MoveActorAction(pokemonCenter.at(9, 5), "to Pokemon Center!"));
+        gameDoor.addMapAction(pokemonCenter.at(9, 5), "to Pokemon Center!");
+        gameMap.at(30, 5).addItem(gameDoor);
+
+        //Add player and nurse joy in the middle of new map
+        NurseJoy newNurseJoy = new NurseJoy();
+        pokemonCenter.at(9, 2).addActor(newNurseJoy);
+
+        // Add Exit to teleport from new map to game map
+        Door newDoor = new Door("door", '=', false);
+        newDoor.addMapAction(gameMap.at(30, 5), "to Game Map!");
+        pokemonCenter.at(9, 5).addItem(newDoor);
+
         //Add player - Ash
         Player ash = new Player("Ash", '@', 1);
         world.addPlayer(ash, gameMap.at(32, 10));
-        ash.addItemToInventory(new Pokefruit(Element.FIRE));
-
 
         //Add first pokemon - Charmander
         Actor charmander = new Charmander();
         gameMap.at(33, 10).addActor(charmander);
-//        AffectionManager.getInstance().increaseAffection((Pokemon)charmander, 100);
-//        ((Pokemon) charmander).setAffectionLevel(AffectionLevel.MAX);
 
-
-        //Add NurseJoy into the house in the middle of the map
-        NurseJoy nurseJoy = new NurseJoy();
-        gameMap.at(31,6).addActor(nurseJoy);
 
         world.run();
 
