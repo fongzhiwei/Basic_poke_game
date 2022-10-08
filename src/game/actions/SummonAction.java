@@ -68,7 +68,6 @@ public class SummonAction extends Action {
         if (validPosIndex.size() > 0) {
             int randomPosIndex = Utils.nextNum(0, validPosIndex.size());
             map.addActor(capturedPokemon, exits.get(randomPosIndex).getDestination());
-            capturedPokemon.getBehaviours().put(1, new FollowBehaviour(actor));
             actor.removeItemFromInventory(pokeball);
             System.out.println(actor.getInventory());
             return String.format("I choose you... %s.", this.target);
