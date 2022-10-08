@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.GroundFactory;
 import edu.monash.fit2099.engine.positions.World;
 import game.environment.*;
 import game.items.Candy;
@@ -14,7 +15,9 @@ import game.items.Pokeball;
 import game.items.Pokefruit;
 import game.pokemon.Bulbasaur;
 import game.pokemon.Charmander;
+import game.pokemon.Charmeleon;
 import game.pokemon.Pokemon;
+import game.time.TimePerceptionManager;
 import game.trade.NurseJoy;
 
 /**
@@ -56,11 +59,14 @@ public class Application {
         //Add player - Ash
         Player ash = new Player("Ash", '@', 1);
         world.addPlayer(ash, gameMap.at(32, 10));
+        ash.addItemToInventory(new Pokefruit(Element.FIRE));
 
 
         //Add first pokemon - Charmander
         Actor charmander = new Charmander();
         gameMap.at(33, 10).addActor(charmander);
+//        AffectionManager.getInstance().increaseAffection((Pokemon)charmander, 100);
+//        ((Pokemon) charmander).setAffectionLevel(AffectionLevel.MAX);
 
 
         //Add NurseJoy into the house in the middle of the map
