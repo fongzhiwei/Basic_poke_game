@@ -23,5 +23,7 @@ public enum Status {
     CURRENCY,       // to identify that an item is tradable
     FRUIT,          // to identify that an item is feedable
     BALL,           // to identify that an item can catch pokemon
+    EGG,            // to identify that an item is a pokemon egg
+    HATCHING_GROUND,// to identify that a ground is an incubator
     WEAPON          // to identify that an item is a weapon
 }
