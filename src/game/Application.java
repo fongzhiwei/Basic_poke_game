@@ -77,8 +77,6 @@ public class Application {
         //Add player - Ash
         Player ash = new Player("Ash", '@', 1);
         world.addPlayer(ash, gameMap.at(32, 10));
-        ash.addItemToInventory(new Pokefruit(Element.WATER));
-        ash.addItemToInventory(new Pokefruit(Element.FIRE));
 
         //Add first pokemon - Charmander
         Actor charmander = new Charmander();
