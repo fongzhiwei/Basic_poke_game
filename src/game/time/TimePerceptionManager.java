@@ -58,13 +58,13 @@ public class TimePerceptionManager{
         originalList.addAll(timePerceptionList);
 
         if (last_digit >= 5){
-            System.out.println("Night Turn " + (last_digit-4));
+            System.out.println("Night Turn " + (turn+1));
             for (TimePerception timePerception : originalList) {
                 timePerception.nightEffect();
             }
         }
         else{
-            System.out.println("Day Turn " + (last_digit+1));
+            System.out.println("Day Turn " + (turn+1));
             for (TimePerception timePerception : originalList) {
                 timePerception.dayEffect();
             }
