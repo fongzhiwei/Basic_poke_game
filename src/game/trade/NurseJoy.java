@@ -6,17 +6,19 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.Element;
 import game.Status;
+import game.items.Pokefruit;
+import game.pokemon.Bulbasaur;
+import game.pokemon.Charmander;
+import game.pokemon.Squirtle;
 
 /**
  * A class that represents NurseJoy.
  * @author Fong Zhiwei <zfon0005@student.monash.edu>
  * @version 1.0
  *
- * @see TradeCharmanderAction
- * @see TradeGrassPokefruitAction
- * @see TradeFirePokefruitAction
- * @see TradeWaterPokefruitAction
+ * @see TradeAction
  * @see Actor
  */
 
@@ -56,10 +58,12 @@ public class NurseJoy extends Actor {
 
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList list = super.allowableActions(otherActor, direction, map);
-        list.add(new TradeFirePokefruitAction(otherActor));
-        list.add(new TradeWaterPokefruitAction(otherActor));
-        list.add(new TradeGrassPokefruitAction(otherActor));
-        list.add(new TradeCharmanderAction(otherActor));
+        list.add(new TradeAction(otherActor, new Pokefruit(Element.FIRE),1));
+        list.add(new TradeAction(otherActor, new Pokefruit(Element.WATER),1));
+        list.add(new TradeAction(otherActor, new Pokefruit(Element.GRASS),1));
+        list.add(new TradeAction(otherActor, new Charmander(),5));
+        list.add(new TradeAction(otherActor, new Bulbasaur(),5));
+        list.add(new TradeAction(otherActor, new Squirtle(),5));
 
         return list;
     }
