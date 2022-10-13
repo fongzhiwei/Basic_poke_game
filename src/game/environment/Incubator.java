@@ -19,7 +19,7 @@ public class Incubator extends Ground {
 
     /**
      * Constructor.
-     * Incubator shows symbol 'X' in game map, and it is not expandable.
+     * Incubator shows symbol 'X' in game map, and it is not expandable. It is a ground to hatch a Pokemon Egg.
      */
     public Incubator(){
         super('X');

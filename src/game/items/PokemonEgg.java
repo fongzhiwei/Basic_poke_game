@@ -10,7 +10,12 @@ import game.pokemon.Pokemon;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * A class that represents Pokemon Egg.
+ * @author Fong Zhiwei <zfon0005@student.monash.edu>
+ * @version 1.0
+ *
+ */
 public class PokemonEgg extends Item {
 
     private int hatchTime;
@@ -19,6 +24,10 @@ public class PokemonEgg extends Item {
 
     private Pokemon pokemon;
 
+    /**
+     * Constructor.
+     * Pokemon Egg shows symbol 'g' in game map.
+     */
     public PokemonEgg(BasePokemon basePokemon){
         super(basePokemon.toString() + " Egg",'g',true);
         setHatchTimer(0);
