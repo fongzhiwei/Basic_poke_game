@@ -61,10 +61,10 @@ public class FeedAction extends Action {
         if (ElementsHelper.hasAnySimilarElements(this.target, this.pokefruit.findCapabilitiesByType(Element.class))) {
             pokefruitType = this.pokefruit.findCapabilitiesByType(Element.class).get(0);
             actor.removeItemFromInventory(this.pokefruit);
-            return String.format("%s gives a %s Pokefruit to %s.", actor, pokefruitType, AffectionManager.getInstance().increaseAffection(this.target, 20));
+            return String.format("%s gives a %s Pokefruit to %s.", actor, pokefruitType, AffectionManager.getInstance().increaseAffection(actor,target, 20));
         } else {
             actor.removeItemFromInventory(pokefruit);
-            return String.format("%s dislikes it! %s.", this.target, AffectionManager.getInstance().decreaseAffection(this.target, 10));
+            return String.format("%s dislikes it! %s.", this.target, AffectionManager.getInstance().decreaseAffection(actor, target, 10));
         }
     }
     
@@ -75,7 +75,7 @@ public class FeedAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return String.format("%s gives a %s to %s.(%s AP) at %s",actor,pokefruit, target, AffectionManager.getInstance().getAffectionPoint(target), direction);
+        return String.format("%s gives a %s to %s.(%s AP) at %s",actor,pokefruit, target, AffectionManager.getInstance().getAffectionPoint(actor,target), direction);
     }
 
 }
