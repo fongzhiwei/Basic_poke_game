@@ -1,10 +1,13 @@
 package game.pokemon;
 
 
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Exit;
 import game.Element;
+import game.items.PokemonEgg;
 import game.time.TimePerception;
+import game.trade.Tradable;
 import game.weapons.SpecialWeapon;
 
 import java.util.ArrayList;
@@ -19,7 +22,7 @@ import java.util.List;
  *
  *
  */
-public class Squirtle extends Pokemon implements TimePerception {
+public class Squirtle extends Pokemon implements TimePerception, Tradable {
     /**
      * Constructor.
      */
@@ -74,5 +77,10 @@ public class Squirtle extends Pokemon implements TimePerception {
     public void nightEffect() {
         // Squirtle will be healed by 10 points
         super.heal(10);
+    }
+
+    public void tradedWith(Actor player) {
+        PokemonEgg pokemonEgg = new PokemonEgg(BasePokemon.CHARMANDER);
+        player.addItemToInventory(pokemonEgg);
     }
 }

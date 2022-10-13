@@ -1,10 +1,13 @@
 package game.pokemon;
 
 
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import game.Element;
 import game.Status;
+import game.items.PokemonEgg;
 import game.time.TimePerception;
+import game.trade.Tradable;
 import game.weapons.SpecialWeapon;
 
 /**
@@ -16,7 +19,7 @@ import game.weapons.SpecialWeapon;
  * Modified by:
  *
  */
-public class Bulbasaur extends Pokemon implements TimePerception {
+public class Bulbasaur extends Pokemon implements TimePerception, Tradable {
     /**
      * Constructor.
      */
@@ -63,5 +66,10 @@ public class Bulbasaur extends Pokemon implements TimePerception {
     public void nightEffect() {
         // Bulbasaur will be healed by 5 points
         super.heal(5);
+    }
+
+    public void tradedWith(Actor player) {
+        PokemonEgg pokemonEgg = new PokemonEgg(BasePokemon.CHARMANDER);
+        player.addItemToInventory(pokemonEgg);
     }
 }

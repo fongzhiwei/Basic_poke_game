@@ -7,7 +7,9 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.Element;
 import game.Status;
 import game.behaviours.EvolveBehaviour;
+import game.items.PokemonEgg;
 import game.time.TimePerception;
+import game.trade.Tradable;
 import game.weapons.SpecialWeapon;
 
 import java.util.ArrayList;
@@ -21,7 +23,7 @@ import java.util.ArrayList;
  * Modified by:
  * @author Leong Xin Yun <xleo0002@student.monash.edu>
  */
-public class Charmander extends Pokemon implements TimePerception{
+public class Charmander extends Pokemon implements TimePerception, Tradable {
     /**
      * Constructor.
      */
@@ -86,37 +88,9 @@ public class Charmander extends Pokemon implements TimePerception{
      * @param player the person that want to trade
      * @return the result of whether the trade can successfully done (True/False)
      */
-    public boolean tradedWith(Actor player){
-        int price = 5;
-        int money = 0;
-        int count = 0;
-        boolean flag = false;
-        ArrayList<Integer> candyIndex = new ArrayList<>();
-
-
-        for(Item item : player.getInventory()){
-            if (item.hasCapability(Status.CURRENCY)){
-                money += 1;
-                candyIndex.add(player.getInventory().indexOf(item));
-            }
-        }
-        System.out.println(money);
-
-        if(price <= money) {
-            flag = true;
-            while (count < price){
-                player.removeItemFromInventory(player.getInventory().get(candyIndex.get(count)-count));
-                count += 1;
-            }
-        }
-        money=0;
-        for(Item item : player.getInventory()){
-            if (item.hasCapability(Status.CURRENCY)){
-                money += 1;
-                candyIndex.add(player.getInventory().indexOf(item));
-            }
-        }
-        System.out.println(money);
-        return flag;
+    public void tradedWith(Actor player) {
+        PokemonEgg pokemonEgg = new PokemonEgg(BasePokemon.CHARMANDER);
+        player.addItemToInventory(pokemonEgg);
     }
+
 }
