@@ -122,12 +122,12 @@ public abstract class Pokemon extends Actor{
      *
      * @param newAffectionLevel the affection level to be set to a Pokemon
      */
-    public void setAffectionLevel(AffectionLevel newAffectionLevel) {
-        if (this.findCapabilitiesByType(AffectionLevel.class).size() > 0) {
-            this.findCapabilitiesByType(AffectionLevel.class).clear();
-        }
-        this.addCapability(newAffectionLevel);
-    }
+//    public void setAffectionLevel(AffectionLevel newAffectionLevel) {
+//        if (this.findCapabilitiesByType(AffectionLevel.class).size() > 0) {
+//            this.findCapabilitiesByType(AffectionLevel.class).clear();
+//        }
+//        this.addCapability(newAffectionLevel);
+//    }
 
     /**
      * Set the status of a Pokemon according to its current affection points
@@ -138,6 +138,7 @@ public abstract class Pokemon extends Actor{
 
         if(this.hasCapability(Status.CATCHABLE)){
             this.removeCapability(Status.CATCHABLE);
+
         }
 
         if (affectionPoints<=-50) {
@@ -223,8 +224,8 @@ public abstract class Pokemon extends Actor{
                         actions.add(new CaptureAction(this, direction));
                     }
 
-                    if (this.hasCapability(AffectionLevel.MAX)) {
-                        actions.add(new EvolveAction(this));
+                    if (AffectionManager.getInstance().getAffectionPoint(otherActor, this) == AffectionLevel.MAX.getPoints()) {
+                            actions.add(new EvolveAction(this));
                     }
 
                     for (Item elem: otherActor.getInventory()) {
@@ -247,6 +248,6 @@ public abstract class Pokemon extends Actor{
 
     @Override
     public String toString() {
-        return String.format("%s(%s/%d)(AP: %d)", super.toString(), super.printHp(), super.getMaxHp(), AffectionManager.getInstance().getAffectionPoint(this));
+        return String.format("%s(%s/%d)(AP: %d)", super.toString(), super.printHp(), super.getMaxHp(), AffectionManager.getInstance().getAffectionPoint(AffectionManager.getInstance().getTrainer(), this));
     }
 }
