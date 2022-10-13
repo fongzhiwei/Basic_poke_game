@@ -11,8 +11,8 @@ import game.behaviours.WanderBehaviour;
 
 public class TrainerGoh extends Trainer{
 
-    public TrainerGoh(String name, char displayChar, int hitPoints){
-        super(name, displayChar, hitPoints);
+    public TrainerGoh(){
+        super("TrainerGoh", 'G', 1);
         this.getBehaviours().put(1, new TrainerCatchBehaviour());
         this.getBehaviours().put(2, new TrainerFeedBehaviour());
         this.getBehaviours().put(3, new TrainerPickupBehaviour());
@@ -22,7 +22,11 @@ public class TrainerGoh extends Trainer{
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
 
         for (Behaviour behaviour : getBehaviours().values()) {
-            return behaviour.getAction(this, map);
+            Action action = behaviour.getAction(this, map);
+
+            if (action != null){
+                return action;
+            }
 
         }
         return new DoNothingAction();

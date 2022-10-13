@@ -13,6 +13,7 @@ import game.items.Door;
 import game.items.Pokefruit;
 import game.pokemon.Charmander;
 import game.trade.NurseJoy;
+import game.trainer.TrainerGoh;
 
 /**
  * The main class to start the game.
@@ -79,6 +80,9 @@ public class Application {
         Player ash = new Player("Ash", '@', 1);
         world.addPlayer(ash, gameMap.at(32, 10));
         ash.addItemToInventory(new Pokefruit(Element.FIRE));
+
+        Actor goh = new TrainerGoh();
+        gameMap.at(25,5).addActor(goh);
 
         //Add first pokemon - Charmander
         Actor charmander = new Charmander();
