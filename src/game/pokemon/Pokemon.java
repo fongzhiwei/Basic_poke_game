@@ -248,6 +248,6 @@ public abstract class Pokemon extends Actor{
 
     @Override
     public String toString() {
-        return String.format("%s(%s/%d)(AP: %d)", super.toString(), super.printHp(), super.getMaxHp(), AffectionManager.getInstance().getAffectionPoint(this));
+        return String.format("%s(%s/%d)(AP: %d)", super.toString(), super.printHp(), super.getMaxHp(), AffectionManager.getInstance().getAffectionPoint(AffectionManager.getInstance().getTrainer(), this));
     }
 }

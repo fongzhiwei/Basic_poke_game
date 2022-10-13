@@ -33,7 +33,7 @@ public class Player extends Actor {
 		this.addCapability(Status.IMMUNE);
 		this.addCapability(Character.PLAYER);
 		AffectionManager.getInstance().registerPlayer(this);
-		AffectionManager.getInstance().registerPlayer(this);
+		AffectionManager.getInstance().registerTrainer(this);
 	}
 
 	/**

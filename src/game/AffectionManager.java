@@ -113,6 +113,10 @@ public class AffectionManager {
         return null;
     }
 
+    public Actor getTrainer() {
+        return trainer;
+    }
+
     /**
      * Increase the Pokemon's affection points
      *
