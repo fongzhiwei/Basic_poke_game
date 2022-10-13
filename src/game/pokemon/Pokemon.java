@@ -224,8 +224,9 @@ public abstract class Pokemon extends Actor{
                         actions.add(new CaptureAction(this, direction));
                     }
 
-                    if (this.hasCapability(AffectionLevel.MAX)) {
-                        actions.add(new EvolveAction(this));
+//                    if (this.hasCapability(AffectionLevel.MAX)) {
+                    if (AffectionManager.getInstance().getAffectionPoint(otherActor, this) == AffectionLevel.MAX.getPoints()) {
+                            actions.add(new EvolveAction(this));
                     }
 
                     for (Item elem: otherActor.getInventory()) {
