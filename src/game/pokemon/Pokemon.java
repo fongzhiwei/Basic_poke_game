@@ -81,17 +81,17 @@ public abstract class Pokemon extends Actor{
         return new IntrinsicWeapon(10, "tackle");
     }
 
-    /**
-     * Set the affection level of a Pokemon
-     *
-     * @param newAffectionLevel the affection level to be set to a Pokemon
-     */
-    public void setAffectionLevel(AffectionLevel newAffectionLevel) {
-        if (this.findCapabilitiesByType(AffectionLevel.class).size() > 0) {
-            this.findCapabilitiesByType(AffectionLevel.class).clear();
-        }
-        this.addCapability(newAffectionLevel);
-    }
+//    /**
+//     * Set the affection level of a Pokemon
+//     *
+//     * @param newAffectionLevel the affection level to be set to a Pokemon
+//     */
+//    public void setAffectionLevel(AffectionLevel newAffectionLevel) {
+//        if (this.findCapabilitiesByType(AffectionLevel.class).size() > 0) {
+//            this.findCapabilitiesByType(AffectionLevel.class).clear();
+//        }
+//        this.addCapability(newAffectionLevel);
+//    }
 
     /**
      * Set the status of a Pokemon according to its current affection points
