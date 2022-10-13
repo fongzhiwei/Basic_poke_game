@@ -40,24 +40,23 @@ public class TradeCharmanderAction extends Action {
     public TradeCharmanderAction(Actor target){
         this.target = target;
         this.merchandise = new Charmander();
-        AffectionManager.getInstance().increaseAffection(merchandise, AffectionLevel.LIKE.getPoints());
-        merchandise.setStatus(AffectionManager.getInstance().getAffectionPoint(merchandise));
         this.pokeball = new Pokeball(merchandise);
     }
 
     /**
      * This is a method to execute trading.
-     * @param target The actor performing the action.
+     * @param actor The actor performing the action.
      * @param map The map the actor is on.
      * @return a string result
      */
     @Override
-    public String execute(Actor target, GameMap map) {
+    public String execute(Actor actor, GameMap map) {
         boolean tradeStatus = merchandise.tradedWith(target);
         if (!tradeStatus){
             return "Trade cancelled. The player does not have enough candy";
         }
         else {
+            AffectionManager.getInstance().increaseAffection(actor, merchandise, AffectionLevel.LIKE.getPoints());
             target.addItemToInventory(pokeball);
             return "Trade success. Charmander inside a pokeball is added";
         }
