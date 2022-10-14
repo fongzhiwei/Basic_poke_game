@@ -1,8 +1,9 @@
 package game.items;
 
-import edu.monash.fit2099.engine.actions.Action;
+import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.MoveActorAction;
-import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 
 /**
@@ -10,36 +11,45 @@ import edu.monash.fit2099.engine.positions.Location;
  *  @author Soh Meng Jienq <msoh0007@student.monash.edu>
  *  @version 1.0
  *
- * @see Item
+ * @see Ground
  */
 
-public class Door extends Item {
+public class Door extends Ground {
+
+    private Location moveToLocation;
+    private String direction;
     /**
      * Constructor.
-     * @param name the name of this Item: door
-     * @param displayChar the character to use to represent this item if it is on the ground: '='
-     * @param portable true if and only if the door can be picked up
      */
-    public Door(String name, char displayChar, boolean portable) {
-        super(name, displayChar, portable);
+    public Door() {
+        super('=');
     }
 
     /**
-     * Allow Door to add action.
-     * @param newAction a new action to be added to the game.actions list.
-     */
-    public void addMapAction(Action newAction){
-        this.addAction(newAction);
-    }
-
-    /**
-     * Create an Action that will move the Actor to a Location in a given Direction. A currently-unused menu hotkey
-     * will be assigned.
+     * Overloading Constructor.
+     *
      * @param moveToLocation Location to move to
      * @param direction String describing the direction to move in, e.g. "to Pokemon Center!"
      */
-    public void addMapAction(Location moveToLocation, String direction){
-        addMapAction(new MoveActorAction(moveToLocation, direction));
+    public Door(Location moveToLocation, String direction){
+        super('=');
+        this.moveToLocation = moveToLocation;
+        this.direction = direction;
+    }
+
+    /**
+     * Returns an Action list for door.
+     *
+     * @param actor the Actor acting
+     * @param location the current Location
+     * @param direction the direction of the Ground from the Actor
+     * @return an action list
+     */
+    @Override
+    public ActionList allowableActions(Actor actor, Location location, String direction){
+        ActionList tmpActionList = super.allowableActions(actor, location, direction);
+        tmpActionList.add(new MoveActorAction(this.moveToLocation, this.direction));
+        return tmpActionList;
     }
 
 }
