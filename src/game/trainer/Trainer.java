@@ -2,6 +2,7 @@ package game.trainer;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import game.AffectionManager;
+import game.Character;
 import game.Status;
 import game.behaviours.Behaviour;
 import game.pokemon.Pokemon;
@@ -23,6 +24,7 @@ public abstract class Trainer extends Actor {
         super(name, displayChar, hitPoints);
         this.behaviours = new TreeMap<>();
         this.addCapability(Status.IMMUNE);
+        this.addCapability(Character.TRAINER);
         AffectionManager.getInstance().registerTrainer(this);
 
 

@@ -38,4 +38,9 @@ public class TrainerGoh extends Trainer{
     public char getDisplayChar() {
         return super.getDisplayChar();
     }
+
+    @Override
+    public String toString() {
+        return " Trainer Goh";
+    }
 }
