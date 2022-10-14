@@ -61,20 +61,9 @@ public class Application {
         GameMap pokemonCenter = new GameMap(groundFactory, newMap);
         world.addGameMap(pokemonCenter);
 
-        // Add Door to teleport from game map to new map
-        Door gameDoor = new Door("door", '=', false);
-        //gameDoor.addMapAction(new MoveActorAction(pokemonCenter.at(9, 5), "to Pokemon Center!"));
-        gameDoor.addMapAction(pokemonCenter.at(9, 5), "to Pokemon Center!");
-        gameMap.at(30, 5).addItem(gameDoor);
-
         //Add player and nurse joy in the middle of new map
         NurseJoy newNurseJoy = new NurseJoy();
         pokemonCenter.at(9, 2).addActor(newNurseJoy);
-
-        // Add Exit to teleport from new map to game map
-        Door newDoor = new Door("door", '=', false);
-        newDoor.addMapAction(gameMap.at(30, 5), "to Game Map!");
-        pokemonCenter.at(9, 5).addItem(newDoor);
 
         //Add player - Ash
         Player ash = new Player("Ash", '@', 1);
@@ -88,6 +77,13 @@ public class Application {
         Actor charmander = new Charmander();
         gameMap.at(33, 10).addActor(charmander);
 
+        // Add Door to teleport from game map to new map
+        Door gameDoor = new Door(pokemonCenter.at(9, 5), "to Pokemon Center!");
+        gameMap.at(30, 5).setGround(gameDoor);
+
+        // Add Exit to teleport from new map to game map
+        Door newDoor = new Door(gameMap.at(30, 5), "to Game Map!");
+        pokemonCenter.at(9, 5).setGround(newDoor);
 
         world.run();
 
