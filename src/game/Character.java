@@ -11,5 +11,6 @@ package game;
  */
 public enum Character {
     NPC,        // Non-player character (pokemons, nurse joy)
-    PLAYER      // Player character (player/trainer)
+    PLAYER,      // Player character (player/trainer)
+    TRAINER
 }
