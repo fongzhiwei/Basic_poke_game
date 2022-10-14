@@ -9,8 +9,11 @@ import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.environment.*;
+import game.items.Candy;
 import game.items.Door;
 import game.items.Pokefruit;
+import game.items.PokemonEgg;
+import game.pokemon.BasePokemon;
 import game.pokemon.Charmander;
 import game.trade.NurseJoy;
 import game.trainer.TrainerGoh;
@@ -31,11 +34,11 @@ public class Application {
 
         World world = new World(new Display());
 
-        FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(),
+        FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Incubator(),
                 new Floor(), new Tree(), new Lava(), new Puddle(), new Crater(), new Hay(), new Waterfall());
 
         List<String> map = Arrays.asList(
-                ".............................................^^^^^^^^^^^^^^",
+                "X............................................^^^^^^^^^^^^^^",
                 "....,,.....,T....OOOOO.........................T...^^^^^^^^",
                 "..,,,,...........OOO................................#^^^^^^",
                 "..,,,,.......~....OOOO..................................^^^",
@@ -69,7 +72,8 @@ public class Application {
 
         //Add player and nurse joy in the middle of new map
         NurseJoy newNurseJoy = new NurseJoy();
-        pokemonCenter.at(9, 2).addActor(newNurseJoy);
+//        pokemonCenter.at(9, 2).addActor(newNurseJoy);
+        gameMap.at(31,10).addActor(newNurseJoy);
 
         // Add Exit to teleport from new map to game map
         Door newDoor = new Door("door", '=', false);
@@ -79,7 +83,9 @@ public class Application {
         //Add player - Ash
         Player ash = new Player("Ash", '@', 1);
         world.addPlayer(ash, gameMap.at(32, 10));
-        ash.addItemToInventory(new Pokefruit(Element.FIRE));
+        ash.addItemToInventory(new Candy());
+        ash.addItemToInventory(new Candy());
+        gameMap.at(0,0).addItem(new PokemonEgg(BasePokemon.CHARMANDER));
 
         Actor goh = new TrainerGoh();
         gameMap.at(25,5).addActor(goh);
