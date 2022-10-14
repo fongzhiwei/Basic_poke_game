@@ -10,6 +10,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.environment.*;
 import game.environment.Door;
+import game.items.Candy;
 import game.items.Pokefruit;
 import game.items.PokemonEgg;
 import game.pokemon.BasePokemon;
