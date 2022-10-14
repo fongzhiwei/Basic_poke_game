@@ -9,7 +9,7 @@ import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.environment.*;
-import game.items.Door;
+import game.environment.Door;
 import game.items.Pokefruit;
 import game.pokemon.Charmander;
 import game.trade.NurseJoy;
