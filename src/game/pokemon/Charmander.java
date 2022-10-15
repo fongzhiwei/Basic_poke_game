@@ -1,11 +1,18 @@
 package game.pokemon;
 
 
+import edu.monash.fit2099.engine.actions.Action;
+import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.Exit;
+import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.AffectionLevel;
+import game.AffectionManager;
 import game.Element;
 import game.Status;
+import game.actions.EvolveAction;
 import game.behaviours.EvolveBehaviour;
 import game.time.TimePerception;
 import game.weapons.SpecialWeapon;
@@ -118,5 +125,24 @@ public class Charmander extends Pokemon implements TimePerception{
         }
         System.out.println(money);
         return flag;
+    }
+
+    /**
+     * Returns a new collection of the Actions that the otherActor can do to the current Actor.
+     *
+     * @param otherActor the Actor that might be performing attack
+     * @param direction  String representing the direction of the other Actor
+     * @param map        current GameMap
+     * @return A collection of Actions.
+     */
+    @Override
+    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+        ActionList actions = super.allowableActions(otherActor, direction, map);
+
+        if (AffectionManager.getInstance().getAffectionPoint(otherActor, this) == AffectionLevel.MAX.getPoints()) {
+            actions.add(new EvolveAction(this));
+        }
+
+        return actions;
     }
 }
