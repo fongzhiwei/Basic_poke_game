@@ -14,9 +14,7 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.*;
 import game.Character;
 import game.actions.CaptureAction;
-import game.actions.EvolveAction;
 import game.actions.FeedAction;
-import game.actions.SummonAction;
 import game.behaviours.*;
 import game.items.Fire;
 import game.time.TimePerceptionManager;
@@ -116,18 +114,6 @@ public abstract class Pokemon extends Actor{
     public void setEffectTurnCount(int count) {
         this.effectTurnCount = count;
     }
-
-    /**
-     * Set the affection level of a Pokemon
-     *
-     * @param newAffectionLevel the affection level to be set to a Pokemon
-     */
-//    public void setAffectionLevel(AffectionLevel newAffectionLevel) {
-//        if (this.findCapabilitiesByType(AffectionLevel.class).size() > 0) {
-//            this.findCapabilitiesByType(AffectionLevel.class).clear();
-//        }
-//        this.addCapability(newAffectionLevel);
-//    }
 
     /**
      * Set the status of a Pokemon according to its current affection points
