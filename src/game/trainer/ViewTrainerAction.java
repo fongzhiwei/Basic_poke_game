@@ -28,7 +28,8 @@ public class ViewTrainerAction extends Action {
     }
 
     /**
-     * This method view trainer's action and return an appropriate format to print at console
+     * This method view trainer's action and return an appropriate format to print at console.
+     *
      * @param actor The actor performing the action.
      * @param map The map the actor is on.
      * @return a string format
@@ -47,7 +48,8 @@ public class ViewTrainerAction extends Action {
     }
 
     /**
-     * This method return an appropriate string format to print to console
+     * This method return an appropriate string format to print to console.
+     *
      * @param actor The actor performing the action.
      * @return a string format
      */
@@ -57,6 +59,7 @@ public class ViewTrainerAction extends Action {
 
     /**
      * The preferred hotkey to use for a MoveAction.
+     *
      * @param string string for hotkey
      * @return a string
      */
