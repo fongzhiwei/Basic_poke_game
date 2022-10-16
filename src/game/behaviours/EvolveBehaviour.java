@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.EvolveAction;
+import game.pokemon.CanEvolve;
 import game.pokemon.Pokemon;
 
 /**
@@ -34,7 +35,7 @@ public class EvolveBehaviour implements Behaviour{
                     return null;
                 }
             }
-            return new EvolveAction((Pokemon) actor);
+            return new EvolveAction((CanEvolve) actor);
         }
         return null; // go to next behaviour
     }

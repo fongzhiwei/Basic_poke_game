@@ -121,6 +121,11 @@ public class Charmander extends Pokemon implements TimePerception, Tradable, Can
         return TimePerceptionManager.getInstance().getTurn() - this.birthCount >= 20;
     }
 
+    @Override
+    public Pokemon evolve() {
+        return new Charmeleon();
+    }
+
     /**
      * Select and return an action to perform on the current turn.
      *

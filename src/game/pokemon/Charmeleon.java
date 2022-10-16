@@ -91,6 +91,11 @@ public class Charmeleon extends Pokemon implements CanEvolve {
         return TimePerceptionManager.getInstance().getTurn() - this.birthCount >= 20;
     }
 
+    @Override
+    public Pokemon evolve() {
+        return new Charizard();
+    }
+
     /**
      * Select and return an action to perform on the current turn.
      *

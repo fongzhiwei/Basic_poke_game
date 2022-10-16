@@ -4,6 +4,8 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.AffectionManager;
+import game.pokemon.CanEvolve;
 import game.pokemon.Charizard;
 import game.pokemon.Charmeleon;
 import game.pokemon.Pokemon;
@@ -22,7 +24,7 @@ public class EvolveAction extends Action {
     /**
      * The Pokemon that is to be evolved
      */
-    protected Pokemon target;
+    protected CanEvolve target;
 
     /**
      * Constructor.
@@ -30,7 +32,7 @@ public class EvolveAction extends Action {
      * @param target the Pokemon to be evolved
      *
      */
-    public EvolveAction(Pokemon target) {
+    public EvolveAction(CanEvolve target) {
         this.target = target;
     }
 
@@ -43,19 +45,16 @@ public class EvolveAction extends Action {
     @Override
     public String execute(Actor actor, GameMap map) {
         String oldPokemon = this.target.toString();
-        Location currentLocation = map.locationOf(this.target);
+        Pokemon pokemon = (Pokemon) target;
+        Location currentLocation = map.locationOf(pokemon);
+        int oldAffection = AffectionManager.getInstance().getAffectionPoint(actor,pokemon);
 
-        map.removeActor(this.target);
+        map.removeActor(pokemon);
         Pokemon evolvedPokemon;
 
-        if (this.target.getDisplayChar() == 'c') {
-            evolvedPokemon = new Charmeleon();
-        }
-        else{
-            evolvedPokemon = new Charizard();
-        }
+        evolvedPokemon = target.evolve();
+        AffectionManager.getInstance().increaseAffection(actor,evolvedPokemon,oldAffection);
 
-        this.target = evolvedPokemon;
         map.addActor(evolvedPokemon, currentLocation);
         return String.format("%s evolved to %s", oldPokemon, evolvedPokemon);
     }

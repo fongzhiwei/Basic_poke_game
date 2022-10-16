@@ -61,7 +61,6 @@ public abstract class Pokemon extends Actor{
         this.getBehaviours().put(3, new WanderBehaviour());
         this.addCapability(AffectionLevel.NEUTRAL);
         this.addCapability(Character.NPC);
-        this.setStatus(0);
         AffectionManager.getInstance().registerPokemon(this);
     }
 
@@ -97,28 +96,6 @@ public abstract class Pokemon extends Actor{
      */
     public void setEffectTurnCount(int count) {
         this.effectTurnCount = count;
-    }
-
-    /**
-     * Set the status of a Pokemon according to its current affection points
-     *
-     * @param affectionPoints the Pokemon's affection points towards the player or trainer
-     */
-    public void setStatus(int affectionPoints) {
-
-        if(this.hasCapability(Status.CATCHABLE)){
-            this.removeCapability(Status.CATCHABLE);
-
-        }
-
-        if (affectionPoints<=-50) {
-            this.addCapability(Status.NOT_CATCHABLE);
-            this.addCapability(AffectionLevel.DISLIKE);
-        }
-        else if (affectionPoints>=50) {
-            this.addCapability(Status.CATCHABLE);
-        }
-
     }
 
     /**
@@ -190,12 +167,12 @@ public abstract class Pokemon extends Actor{
                 }
 
                 if (otherActor.hasCapability(Character.PLAYER)) {
-                    if (this.hasCapability(Status.CATCHABLE)){
+                    if (AffectionManager.getInstance().getAffectionPoint(otherActor, this)>= AffectionLevel.LIKE.getPoints()){
                         actions.add(new CaptureAction(this, direction));
                     }
 
                     for (Item elem: otherActor.getInventory()) {
-                        if (elem.hasCapability(Status.FRUIT) && !this.hasCapability(AffectionLevel.DISLIKE)) {
+                        if (elem.hasCapability(Status.FRUIT) && AffectionManager.getInstance().getAffectionPoint(otherActor, this)>AffectionLevel.DISLIKE.getPoints()) {
                             actions.add(new FeedAction(this, direction, elem));
                         }
                     }

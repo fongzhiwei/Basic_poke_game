@@ -143,7 +143,6 @@ public class AffectionManager {
             else {
                 selectedTrainerMap.replace(pokemon, oldAP + point);
             }
-            pokemon.setStatus(getAffectionPoint(trainer, pokemon));
 
             if (getAffectionPoint(trainer, pokemon)>= AffectionLevel.FOLLOW.getPoints()){
                 pokemon.getBehaviours().put(1,new FollowBehaviour(trainer));
@@ -167,7 +166,6 @@ public class AffectionManager {
             int oldAP = this.getAffectionPoint(trainer, pokemon);
 
             selectedTrainerMap.replace(pokemon, oldAP - point);
-            pokemon.setStatus(getAffectionPoint(trainer, pokemon));
 
             if (oldAP>=AffectionLevel.FOLLOW.getPoints() && getAffectionPoint(trainer,pokemon)< AffectionLevel.FOLLOW.getPoints()){
                 pokemon.getBehaviours().remove(1);

@@ -12,4 +12,6 @@ public interface CanEvolve {
      * @return boolean value representing the result of the validation
      */
     public boolean canPokemonEvolve();
+
+    public Pokemon evolve();
 }
