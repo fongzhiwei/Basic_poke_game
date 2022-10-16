@@ -8,16 +8,22 @@ package game.pokemon;
  */
 
 public enum BasePokemon {
-    CHARMANDER("Charmander", new Charmander(),4),       // fire element
-    BULBASAUR("Bulbasaur", new Bulbasaur(),3),     // water element
-    SQUIRTLE("Squirtle", new Squirtle(),2);     // grass element
+    CHARMANDER("Charmander", new Charmander(),4),       // Base Charmander Pokemon
+    BULBASAUR("Bulbasaur", new Bulbasaur(),3),     // Base Bulbasaur Pokemon
+    SQUIRTLE("Squirtle", new Squirtle(),2);     // Base Squirtle Pokemon
 
     /**
-     * The label text for element type
+     * The label text for the Pokemon
      */
     private final String label;
 
+    /**
+     * The Pokemon instance stored within the Base Pokemon
+     */
     private final Pokemon pokemon;
+    /**
+     * The fixed hatch time for that Base Pokemon
+     */
     private final int hatchTime;
 
     /**

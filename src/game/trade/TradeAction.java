@@ -54,28 +54,31 @@ public class TradeAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        int money = 0;
-        int count = 0;
+        int money = 0;  // money to store how many candies the player have
+        int count = 0;  // count to remove candies from the player's inventory on a successful trade
         ArrayList<Integer> candyIndex = new ArrayList<>();
 
 
+        // If the item has Status.CURRENCY, it is a candy
         for(Item item : actor.getInventory()){
             if (item.hasCapability(Status.CURRENCY)){
                 money += 1;
                 candyIndex.add(actor.getInventory().indexOf(item));
             }
         }
+        // The player don't have enough candies
         if (price > money){
             return "Trade cancelled. The player does not have enough candy";
         }
+        // The player have enough candies
         else {
+            // removing candies from the Player's inventory
             while (count < price){
                 actor.removeItemFromInventory(actor.getInventory().get(candyIndex.get(count)-count));
                 count += 1;
             }
             merchandise.tradedWith(actor);
         }
-
         return "Trade success. "+ merchandise + " is added";
     }
 

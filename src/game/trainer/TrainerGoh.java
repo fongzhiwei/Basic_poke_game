@@ -43,13 +43,13 @@ public class TrainerGoh extends Trainer{
      */
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
 
+        // Loop through all the trainer's behaviours until it returns an action
         for (Behaviour behaviour : getBehaviours().values()) {
             Action action = behaviour.getAction(this, map);
 
             if (action != null){
                 return action;
             }
-
         }
         return new DoNothingAction();
     }

@@ -45,15 +45,17 @@ public class EvolveAction extends Action {
     @Override
     public String execute(Actor actor, GameMap map) {
         String oldPokemon = this.target.toString();
+        // Only Pokemons implement CanEvolve interface
         Pokemon pokemon = (Pokemon) target;
         Location currentLocation = map.locationOf(pokemon);
-        int oldAffection = AffectionManager.getInstance().getAffectionPoint(actor,pokemon);
 
-        map.removeActor(pokemon);
+        // Evolved pokemon is the new pokemon's evolved form -- different for different pokemon
         Pokemon evolvedPokemon;
-
         evolvedPokemon = target.evolve();
 
+        // Remove the old pokemon from the map
+        map.removeActor(pokemon);
+        // Add in the new pokemon from the map
         map.addActor(evolvedPokemon, currentLocation);
         return String.format("%s evolved to %s", oldPokemon, evolvedPokemon);
     }

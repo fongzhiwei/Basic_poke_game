@@ -58,7 +58,7 @@ public class AffectionManager {
     }
 
     /**
-     * Add a trainer to this class's attribute. Assume there's only one trainer at a time.
+     * Add a player to this class's attribute. Assume there's only one trainer at a time.
      *
      * @param player the actor instance
      */
@@ -66,6 +66,11 @@ public class AffectionManager {
         this.trainer = player;
     }
 
+    /**
+     * Registers a new trainer in the map of actor to hashmap of pokemons to integer
+     *
+     * @param trainer the actor instance
+     */
     public void registerTrainer(Actor trainer){
         this.trainerMap.put(trainer, new HashMap<>());
     }
@@ -84,12 +89,10 @@ public class AffectionManager {
     /**
      * Get the affection point by using the game.pokemon instance as the key.
      *
+     * @param trainer Actor instance, but we expect a trainer here, e.g. Trainer Goh
      * @param pokemon Pokemon instance
      * @return integer of affection point.
      */
-//    public int getAffectionPoint(Pokemon pokemon) { // changed Charmander game.pokemon --> Pokemon game.pokemon
-//        return affectionPoints.get(pokemon);
-//    }
 
     public int getAffectionPoint(Actor trainer, Pokemon pokemon){
         Map<Pokemon, Integer> selectedTrainerMap = trainerMap.get(trainer);
