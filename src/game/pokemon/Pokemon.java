@@ -14,12 +14,9 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.*;
 import game.Character;
 import game.actions.CaptureAction;
-import game.actions.EvolveAction;
 import game.actions.FeedAction;
-import game.actions.SummonAction;
 import game.behaviours.*;
 import game.items.Fire;
-import game.time.TimePerceptionManager;
 
 import java.util.List;
 import java.util.SortedMap;
@@ -46,11 +43,6 @@ public abstract class Pokemon extends Actor{
     protected Location pokemonLocation;
 
     /**
-     * The starting turn number when a Pokemon is spawned
-     */
-    private int birthCount;
-
-    /**
      * Duration of damage effect on a Pokemon
      */
     private int effectTurnCount;
@@ -69,8 +61,6 @@ public abstract class Pokemon extends Actor{
         this.getBehaviours().put(3, new WanderBehaviour());
         this.addCapability(AffectionLevel.NEUTRAL);
         this.addCapability(Character.NPC);
-        this.setStatus(0);
-        this.birthCount = TimePerceptionManager.getInstance().getTurn();
         AffectionManager.getInstance().registerPokemon(this);
     }
 
@@ -102,53 +92,10 @@ public abstract class Pokemon extends Actor{
     }
 
     /**
-     * Get the starting turn number for when the Pokemon is spawned to the game world
-     *
-     * @return turn number when the Pokemon is spawned
-     */
-    public int getbirthCount() {
-        return this.birthCount;
-    }
-
-    /**
      * Set the starting time for when the Pokemon's damage effect started
      */
     public void setEffectTurnCount(int count) {
         this.effectTurnCount = count;
-    }
-
-    /**
-     * Set the affection level of a Pokemon
-     *
-     * @param newAffectionLevel the affection level to be set to a Pokemon
-     */
-//    public void setAffectionLevel(AffectionLevel newAffectionLevel) {
-//        if (this.findCapabilitiesByType(AffectionLevel.class).size() > 0) {
-//            this.findCapabilitiesByType(AffectionLevel.class).clear();
-//        }
-//        this.addCapability(newAffectionLevel);
-//    }
-
-    /**
-     * Set the status of a Pokemon according to its current affection points
-     *
-     * @param affectionPoints the Pokemon's affection points towards the player or trainer
-     */
-    public void setStatus(int affectionPoints) {
-
-        if(this.hasCapability(Status.CATCHABLE)){
-            this.removeCapability(Status.CATCHABLE);
-
-        }
-
-        if (affectionPoints<=-50) {
-            this.addCapability(Status.NOT_CATCHABLE);
-            this.addCapability(AffectionLevel.DISLIKE);
-        }
-        else if (affectionPoints>=50) {
-            this.addCapability(Status.CATCHABLE);
-        }
-
     }
 
     /**
@@ -220,16 +167,12 @@ public abstract class Pokemon extends Actor{
                 }
 
                 if (otherActor.hasCapability(Character.PLAYER)) {
-                    if (this.hasCapability(Status.CATCHABLE)){
+                    if (AffectionManager.getInstance().getAffectionPoint(otherActor, this)>= AffectionLevel.LIKE.getPoints()){
                         actions.add(new CaptureAction(this, direction));
                     }
 
-                    if (AffectionManager.getInstance().getAffectionPoint(otherActor, this) == AffectionLevel.MAX.getPoints()) {
-                            actions.add(new EvolveAction(this));
-                    }
-
                     for (Item elem: otherActor.getInventory()) {
-                        if (elem.hasCapability(Status.FRUIT) && !this.hasCapability(AffectionLevel.DISLIKE)) {
+                        if (elem.hasCapability(Status.FRUIT) && AffectionManager.getInstance().getAffectionPoint(otherActor, this)>AffectionLevel.DISLIKE.getPoints()) {
                             actions.add(new FeedAction(this, direction, elem));
                         }
                     }

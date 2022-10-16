@@ -23,18 +23,7 @@ public class Incubator extends Ground {
      */
     public Incubator(){
         super('X');
-        this.addCapability(CapabilityOfExpand.NOT_EXPANDABLE);
         this.addCapability(Status.HATCHING_GROUND);
 
     }
-
-//    public void tick(Location location){
-//        this.location = location;
-//
-//        for(Item item:location.getItems()){
-//            if(item.hasCapability(Status.EGG)){
-//
-//            }
-//        }
-//    }
 }

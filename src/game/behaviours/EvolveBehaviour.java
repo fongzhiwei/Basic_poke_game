@@ -5,8 +5,8 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.Element;
 import game.actions.EvolveAction;
+import game.pokemon.CanEvolve;
 import game.pokemon.Pokemon;
 
 /**
@@ -19,7 +19,6 @@ import game.pokemon.Pokemon;
  *
  */
 public class EvolveBehaviour implements Behaviour{
-
     /**
      * Returns an EvolveAction to evolve a target actor, if possible.
      * If no target is found or no evolve action is possible, returns null.
@@ -36,12 +35,7 @@ public class EvolveBehaviour implements Behaviour{
                     return null;
                 }
             }
-
-            Pokemon pokemon = (Pokemon)actor;
-
-            if (actor.hasCapability(Element.FIRE) && !actor.hasCapability(Element.DRAGON) && pokemon.getbirthCount() >= 20) {
-                return new EvolveAction(pokemon);
-            }
+            return new EvolveAction((CanEvolve) actor);
         }
         return null; // go to next behaviour
     }
