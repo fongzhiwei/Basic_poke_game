@@ -53,7 +53,6 @@ public class EvolveAction extends Action {
         Pokemon evolvedPokemon;
 
         evolvedPokemon = target.evolve();
-        AffectionManager.getInstance().increaseAffection(actor,evolvedPokemon,oldAffection);
 
         map.addActor(evolvedPokemon, currentLocation);
         return String.format("%s evolved to %s", oldPokemon, evolvedPokemon);
