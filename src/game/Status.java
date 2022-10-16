@@ -17,9 +17,6 @@ package game;
  */
 public enum Status {
     IMMUNE,         // an enum to identify that an object is immune to any attack.
-    HOSTILE,        // use this status to be considered hostile towards enemy (e.g., to be attacked by enemy)
-    NOT_CATCHABLE,  // to identify that an actor is uncatchable
-    CATCHABLE,      // to identify that an actor is catchable
     CURRENCY,       // to identify that an item is tradable
     FRUIT,          // to identify that an item is feedable
     BALL,           // to identify that an item can catch pokemon

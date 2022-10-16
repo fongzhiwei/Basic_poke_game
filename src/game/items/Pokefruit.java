@@ -6,7 +6,6 @@ import game.Element;
 import game.Status;
 import game.trade.Tradable;
 
-import java.util.ArrayList;
 
 /**
  * A class that represents Pokefruit
