@@ -11,7 +11,12 @@ public interface CanEvolve {
      *
      * @return boolean value representing the result of the validation
      */
-    public boolean canPokemonEvolve();
+    boolean canPokemonEvolve();
 
-    public Pokemon evolve();
+    /**
+     * Pokemon evolves (exp: Charmander -> Charmeleon).
+     *
+     * @return an evolved pokemon
+     */
+    Pokemon evolve();
 }
