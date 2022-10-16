@@ -34,6 +34,7 @@ public class TrainerFeedBehaviour implements Behaviour {
     public Action getAction(Actor actor, GameMap map) {
         ArrayList<Item> pokefruits = new ArrayList<>();
         for (Item item: actor.getInventory()){
+            // Check if the trainer has pokefruit iin his inventory
             if (item.hasCapability(Status.FRUIT)){
                 pokefruits.add(item);
             }
@@ -43,6 +44,7 @@ public class TrainerFeedBehaviour implements Behaviour {
             Pokemon otherActor;
 
             for (Exit exit: exits){
+                // Character.NPC to check if the actor is a pokemon
                 if (exit.getDestination().containsAnActor() && exit.getDestination().getActor().hasCapability(Character.NPC)){
                     otherActor = (Pokemon) exit.getDestination().getActor();
 
@@ -55,6 +57,6 @@ public class TrainerFeedBehaviour implements Behaviour {
                 }
             }
         }
-        return null;
+        return null;    // go to next behaviour
     }
 }

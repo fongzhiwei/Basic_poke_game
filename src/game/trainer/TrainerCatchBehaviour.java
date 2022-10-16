@@ -40,14 +40,18 @@ public class TrainerCatchBehaviour implements Behaviour {
         Pokemon otherActor;
 
         for (Exit exit : exits) {
+            // Character.NPC to check if the actor is a pokemon
             if (exit.getDestination().containsAnActor() && exit.getDestination().getActor().hasCapability(Character.NPC)) {
+                // Get the actor on the trainer's exits as a pokemon
                 otherActor = (Pokemon) exit.getDestination().getActor();
+                // Check if the pokemon's affection > 50
                 if (AffectionManager.getInstance().getAffectionPoint(actor, otherActor) > AffectionLevel.LIKE.getPoints()) {
                     actions.add(new CaptureAction(otherActor, exit.getName()));
                 }
             }
         }
         if (!actions.isEmpty()) {
+            // return a random action from the list of valid actions
             return actions.get(random.nextInt(actions.size()));
         } else {
             return null; // go to next behaviour

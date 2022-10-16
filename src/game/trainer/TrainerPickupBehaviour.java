@@ -28,15 +28,19 @@ public class TrainerPickupBehaviour implements Behaviour {
     public Action getAction(Actor actor, GameMap map) {
         ArrayList<Action> actions = new ArrayList<>();
 
+        // Check if the actor's current location has any items
         if(map.locationOf(actor).getItems().size() > 0){
             for (Item item : map.locationOf(actor).getItems()){
-                if (item.getPickUpAction(actor)!= null)
-                actions.add(item.getPickUpAction(actor));
+                // Check if the items can be picked up
+                if (item.getPickUpAction(actor)!= null){
+                    actions.add(item.getPickUpAction(actor));
+                }
             }
+            // return the first pickup action in the possible pickup actions
             if (!actions.isEmpty()){
                 return actions.get(0);
             }
         }
-        return null;
+        return null;    // go to next behaviour
     }
 }

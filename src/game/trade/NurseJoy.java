@@ -24,14 +24,13 @@ import game.pokemon.Squirtle;
 
 public class NurseJoy extends Actor {
 
-    private static final int MAX_NJ_HP = 100;
 
     /**
      * Constructor.
      * Nurse Joy shows symbol '%' in game map.
      */
     public NurseJoy(){
-        super("Nurse Joy",'%',MAX_NJ_HP);
+        super("Nurse Joy",'%',1);
         this.addCapability(Status.IMMUNE);
     }
 
@@ -45,7 +44,7 @@ public class NurseJoy extends Actor {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        return new DoNothingAction();
+        return new DoNothingAction();   // Nurse Joy will not move
     }
 
     /**
@@ -58,6 +57,7 @@ public class NurseJoy extends Actor {
 
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList list = super.allowableActions(otherActor, direction, map);
+        // these are all possible trade actions from Nurse Joy
         list.add(new TradeAction(otherActor, new Pokefruit(Element.FIRE),1));
         list.add(new TradeAction(otherActor, new Pokefruit(Element.WATER),1));
         list.add(new TradeAction(otherActor, new Pokefruit(Element.GRASS),1));
