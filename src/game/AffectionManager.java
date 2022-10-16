@@ -27,10 +27,8 @@ public class AffectionManager {
     private static AffectionManager instance;
 
     /**
-     * A collection of pokemons and their affection points
+     * A collection of trainers and their map of Pokemon affection points
      */
-    private final Map<Pokemon, Integer> affectionPoints;
-
     private final Map<Actor, Map<Pokemon, Integer>> trainerMap;
 
     /**
@@ -42,7 +40,6 @@ public class AffectionManager {
      * private singleton constructor
      */
     private AffectionManager() {
-        this.affectionPoints = new HashMap<>();
         this.trainerMap = new HashMap<>();
     }
 

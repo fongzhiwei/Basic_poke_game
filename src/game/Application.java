@@ -74,7 +74,6 @@ public class Application {
         world.addPlayer(ash, gameMap.at(32, 10));
         ash.addItemToInventory(new Candy());
         ash.addItemToInventory(new Candy());
-        gameMap.at(0,0).addItem(new PokemonEgg(BasePokemon.CHARMANDER));
 
         Actor goh = new TrainerGoh();
         gameMap.at(25,5).addActor(goh);

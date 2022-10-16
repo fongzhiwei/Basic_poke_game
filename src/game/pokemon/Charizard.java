@@ -19,7 +19,6 @@ import game.weapons.SpecialWeapon;
  *
  */
 public class Charizard extends Pokemon{
-    private int fireEffectTurn;
 
     /**
      * Constructor.
