@@ -7,9 +7,9 @@ package game.pokemon;
  */
 public interface CanEvolve {
     /**
-     * Get the starting turn number for when the Pokemon is spawned to the game world
+     * Check if pokemon meets the criteria to evolve
      *
-     * @return turn number when the Pokemon is spawned
+     * @return boolean value representing the result of the validation
      */
     public boolean canPokemonEvolve();
 }

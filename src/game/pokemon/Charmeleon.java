@@ -82,9 +82,9 @@ public class Charmeleon extends Pokemon implements CanEvolve {
     }
 
     /**
-     * Get the turn number for when the Pokemon is alive since it was spawned to the game world
+     * Check if pokemon meets the criteria to evolve
      *
-     * @return number of turns the Pokemon has survived
+     * @return boolean value representing the result of the validation
      */
     @Override
     public boolean canPokemonEvolve() {
