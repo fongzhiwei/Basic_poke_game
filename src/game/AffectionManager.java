@@ -56,7 +56,7 @@ public class AffectionManager {
     }
 
     /**
-     * Add a trainer to this class's attribute. Assume there's only one trainer at a time.
+     * Add a player to this class's attribute. Assume there's only one trainer at a time.
      *
      * @param player the actor instance
      */
@@ -64,6 +64,11 @@ public class AffectionManager {
         this.trainer = player;
     }
 
+    /**
+     * Registers a new trainer in the map of actor to hashmap of pokemons to integer
+     *
+     * @param trainer the actor instance
+     */
     public void registerTrainer(Actor trainer){
         this.trainerMap.put(trainer, new HashMap<>());
     }
