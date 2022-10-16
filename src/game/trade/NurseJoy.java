@@ -20,6 +20,12 @@ import game.pokemon.Squirtle;
  *
  * @see TradeAction
  * @see Actor
+ * @see Element
+ * @see Status
+ * @see Pokefruit
+ * @see Bulbasaur
+ * @see Charmander
+ * @see Squirtle
  */
 
 public class NurseJoy extends Actor {

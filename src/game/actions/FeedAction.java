@@ -5,7 +5,6 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.*;
-import game.items.Pokefruit;
 import game.pokemon.Pokemon;
 
 /**
@@ -16,7 +15,10 @@ import game.pokemon.Pokemon;
  * @version 1.0
  *
  * @see edu.monash.fit2099.engine.actions.Action
- *
+ * @see Pokemon
+ * @see ElementsHelper
+ * @see game.items.Pokefruit
+ * @see AffectionManager
  */
 public class FeedAction extends Action {
     /**

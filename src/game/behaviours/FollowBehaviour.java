@@ -16,6 +16,7 @@ import edu.monash.fit2099.engine.actions.MoveActorAction;
  * @author Riordan D. Alfredo
  * Modified by:
  *
+ * @see Behaviour
  */
 public class FollowBehaviour implements Behaviour {
 

@@ -18,6 +18,8 @@ import game.trainer.ViewTrainerAction;
  *
  * Modified by:
  * @author Leong Xin Yun <xleo0002@student.monash.edu>
+ *
+ * @see Actor
  */
 public class Player extends Actor {
 

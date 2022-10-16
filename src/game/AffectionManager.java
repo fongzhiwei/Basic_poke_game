@@ -1,7 +1,6 @@
 package game;
 
 import edu.monash.fit2099.engine.actors.Actor;
-import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
 import game.pokemon.*;
 
@@ -18,6 +17,9 @@ import java.util.Map;
  * @author Leong Xin Yun <xleo0002@student.monash.edu>
  * @author Fong Zhiwei <zfon0005@student.monash.edu>
  * @author Soh Meng Jienq <msoh0007@student.monash.edu>
+ *
+ * @see FollowBehaviour
+ * @see Actor
  */
 public class AffectionManager {
 

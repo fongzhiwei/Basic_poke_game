@@ -30,6 +30,12 @@ import java.util.TreeMap;
  *
  * Modified by:
  *
+ * @see Pokemon
+ * @see Actor
+ * @see Character
+ * @see CaptureAction
+ * @see FeedAction
+ * @see Fire
  */
 public abstract class Pokemon extends Actor{
     /**

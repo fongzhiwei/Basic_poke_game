@@ -17,6 +17,8 @@ import java.util.List;
  * Modified by:
  * @author Leong Xin Yun <xleo0002@student.monash.edu>
  *
+ * @see Behaviour
+ * @see Status
  */
 public class AttackBehaviour implements Behaviour {
 

@@ -13,6 +13,9 @@ import java.util.Map;
  * @author Fong Zhiwei <zfon0005@student.monash.edu>
  * @version 1.0
  *
+ * @see Action
+ * @see AffectionManager
+ * @see Pokemon
  */
 
 public class ViewTrainerAction extends Action {

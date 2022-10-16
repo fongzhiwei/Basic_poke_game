@@ -4,7 +4,6 @@ package game.pokemon;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import game.Element;
-import game.Status;
 import game.items.PokemonEgg;
 import game.time.TimePerception;
 import game.trade.Tradable;
@@ -18,6 +17,12 @@ import game.weapons.SpecialWeapon;
  *
  * Modified by:
  *
+ * @see Pokemon
+ * @see TimePerception
+ * @see Tradable
+ * @see Element
+ * @see PokemonEgg
+ * @see SpecialWeapon
  */
 public class Bulbasaur extends Pokemon implements TimePerception, Tradable {
     /**

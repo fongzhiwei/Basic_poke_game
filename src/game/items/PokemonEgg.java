@@ -14,6 +14,10 @@ import java.util.List;
  * @author Fong Zhiwei <zfon0005@student.monash.edu>
  * @version 1.0
  *
+ * @see Item
+ * @see Status
+ * @see BasePokemon
+ * @see Pokemon
  */
 public class PokemonEgg extends Item {
 
@@ -29,7 +33,7 @@ public class PokemonEgg extends Item {
      * base Pokemon (exp: Charmander, Bulbasaur, Squirtle) can be born from an egg.
      */
     public PokemonEgg(BasePokemon basePokemon){
-        super(basePokemon.toString() + " Egg",'g',true);
+        super(basePokemon.toString() + "Egg",'g',true);
         setHatchTimer(0);
         setHatchTime(basePokemon.getHatchTime());
         setPokemon(basePokemon.getPokemon());

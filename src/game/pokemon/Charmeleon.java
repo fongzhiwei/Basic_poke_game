@@ -26,6 +26,17 @@ import game.weapons.SpecialWeapon;
  *
  * Modified by:
  *
+ * @see Pokemon
+ * @see CanEvolve
+ * @see AffectionLevel
+ * @see AffectionManager
+ * @see Character
+ * @see Element
+ * @see Utils
+ * @see EvolveAction
+ * @see EvolveBehaviour
+ * @see TimePerceptionManager
+ * @see SpecialWeapon
  */
 public class Charmeleon extends Pokemon implements CanEvolve {
     /**

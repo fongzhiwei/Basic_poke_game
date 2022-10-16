@@ -20,7 +20,12 @@ import java.util.List;
  * @author Leong Xin Yun <xleo0002@student.monash.edu>
  * @version 1.0
  *
- *
+ * @see Pokemon
+ * @see Element
+ * @see PokemonEgg
+ * @see TimePerception
+ * @see Tradable
+ * @see SpecialWeapon
  */
 public class Squirtle extends Pokemon implements TimePerception, Tradable {
     /**

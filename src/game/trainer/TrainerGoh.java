@@ -13,6 +13,8 @@ import game.behaviours.WanderBehaviour;
  * @author Fong Zhiwei <zfon0005@student.monash.edu>
  * @version 1.0
  *
+ * @see Trainer
+ * @see Behaviour
  */
 
 public class TrainerGoh extends Trainer{

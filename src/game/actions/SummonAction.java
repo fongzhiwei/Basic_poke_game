@@ -2,12 +2,9 @@ package game.actions;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.Status;
 import game.Utils;
-import game.behaviours.FollowBehaviour;
 import game.items.Pokeball;
 import game.pokemon.Pokemon;
 
@@ -19,7 +16,9 @@ import java.util.List;
  * Created by:
  * @author Leong Xin Yun <xleo0002@student.monash.edu>
  *
- * Modified by:
+ * @see Utils
+ * @see Pokeball
+ * @see Pokemon
  *
  */
 public class SummonAction extends Action {

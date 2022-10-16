@@ -1,6 +1,5 @@
 package game.environment;
 
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Status;
@@ -10,6 +9,8 @@ import game.Status;
  * @author Fong Zhiwei <zfon0005@student.monash.edu>
  * @version 1.0
  *
+ * @see Ground
+ * @see Status
  */
 
 

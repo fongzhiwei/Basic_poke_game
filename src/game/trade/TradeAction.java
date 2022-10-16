@@ -13,6 +13,10 @@ import java.util.ArrayList;
  * @author Fong Zhiwei <zfon0005@student.monash.edu>
  * @version 1.0
  *
+ * @see Action
+ * @see Status
+ * @see Actor
+ * @see Item
  */
 
 public class TradeAction extends Action {

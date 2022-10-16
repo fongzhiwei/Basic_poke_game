@@ -13,6 +13,11 @@ import java.util.TreeMap;
  * @author Fong Zhiwei <zfon0005@student.monash.edu>
  * @version 1.0
  *
+ * @see Actor
+ * @see AffectionManager
+ * @see Character
+ * @see Status
+ * @see Behaviour
  */
 
 public abstract class Trainer extends Actor {

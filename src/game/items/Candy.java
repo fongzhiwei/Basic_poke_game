@@ -9,6 +9,7 @@ import game.Status;
  *  @version 1.0
  *
  * @see Item
+ * @see Status
  */
 
 public class Candy extends Item {

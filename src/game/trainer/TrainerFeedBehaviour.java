@@ -19,6 +19,11 @@ import java.util.List;
  * @author Fong Zhiwei <zfon0005@student.monash.edu>
  * @version 1.0
  *
+ * @see Behaviour
+ * @see Character
+ * @see FeedAction
+ * @see Behaviour
+ * @see Pokemon
  */
 
 public class TrainerFeedBehaviour implements Behaviour {

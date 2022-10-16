@@ -3,29 +3,22 @@ package game.pokemon;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
-import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.AffectionLevel;
 import game.AffectionManager;
 import game.Character;
 import game.Element;
-import game.Status;
 import game.actions.EvolveAction;
-import game.behaviours.Behaviour;
 import game.behaviours.EvolveBehaviour;
-import game.items.Fire;
 import game.items.PokemonEgg;
 import game.time.TimePerception;
 import game.time.TimePerceptionManager;
 import game.trade.Tradable;
 import game.weapons.SpecialWeapon;
-
-import java.util.ArrayList;
 
 /**
  * Class representing the Charmander
@@ -35,6 +28,20 @@ import java.util.ArrayList;
  *
  * Modified by:
  * @author Leong Xin Yun <xleo0002@student.monash.edu>
+ *
+ * @see Pokemon
+ * @see TimePerception
+ * @see Tradable
+ * @see CanEvolve
+ * @see AffectionManager
+ * @see AffectionLevel
+ * @see Character
+ * @see Element
+ * @see EvolveAction
+ * @see EvolveBehaviour
+ * @see PokemonEgg
+ * @see TimePerceptionManager
+ * @see SpecialWeapon
  */
 public class Charmander extends Pokemon implements TimePerception, Tradable, CanEvolve {
     /**

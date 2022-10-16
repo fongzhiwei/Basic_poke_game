@@ -6,7 +6,6 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.AffectionLevel;
 import game.AffectionManager;
-import game.Status;
 import game.items.Candy;
 import game.items.Pokeball;
 import game.pokemon.Pokemon;
@@ -19,6 +18,8 @@ import game.pokemon.Pokemon;
  * @version 1.0
  *
  * @see edu.monash.fit2099.engine.actions.Action
+ * @see Pokeball
+ * @see Pokemon
  *
  */
 public class CaptureAction extends Action {

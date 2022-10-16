@@ -7,7 +7,6 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.EvolveAction;
 import game.pokemon.CanEvolve;
-import game.pokemon.Pokemon;
 
 /**
  * A class that figures out an EvolveAction that will evolve the target Actor
@@ -17,6 +16,9 @@ import game.pokemon.Pokemon;
  *
  * Modified by:
  *
+ * @see Behaviour
+ * @see EvolveAction
+ * @see CanEvolve
  */
 public class EvolveBehaviour implements Behaviour{
     /**

@@ -6,8 +6,6 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.AffectionManager;
 import game.pokemon.CanEvolve;
-import game.pokemon.Charizard;
-import game.pokemon.Charmeleon;
 import game.pokemon.Pokemon;
 
 /**
@@ -18,7 +16,9 @@ import game.pokemon.Pokemon;
  * @version 1.0
  *
  * @see edu.monash.fit2099.engine.actions.Action
- *
+ * @see CanEvolve
+ * @see AffectionManager
+ * @see Pokemon
  */
 public class EvolveAction extends Action {
     /**

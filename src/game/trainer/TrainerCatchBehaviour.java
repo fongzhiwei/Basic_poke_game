@@ -20,6 +20,13 @@ import java.util.Random;
  * @author Fong Zhiwei <zfon0005@student.monash.edu>
  * @version 1.0
  *
+ * @see Behaviour
+ * @see AffectionLevel
+ * @see AffectionManager
+ * @see Character
+ * @see CaptureAction
+ * @see Behaviour
+ * @see Pokemon
  */
 
 public class TrainerCatchBehaviour implements Behaviour {

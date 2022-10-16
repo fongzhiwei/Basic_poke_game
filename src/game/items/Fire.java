@@ -10,6 +10,7 @@ import edu.monash.fit2099.engine.items.Item;
  *
  * Modified by:
  *
+ * @see Item
  */
 public class Fire extends Item {
     /***

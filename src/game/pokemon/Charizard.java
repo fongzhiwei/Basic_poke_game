@@ -17,6 +17,10 @@ import game.weapons.SpecialWeapon;
  *
  * Modified by:
  *
+ * @see Element
+ * @see Utils
+ * @see Fire
+ * @see SpecialWeapon
  */
 public class Charizard extends Pokemon{
 
