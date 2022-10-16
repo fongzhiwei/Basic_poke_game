@@ -20,7 +20,7 @@ public class TradeAction extends Action {
     protected Actor target;
 
     /**
-     * Trade target (player)
+     * Trade item (merchandise)
      */
     protected Tradable merchandise;
 
