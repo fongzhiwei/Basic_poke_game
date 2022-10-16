@@ -9,8 +9,8 @@ import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.environment.*;
+import game.environment.Door;
 import game.items.Candy;
-import game.items.Door;
 import game.items.Pokefruit;
 import game.items.PokemonEgg;
 import game.pokemon.BasePokemon;
@@ -66,8 +66,7 @@ public class Application {
 
         //Add player and nurse joy in the middle of new map
         NurseJoy newNurseJoy = new NurseJoy();
-//        pokemonCenter.at(9, 2).addActor(newNurseJoy);
-        gameMap.at(31,10).addActor(newNurseJoy);
+        pokemonCenter.at(9, 2).addActor(newNurseJoy);
 
         //Add player - Ash
         Player ash = new Player("Ash", '@', 1);

@@ -14,9 +14,22 @@ import game.pokemon.Pokemon;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A class that represents a behaviour of feed pokemon for trainer.
+ * @author Fong Zhiwei <zfon0005@student.monash.edu>
+ * @version 1.0
+ *
+ */
+
 public class TrainerFeedBehaviour implements Behaviour {
 
-
+    /**
+     * This method will get the action of feed a pokemon with pokefruit
+     *
+     * @param actor the Actor acting
+     * @param map the GameMap containing the Actor
+     * @return either the behaviour of feed action or null(go to the check the next behaviour)
+     */
     @Override
     public Action getAction(Actor actor, GameMap map) {
         ArrayList<Item> pokefruits = new ArrayList<>();

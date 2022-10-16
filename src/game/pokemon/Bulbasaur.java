@@ -69,7 +69,7 @@ public class Bulbasaur extends Pokemon implements TimePerception, Tradable {
     }
 
     public void tradedWith(Actor player) {
-        PokemonEgg pokemonEgg = new PokemonEgg(BasePokemon.CHARMANDER);
+        PokemonEgg pokemonEgg = new PokemonEgg(BasePokemon.BULBASAUR);
         player.addItemToInventory(pokemonEgg);
     }
 }

@@ -16,7 +16,8 @@ import java.util.Map;
  *
  * Modified by:
  * @author Leong Xin Yun <xleo0002@student.monash.edu>
- *
+ * @author Fong Zhiwei <zfon0005@student.monash.edu>
+ * @author Soh Meng Jienq <msoh0007@student.monash.edu>
  */
 public class AffectionManager {
 
@@ -99,7 +100,8 @@ public class AffectionManager {
     /**
      * Useful method to search a game.pokemon by using Actor instance.
      *
-     * @param actor general actor instance
+     * @param trainer Actor instance, but we expect a trainer here, e.g. Trainer Goh
+     * @param pokemon Actor instance, but we expect a pokemon here, e.g. Charmander
      * @return the Pokemon instance.
      */
 
@@ -113,15 +115,20 @@ public class AffectionManager {
         return null;
     }
 
+    /**
+     * Get trainer (e.g. Trainer Goh)
+     * @return trainer
+     */
     public Actor getTrainer() {
         return trainer;
     }
 
     /**
-     * Increase the Pokemon's affection points
+     * Increase the Pokemon's affection points.
      *
-     * @param actor Actor instance, but we expect a Pokemon here.
-     * @param point positive affection modifier
+     * @param trainer Actor instance, but we expect a trainer here, e.g. Trainer Goh
+     * @param pokemon the target pokemon that might increase its affection points
+     * @param point positive affection modifier (to be subtracted later)
      * @return custom message to be printed by Display instance later.
      */
 
@@ -149,8 +156,8 @@ public class AffectionManager {
     /**
      * Decrease the Pokemon's affection points. Work on both cases when there's a Pokemon,
      * or when it doesn't exist in the collection.
-     *
-     * @param actor Actor instance, but we expect a Pokemon here.
+     * @param trainer Actor instance, but we expect a trainer here, e.g. Trainer Goh
+     * @param pokemon the target pokemon that might decrease its affection points
      * @param point positive affection modifier (to be subtracted later)
      * @return custom message to be printed by Display instance later.
      */
@@ -170,6 +177,10 @@ public class AffectionManager {
         return String.format("%s does not exist in the collection", pokemon);
     }
 
+    /**
+     * Get trainer's map.
+     * @return trainer map
+     */
     public Map<Actor, Map<Pokemon, Integer>> getTrainerMap() {
         return trainerMap;
     }
