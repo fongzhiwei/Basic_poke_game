@@ -3,12 +3,10 @@ package game.items;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Location;
-import game.AffectionManager;
 import game.Status;
 import game.pokemon.BasePokemon;
 import game.pokemon.Pokemon;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

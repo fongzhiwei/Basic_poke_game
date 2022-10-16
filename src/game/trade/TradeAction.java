@@ -5,11 +5,6 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.Status;
-import game.items.Pokefruit;
-import game.items.PokemonEgg;
-import game.pokemon.BasePokemon;
-import game.pokemon.Charmander;
-import game.pokemon.Pokemon;
 
 import java.util.ArrayList;
 
