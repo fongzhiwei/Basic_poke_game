@@ -17,7 +17,6 @@ import game.actions.CaptureAction;
 import game.actions.FeedAction;
 import game.behaviours.*;
 import game.items.Fire;
-import game.time.TimePerceptionManager;
 
 import java.util.List;
 import java.util.SortedMap;
@@ -44,11 +43,6 @@ public abstract class Pokemon extends Actor{
     protected Location pokemonLocation;
 
     /**
-     * The starting turn number when a Pokemon is spawned
-     */
-    private int birthCount;
-
-    /**
      * Duration of damage effect on a Pokemon
      */
     private int effectTurnCount;
@@ -68,7 +62,6 @@ public abstract class Pokemon extends Actor{
         this.addCapability(AffectionLevel.NEUTRAL);
         this.addCapability(Character.NPC);
         this.setStatus(0);
-        this.birthCount = TimePerceptionManager.getInstance().getTurn();
         AffectionManager.getInstance().registerPokemon(this);
     }
 
@@ -97,15 +90,6 @@ public abstract class Pokemon extends Actor{
      */
     public int getEffectTurnCount() {
         return this.effectTurnCount;
-    }
-
-    /**
-     * Get the starting turn number for when the Pokemon is spawned to the game world
-     *
-     * @return turn number when the Pokemon is spawned
-     */
-    public int getbirthCount() {
-        return this.birthCount;
     }
 
     /**
