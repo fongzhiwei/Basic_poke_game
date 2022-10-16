@@ -15,6 +15,7 @@ import game.items.Pokefruit;
 import game.items.PokemonEgg;
 import game.pokemon.BasePokemon;
 import game.pokemon.Charmander;
+import game.pokemon.Pokemon;
 import game.trade.NurseJoy;
 import game.trainer.TrainerGoh;
 
@@ -81,6 +82,7 @@ public class Application {
         //Add first pokemon - Charmander
         Actor charmander = new Charmander();
         gameMap.at(33, 10).addActor(charmander);
+        AffectionManager.getInstance().increaseAffection(ash, (Pokemon)charmander, 100);
 
         // Add Door to teleport from game map to new map
         Door gameDoor = new Door(pokemonCenter.at(9, 5), "to Pokemon Center!");
