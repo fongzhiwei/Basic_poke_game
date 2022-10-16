@@ -9,8 +9,11 @@ import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.environment.*;
-import game.items.Door;
+import game.environment.Door;
+import game.items.Candy;
 import game.items.Pokefruit;
+import game.items.PokemonEgg;
+import game.pokemon.BasePokemon;
 import game.pokemon.Charmander;
 import game.trade.NurseJoy;
 import game.trainer.TrainerGoh;
@@ -31,11 +34,11 @@ public class Application {
 
         World world = new World(new Display());
 
-        FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(),
+        FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Incubator(),
                 new Floor(), new Tree(), new Lava(), new Puddle(), new Crater(), new Hay(), new Waterfall());
 
         List<String> map = Arrays.asList(
-                ".............................................^^^^^^^^^^^^^^",
+                "X............................................^^^^^^^^^^^^^^",
                 "....,,.....,T....OOOOO.........................T...^^^^^^^^",
                 "..,,,,...........OOO................................#^^^^^^",
                 "..,,,,.......~....OOOO..................................^^^",
@@ -61,24 +64,16 @@ public class Application {
         GameMap pokemonCenter = new GameMap(groundFactory, newMap);
         world.addGameMap(pokemonCenter);
 
-        // Add Door to teleport from game map to new map
-        Door gameDoor = new Door("door", '=', false);
-        //gameDoor.addMapAction(new MoveActorAction(pokemonCenter.at(9, 5), "to Pokemon Center!"));
-        gameDoor.addMapAction(pokemonCenter.at(9, 5), "to Pokemon Center!");
-        gameMap.at(30, 5).addItem(gameDoor);
-
         //Add player and nurse joy in the middle of new map
         NurseJoy newNurseJoy = new NurseJoy();
         pokemonCenter.at(9, 2).addActor(newNurseJoy);
 
-        // Add Exit to teleport from new map to game map
-        Door newDoor = new Door("door", '=', false);
-        newDoor.addMapAction(gameMap.at(30, 5), "to Game Map!");
-        pokemonCenter.at(9, 5).addItem(newDoor);
-
         //Add player - Ash
         Player ash = new Player("Ash", '@', 1);
         world.addPlayer(ash, gameMap.at(32, 10));
+        ash.addItemToInventory(new Candy());
+        ash.addItemToInventory(new Candy());
+        gameMap.at(0,0).addItem(new PokemonEgg(BasePokemon.CHARMANDER));
 
         Actor goh = new TrainerGoh();
         gameMap.at(25,5).addActor(goh);
@@ -87,6 +82,13 @@ public class Application {
         Actor charmander = new Charmander();
         gameMap.at(33, 10).addActor(charmander);
 
+        // Add Door to teleport from game map to new map
+        Door gameDoor = new Door(pokemonCenter.at(9, 5), "to Pokemon Center!");
+        gameMap.at(30, 5).setGround(gameDoor);
+
+        // Add Exit to teleport from new map to game map
+        Door newDoor = new Door(gameMap.at(30, 5), "to Game Map!");
+        pokemonCenter.at(9, 5).setGround(newDoor);
 
         world.run();
 

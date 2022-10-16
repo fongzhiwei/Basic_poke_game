@@ -15,10 +15,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * A class that represents a behaviour of catch pokemon for trainer.
+ * @author Fong Zhiwei <zfon0005@student.monash.edu>
+ * @version 1.0
+ *
+ */
+
 public class TrainerCatchBehaviour implements Behaviour {
 
     private final Random random = new Random();
 
+    /**
+     * This method will get the action of catch a pokemon.
+     *
+     * @param actor the Actor acting
+     * @param map the GameMap containing the Actor
+     * @return either the behaviour of catch action or null(go to the check the next behaviour)
+     */
     @Override
     public Action getAction(Actor actor, GameMap map) {
         ArrayList<Action> actions = new ArrayList<>();
