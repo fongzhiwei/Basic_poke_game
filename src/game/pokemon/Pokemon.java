@@ -189,6 +189,11 @@ public abstract class Pokemon extends Actor{
      */
     public abstract void toggleWeapon(boolean isEquipping);
 
+    /**
+     * Return an appropriate format of string to indicate HP and AP of pokemons in console.
+     *
+     * @return an appropriate format of string
+     */
     @Override
     public String toString() {
         return String.format("%s(HP:%s)(AP: %d)", super.toString(), super.printHp(), AffectionManager.getInstance().getAffectionPoint(AffectionManager.getInstance().getTrainer(), this));

@@ -14,5 +14,5 @@ public interface Tradable {
      * @param player the person who want to trade
      *
      */
-    public void tradedWith(Actor player);
+    void tradedWith(Actor player);
 }
