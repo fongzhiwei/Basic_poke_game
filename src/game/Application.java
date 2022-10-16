@@ -35,7 +35,7 @@ public class Application {
                 new Floor(), new Tree(), new Lava(), new Puddle(), new Crater(), new Hay(), new Waterfall());
 
         List<String> map = Arrays.asList(
-                "X............................................^^^^^^^^^^^^^^",
+                ".............................................^^^^^^^^^^^^^^",
                 "....,,.....,T....OOOOO.........................T...^^^^^^^^",
                 "..,,,,...........OOO................................#^^^^^^",
                 "..,,,,.......~....OOOO..................................^^^",
@@ -53,7 +53,7 @@ public class Application {
 
         List<String> newMap = Arrays.asList(
                 "##################",
-                "#________________#",
+                "#XX____________XX#",
                 "#______.._.._____#",
                 "#________________#",
                 "#________________#",
@@ -69,6 +69,7 @@ public class Application {
         Player ash = new Player("Ash", '@', 1);
         world.addPlayer(ash, gameMap.at(32, 10));
 
+        // Add new trainer
         Actor goh = new TrainerGoh();
         gameMap.at(25,5).addActor(goh);
 
