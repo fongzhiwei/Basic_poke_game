@@ -76,7 +76,8 @@ public class TradeAction extends Action {
     }
 
     /**
-     * This method will print an appropriate trade message to console
+     * This method will print an appropriate trade message to console.
+     *
      * @param actor The actor performing the action.
      * @return A message to indicates the trade action progress
      */
