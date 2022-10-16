@@ -12,38 +12,33 @@ import game.AffectionLevel;
 import game.AffectionManager;
 import game.Character;
 import game.Element;
+import game.Utils;
 import game.actions.EvolveAction;
 import game.behaviours.EvolveBehaviour;
-import game.items.PokemonEgg;
-import game.time.TimePerception;
 import game.time.TimePerceptionManager;
-import game.trade.Tradable;
 import game.weapons.SpecialWeapon;
 
 /**
- * Class representing the Charmander
+ * Class representing the Charmeleon
  *
  * Created by:
- * @author Riordan D. Alfredo
- *
- * Modified by:
  * @author Leong Xin Yun <xleo0002@student.monash.edu>
  *
+ * Modified by:
+ *
  * @see Pokemon
- * @see TimePerception
- * @see Tradable
  * @see CanEvolve
- * @see AffectionManager
  * @see AffectionLevel
+ * @see AffectionManager
  * @see Character
  * @see Element
+ * @see Utils
  * @see EvolveAction
  * @see EvolveBehaviour
- * @see PokemonEgg
  * @see TimePerceptionManager
  * @see SpecialWeapon
  */
-public class Charmander extends Pokemon implements TimePerception, Tradable, CanEvolve {
+public class Charmeleon extends Pokemon implements CanEvolve {
     /**
      * The starting turn number when a Pokemon is spawned
      */
@@ -52,17 +47,15 @@ public class Charmander extends Pokemon implements TimePerception, Tradable, Can
     /**
      * Constructor.
      */
-    public Charmander() {
-        super("Charmander", 'c', 100);
-        // HINT: add more relevant behaviours here
-//        this.getBehaviours().put(0, new EvolveBehaviour());
+    public Charmeleon() {
+        super("Charmeleon", 'C', 150);
         this.addCapability(Element.FIRE);
-        this.registerInstance();
+        this.getBehaviours().put(0, new EvolveBehaviour());
         this.birthCount = TimePerceptionManager.getInstance().getTurn();
     }
 
     /**
-     * Creates and returns an intrinsic weapon. By default, the Charmander 'scratch' for 10 damage.
+     * Creates and returns an intrinsic weapon. By default, the Charmeleon 'scratch' for 10 damage.
      *
      * @return a freshly-instantiated IntrinsicWeapon
      */
@@ -79,8 +72,17 @@ public class Charmander extends Pokemon implements TimePerception, Tradable, Can
     public void toggleWeapon(boolean isEquipping) {
         if (this.pokemonLocation.getGround().hasCapability(Element.FIRE)) {
             if (!isEquipping) {
-                SpecialWeapon ember = new SpecialWeapon("Ember", 'E', 20, "sparks", 90, Element.FIRE);
-                this.addItemToInventory(ember);
+                SpecialWeapon weapon;
+                int randomNum = Utils.nextNum(0, 2);
+
+                if (randomNum == 0) {
+                    weapon = new SpecialWeapon("Ember", 'E', 20, "sparks", 90, Element.FIRE);
+                }
+                else {
+                    weapon = new SpecialWeapon("Blaze", 'B', 60, "burns", 90, Element.FIRE);
+                }
+
+                this.addItemToInventory(weapon);
             }
         }
         else {
@@ -88,35 +90,6 @@ public class Charmander extends Pokemon implements TimePerception, Tradable, Can
                 this.removeItemFromInventory((Item) this.getWeapon());
             }
         }
-    }
-
-    /**
-     * Charmander will be healed during the period of day
-     */
-    @Override
-    public void dayEffect() {
-        // Charmander will be healed by 10 points
-        super.heal(10);
-    }
-
-    /**
-     * Charmander will be hurt during the period of night
-     */
-    @Override
-    public void nightEffect() {
-        // Charmander will be hurt by 10 points
-        super.hurt(10);
-    }
-
-    /**
-     * This is a method to trade with player using candy to get Charmander pokemon egg
-     * And, the pokemon egg will be store in the inventory list.
-     *
-     * @param player the person that want to trade
-     */
-    public void tradedWith(Actor player) {
-        PokemonEgg pokemonEgg = new PokemonEgg(BasePokemon.CHARMANDER);
-        player.addItemToInventory(pokemonEgg);
     }
 
     /**
@@ -131,7 +104,7 @@ public class Charmander extends Pokemon implements TimePerception, Tradable, Can
 
     @Override
     public Pokemon evolve() {
-        return new Charmeleon();
+        return new Charizard();
     }
 
     /**

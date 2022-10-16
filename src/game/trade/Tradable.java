@@ -12,7 +12,7 @@ public interface Tradable {
     /**
      * This is an abstract method that trade with player.
      * @param player the person who want to trade
-     * @return The result of trading whether it is successful (True/False)
+     *
      */
-    public boolean tradedWith(Actor player);
+    void tradedWith(Actor player);
 }

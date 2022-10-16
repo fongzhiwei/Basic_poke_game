@@ -5,7 +5,6 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.*;
-import game.pokemon.Charmander;
 
 import java.util.List;
 
@@ -18,6 +17,8 @@ import java.util.List;
  * Modified by:
  * @author Leong Xin Yun <xleo0002@student.monash.edu>
  *
+ * @see Behaviour
+ * @see Status
  */
 public class AttackBehaviour implements Behaviour {
 
@@ -40,7 +41,7 @@ public class AttackBehaviour implements Behaviour {
                 if (elem.getDestination().containsAnActor()) {
                     otherActor = elem.getDestination().getActor();
 
-                    if (!ElementsHelper.hasAnySimilarElements(actor, otherActor.findCapabilitiesByType(Element.class)) && (!otherActor.hasCapability(Status.IMMUNE))) {
+                     if (!ElementsHelper.hasAnySimilarElements(actor, otherActor.findCapabilitiesByType(Element.class)) && (!otherActor.hasCapability(Status.IMMUNE))) {
                         return new AttackAction(otherActor, "here"); // behaviour will stop here.
                     }
                 }

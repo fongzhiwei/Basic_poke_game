@@ -15,11 +15,8 @@ import game.*;
 import game.Character;
 import game.actions.CaptureAction;
 import game.actions.FeedAction;
-import game.actions.SummonAction;
-import game.behaviours.AttackBehaviour;
-import game.behaviours.Behaviour;
-import game.behaviours.FollowBehaviour;
-import game.behaviours.WanderBehaviour;
+import game.behaviours.*;
+import game.items.Fire;
 
 import java.util.List;
 import java.util.SortedMap;
@@ -33,6 +30,12 @@ import java.util.TreeMap;
  *
  * Modified by:
  *
+ * @see Pokemon
+ * @see Actor
+ * @see Character
+ * @see CaptureAction
+ * @see FeedAction
+ * @see Fire
  */
 public abstract class Pokemon extends Actor{
     /**
@@ -44,6 +47,11 @@ public abstract class Pokemon extends Actor{
      * Location of a Pokemon
      */
     protected Location pokemonLocation;
+
+    /**
+     * Duration of damage effect on a Pokemon
+     */
+    private int effectTurnCount;
 
     /**
      * Constructor.
@@ -59,7 +67,6 @@ public abstract class Pokemon extends Actor{
         this.getBehaviours().put(3, new WanderBehaviour());
         this.addCapability(AffectionLevel.NEUTRAL);
         this.addCapability(Character.NPC);
-        this.setStatus(0);
         AffectionManager.getInstance().registerPokemon(this);
     }
 
@@ -82,37 +89,19 @@ public abstract class Pokemon extends Actor{
     }
 
     /**
-     * Set the affection level of a Pokemon
+     * Get the duration for how long the Pokemon's damage effect lasted
      *
-     * @param newAffectionLevel the affection level to be set to a Pokemon
+     * @return a turn count for which the damage effect lasted
      */
-    public void setAffectionLevel(AffectionLevel newAffectionLevel) {
-        if (this.findCapabilitiesByType(AffectionLevel.class).size() > 0) {
-            this.findCapabilitiesByType(AffectionLevel.class).clear();
-        }
-        this.addCapability(newAffectionLevel);
+    public int getEffectTurnCount() {
+        return this.effectTurnCount;
     }
 
     /**
-     * Set the status of a Pokemon according to its current affection points
-     *
-     * @param affectionPoints the Pokemon's affection points towards the player or trainer
+     * Set the starting time for when the Pokemon's damage effect started
      */
-    public void setStatus(int affectionPoints) {
-
-        if(this.hasCapability(Status.CATCHABLE)){
-            this.removeCapability(Status.CATCHABLE);
-
-        }
-
-        if (affectionPoints<=-50) {
-            this.addCapability(Status.NOT_CATCHABLE);
-            this.addCapability(AffectionLevel.DISLIKE);
-        }
-        else if (affectionPoints>=50) {
-            this.addCapability(Status.CATCHABLE);
-        }
-
+    public void setEffectTurnCount(int count) {
+        this.effectTurnCount = count;
     }
 
     /**
@@ -127,6 +116,15 @@ public abstract class Pokemon extends Actor{
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         this.pokemonLocation = map.locationOf(this);
+
+        if (this.pokemonLocation.getItems().contains(new Fire()) && !this.hasCapability(Element.FIRE)) {
+            this.setEffectTurnCount(this.getEffectTurnCount() + 1);
+
+            if (this.getEffectTurnCount() <= 2) {
+                return new DoNothingAction();
+            }
+        }
+
         for (Behaviour behaviour : behaviours.values()) {
             Action action = behaviour.getAction(this, map);
             boolean isEquipping = false;
@@ -175,15 +173,14 @@ public abstract class Pokemon extends Actor{
                 }
 
                 if (otherActor.hasCapability(Character.PLAYER)) {
-                    if (!this.hasCapability(Status.NOT_CATCHABLE)){
+                    if (AffectionManager.getInstance().getAffectionPoint(otherActor, this)>= AffectionLevel.LIKE.getPoints()){
                         actions.add(new CaptureAction(this, direction));
                     }
 
                     for (Item elem: otherActor.getInventory()) {
-                        if (elem.hasCapability(Status.FRUIT) && !this.hasCapability(AffectionLevel.DISLIKE)) {
+                        if (elem.hasCapability(Status.FRUIT) && AffectionManager.getInstance().getAffectionPoint(otherActor, this)>AffectionLevel.DISLIKE.getPoints()) {
                             actions.add(new FeedAction(this, direction, elem));
                         }
-
                     }
                 }
             }
@@ -198,4 +195,13 @@ public abstract class Pokemon extends Actor{
      */
     public abstract void toggleWeapon(boolean isEquipping);
 
+    /**
+     * Return an appropriate format of string to indicate HP and AP of pokemons in console.
+     *
+     * @return an appropriate format of string
+     */
+    @Override
+    public String toString() {
+        return String.format("%s(HP:%s)(AP: %d)", super.toString(), super.printHp(), AffectionManager.getInstance().getAffectionPoint(AffectionManager.getInstance().getTrainer(), this));
+    }
 }

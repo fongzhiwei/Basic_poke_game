@@ -5,6 +5,8 @@ package game.time;
  * @author Riordan D. Alfredo
  * Modified by: Soh Meng Jienq
  * @version 2.0
+ *
+ * @see TimePerception
  */
 
 public interface TimePerception {

@@ -4,8 +4,8 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.AffectionLevel;
 import game.AffectionManager;
-import game.Status;
 import game.items.Candy;
 import game.items.Pokeball;
 import game.pokemon.Pokemon;
@@ -18,6 +18,8 @@ import game.pokemon.Pokemon;
  * @version 1.0
  *
  * @see edu.monash.fit2099.engine.actions.Action
+ * @see Pokeball
+ * @see Pokemon
  *
  */
 public class CaptureAction extends Action {
@@ -56,8 +58,8 @@ public class CaptureAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        if (!this.target.hasCapability(Status.CATCHABLE)) {
-            return String.format("%s cannot be captured. %s", this.target, AffectionManager.getInstance().decreaseAffection(this.target, 10));
+        if (AffectionManager.getInstance().getAffectionPoint(actor,target)< AffectionLevel.LIKE.getPoints()) {
+            return String.format("%s cannot be captured. %s", this.target, AffectionManager.getInstance().decreaseAffection(actor,target, 10));
         }
         else {
             Pokeball pokeball = new Pokeball(this.target);

@@ -6,7 +6,6 @@ import game.Element;
 import game.Status;
 import game.trade.Tradable;
 
-import java.util.ArrayList;
 
 /**
  * A class that represents Pokefruit
@@ -55,34 +54,8 @@ public class Pokefruit extends Item implements Tradable {
      * @param player the person that want to trade
      * @return the result of whether the trade can successfully done (True/False)
      */
-    public boolean tradedWith(Actor player){
-        int price = 1;
-        int money = 0;
-        int count = 0;
-        boolean flag = false;
-        ArrayList <Integer> candyIndex = new ArrayList<>();
 
-        for(Item item : player.getInventory()){
-            if (item.hasCapability(Status.CURRENCY)){
-                money += 1;
-                candyIndex.add(player.getInventory().indexOf(item));
-            }
-        }
-
-        if(price <= money) {
-            flag = true;
-            while (count < price){
-                player.removeItemFromInventory(player.getInventory().get(candyIndex.get(count)));
-                count += 1;
-            }
-        }
-        money=0;
-        for(Item item : player.getInventory()){
-            if (item.hasCapability(Status.CURRENCY)){
-                money += 1;
-                candyIndex.add(player.getInventory().indexOf(item));
-            }
-        }
-        return flag;
+    public void tradedWith(Actor player){
+        player.addItemToInventory(this);
     }
 }

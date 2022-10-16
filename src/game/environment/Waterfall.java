@@ -1,8 +1,8 @@
 package game.environment;
 
-
 import edu.monash.fit2099.engine.positions.Location;
 import game.*;
+import game.pokemon.Pokemon;
 import game.pokemon.Squirtle;
 
 /**
@@ -17,6 +17,7 @@ import game.pokemon.Squirtle;
  */
 
 public class Waterfall extends SpawningGround {
+
     /**
      * Constructor.
      * Waterfall shows symbol 'W' in game map, and it has water element.
@@ -31,7 +32,7 @@ public class Waterfall extends SpawningGround {
      * @param location The location of the Ground
      */
     @Override
-    public void tick(Location location) {
+    public void tick(Location location, Pokemon pokemon, Element element, int chanceSpawn, int minGround) {
         //chance of spawning a Squirtle is 15%
         //at least 2 WATER element ground surrounding to create Squirtle
         super.tick(location, new Squirtle(), Element.WATER, 15, 2);

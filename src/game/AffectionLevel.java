@@ -20,11 +20,17 @@ public enum AffectionLevel {
      */
     private final int affectionPoints;
 
+    /**
+     * Constructor.
+     *
+     * @param points Affection points
+     */
     AffectionLevel(int points) {
         this.affectionPoints = points;
     }
 
     /**
+     * Get the affection points of pokemon.
      *
      * @return the affection points as an integer
      */

@@ -7,6 +7,8 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import game.time.TimePerceptionManager;
+import game.trainer.Trainer;
+import game.trainer.ViewTrainerAction;
 
 /**
  * Class representing the Player.
@@ -16,6 +18,8 @@ import game.time.TimePerceptionManager;
  *
  * Modified by:
  * @author Leong Xin Yun <xleo0002@student.monash.edu>
+ *
+ * @see Actor
  */
 public class Player extends Actor {
 
@@ -32,6 +36,7 @@ public class Player extends Actor {
 		super(name, displayChar, hitPoints);
 		this.addCapability(Status.IMMUNE);
 		this.addCapability(Character.PLAYER);
+		AffectionManager.getInstance().registerPlayer(this);
 		AffectionManager.getInstance().registerTrainer(this);
 	}
 
@@ -46,6 +51,18 @@ public class Player extends Actor {
 	 */
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+		// Print out the Player's inventory
+		System.out.println("Inventory" + this.getInventory());
+		// Adds action to view trainer status
+		for (int x: map.getXRange()){
+			for (int y: map.getYRange()){
+				if(map.at(x,y).containsAnActor() && map.at(x,y).getActor().hasCapability(Character.TRAINER)){
+					Trainer trainer = (Trainer) map.at(x,y).getActor();
+					actions.add(new ViewTrainerAction(trainer));
+				}
+			}
+		}
+
 		// Apply day and night effect
 		TimePerceptionManager.getInstance().run();
 		// Handle multi-turn Actions

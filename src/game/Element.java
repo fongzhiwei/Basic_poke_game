@@ -10,7 +10,8 @@ package game;
 public enum Element {
     WATER("Water"),     // water element
     FIRE("Fire"),       // fire element
-    GRASS("Grass");     // grass element
+    GRASS("Grass"),     // grass element
+    DRAGON("Dragon");   // dragon element
 
     /**
      * The label text for element type

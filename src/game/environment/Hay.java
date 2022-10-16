@@ -10,6 +10,7 @@ import game.Element;
  *
  * @see Ground
  * @see Tree
+ * @see Element
  */
 
 public class Hay extends Ground {
