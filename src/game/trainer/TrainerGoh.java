@@ -53,6 +53,7 @@ public class TrainerGoh extends Trainer{
         return new DoNothingAction();
     }
     /**
+     * Get the display character at game map
      * @return  display character of an instance
      */
     @Override
@@ -60,6 +61,10 @@ public class TrainerGoh extends Trainer{
         return super.getDisplayChar();
     }
 
+    /**
+     * Return a string of trainer name
+     * @return a string
+     */
     @Override
     public String toString() {
         return " Trainer Goh";
