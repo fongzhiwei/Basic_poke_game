@@ -80,7 +80,7 @@ public class Squirtle extends Pokemon implements TimePerception, Tradable {
     }
 
     public void tradedWith(Actor player) {
-        PokemonEgg pokemonEgg = new PokemonEgg(BasePokemon.CHARMANDER);
+        PokemonEgg pokemonEgg = new PokemonEgg(BasePokemon.SQUIRTLE);
         player.addItemToInventory(pokemonEgg);
     }
 }

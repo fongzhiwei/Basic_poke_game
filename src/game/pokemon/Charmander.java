@@ -86,7 +86,6 @@ public class Charmander extends Pokemon implements TimePerception, Tradable {
      * This is a method to trade with player using candy to get Charmander and Pokefruit
      *
      * @param player the person that want to trade
-     * @return the result of whether the trade can successfully done (True/False)
      */
     public void tradedWith(Actor player) {
         PokemonEgg pokemonEgg = new PokemonEgg(BasePokemon.CHARMANDER);
