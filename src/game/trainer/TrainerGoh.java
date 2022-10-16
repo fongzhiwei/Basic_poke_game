@@ -67,6 +67,6 @@ public class TrainerGoh extends Trainer{
      */
     @Override
     public String toString() {
-        return " Trainer Goh";
+        return "Trainer Goh";
     }
 }
