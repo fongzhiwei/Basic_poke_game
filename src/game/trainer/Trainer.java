@@ -5,10 +5,6 @@ import game.AffectionManager;
 import game.Character;
 import game.Status;
 import game.behaviours.Behaviour;
-import game.pokemon.Pokemon;
-
-import java.util.HashMap;
-import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
