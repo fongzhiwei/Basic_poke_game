@@ -40,7 +40,7 @@ public class ViewTrainerAction extends Action {
         Map<Pokemon, Integer> selectedTrainerMap = AffectionManager.getInstance().getTrainerMap().get(trainer);
         for(Map.Entry<Pokemon, Integer> pokemonAffection : selectedTrainerMap.entrySet()){
             if (map.locationOf(pokemonAffection.getKey())!= null && pokemonAffection.getValue() !=0){
-                stats += String.format("\n- %s with %s at %s,%s",pokemonAffection.getKey(),pokemonAffection.getValue(), map.locationOf(pokemonAffection.getKey()).x(),map.locationOf(pokemonAffection.getKey()).y());
+                stats += String.format("\n- %s with %s AP at %s,%s",pokemonAffection.getKey(),pokemonAffection.getValue(), map.locationOf(pokemonAffection.getKey()).x(),map.locationOf(pokemonAffection.getKey()).y());
             }
         }
 
@@ -57,13 +57,5 @@ public class ViewTrainerAction extends Action {
         return String.format("Display %s's stats.", trainer);
     }
 
-    /**
-     * The preferred hotkey to use for a MoveAction.
-     *
-     * @param string string for hotkey
-     * @return a string
-     */
-    public String hotkey(String string) {
-        return string;
-    }
+
 }

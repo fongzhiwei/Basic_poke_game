@@ -10,10 +10,6 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.environment.*;
 import game.environment.Door;
-import game.items.Candy;
-import game.items.Pokefruit;
-import game.items.PokemonEgg;
-import game.pokemon.BasePokemon;
 import game.pokemon.Charmander;
 import game.pokemon.Pokemon;
 import game.trade.NurseJoy;
@@ -72,8 +68,6 @@ public class Application {
         //Add player - Ash
         Player ash = new Player("Ash", '@', 1);
         world.addPlayer(ash, gameMap.at(32, 10));
-        ash.addItemToInventory(new Candy());
-        ash.addItemToInventory(new Candy());
 
         Actor goh = new TrainerGoh();
         gameMap.at(25,5).addActor(goh);
@@ -81,7 +75,6 @@ public class Application {
         //Add first pokemon - Charmander
         Pokemon charmander = new Charmander();
         gameMap.at(33, 10).addActor(charmander);
-        AffectionManager.getInstance().increaseAffection(ash,charmander,100);
 
         // Add Door to teleport from game map to new map
         Door gameDoor = new Door(pokemonCenter.at(9, 5), "to Pokemon Center!");
