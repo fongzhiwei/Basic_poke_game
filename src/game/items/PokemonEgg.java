@@ -75,26 +75,50 @@ public class PokemonEgg extends Item {
         }
     }
 
+    /**
+     * Get hatch timer of the pokemon egg
+     * @return hatch timer
+     */
     public int getHatchTimer() {
         return hatchTimer;
     }
 
+    /**
+     * Get hatch time of the pokemon egg
+     * @return hatch time
+     */
     public int getHatchTime() {
         return hatchTime;
     }
 
+    /**
+     * Get base pokemon (Charmander, Bulbasaur, Squirtle)
+     * @return a pokemon
+     */
     public Pokemon getPokemon() {
         return pokemon;
     }
 
+    /**
+     * Set hatch time of the pokemon egg
+     * @param hatchTime new hatch time
+     */
     public void setHatchTime(int hatchTime) {
         this.hatchTime = hatchTime;
     }
 
+    /**
+     * Set hatch timer of the pokemon egg
+     * @param hatchTimer new hatch timer
+     */
     public void setHatchTimer(int hatchTimer) {
         this.hatchTimer = hatchTimer;
     }
 
+    /**
+     * Set pokemon of the pokemon egg
+     * @param pokemon new pokemon
+     */
     public void setPokemon(Pokemon pokemon) {
         this.pokemon = pokemon;
     }
