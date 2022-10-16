@@ -68,6 +68,12 @@ public class Bulbasaur extends Pokemon implements TimePerception, Tradable {
         super.heal(5);
     }
 
+    /**
+     * This is a method to trade with player using candy to get Bulbasaur pokemon egg.
+     * And, the pokemon egg will be store in the inventory list.
+     *
+     * @param player the person that want to trade
+     */
     public void tradedWith(Actor player) {
         PokemonEgg pokemonEgg = new PokemonEgg(BasePokemon.BULBASAUR);
         player.addItemToInventory(pokemonEgg);

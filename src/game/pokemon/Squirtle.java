@@ -79,6 +79,12 @@ public class Squirtle extends Pokemon implements TimePerception, Tradable {
         super.heal(10);
     }
 
+    /**
+     * This is a method to trade with player using candy to get Squirtle pokemon egg.
+     * And, the pokemon egg will be store in the inventory list.
+     *
+     * @param player the person that want to trade
+     */
     public void tradedWith(Actor player) {
         PokemonEgg pokemonEgg = new PokemonEgg(BasePokemon.SQUIRTLE);
         player.addItemToInventory(pokemonEgg);

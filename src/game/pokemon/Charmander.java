@@ -83,7 +83,8 @@ public class Charmander extends Pokemon implements TimePerception, Tradable {
     }
 
     /**
-     * This is a method to trade with player using candy to get Charmander and Pokefruit
+     * This is a method to trade with player using candy to get Charmander pokemon egg
+     * And, the pokemon egg will be store in the inventory list.
      *
      * @param player the person that want to trade
      */
